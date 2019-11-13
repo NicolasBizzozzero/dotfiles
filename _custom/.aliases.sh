@@ -1,0 +1,5 @@
+alias ls='ls --color --human-readable --literal'
+alias la='ls -A'
+alias ll='ls -lA | column -t'
+
+alias mount='mount | column -t'

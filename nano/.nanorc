@@ -1,0 +1,26 @@
+## spifftastic nano highlighting nano!!
+include "~/.nano/nanorc.nanorc"
+
+## Ruby
+include "~/.nano/ruby.nanorc"
+
+## C/C++
+include "~/.nano/c.nanorc"
+
+## Python
+include "~/.nano/python.nanorc"
+
+## Bourne shell scripts
+include "~/.nano/bash.nanorc"
+
+## CSS
+include "~/.nano/css.nanorc"
+
+## HTML
+include "~/.nano/html.nanorc"
+
+## Markdown
+include "~/.nano/markdown.nanorc"
+
+## Rust
+include "~/.nano/rust.nanorc"

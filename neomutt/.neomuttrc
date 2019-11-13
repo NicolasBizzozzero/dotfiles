@@ -1,0 +1,24 @@
+# User
+set from = "nicolas.bizzozzero@protonmail.com"
+set realname = "Nicolas Bizzozzéro"
+
+# Credentials
+set smtp_url = "smtp://email@server:port"
+set smtp_pass = "password"
+set smtp_authenticators = "gssapi:login"
+
+# Sidebar
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+
+
+
+
+
+
+
+set header_cache = ~/.mutt/headercache
+set message_cachedir = ~/.mutt/messagecache
+set folder = ~/mails
+
