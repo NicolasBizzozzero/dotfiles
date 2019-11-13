@@ -11,10 +11,20 @@ font pango:monospace 8
 new_window 1pixel
 
 # Disable all window titlebars (needed for i3-gaps to works)
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 1
 
 # Set gaps values
-# gaps inner all set 20
+gaps inner  15
+gaps outer 15
+
+# Set border color
+# class                 border  backgr. text    indicator child_border
+client.focused          #d419d4 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.background       #ffffff
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -180,10 +190,11 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# Start i3bar to display a workspace bar
 bar {
-        status_command i3status
+	font pango: Source Code Pro for Powerline, San Fransico Display 9
+	position top
+        status_command i3blocks
 }
 
 
@@ -202,6 +213,6 @@ exec --no-startup-id i3-msg 'workspace 2: $ws2; exec /usr/bin/firefox'
 # exec --no-startup-id i3-msg 'workspace 3: $ws3; exec /local/bizzozzero/softwares/pycharm-2019.2/bin/pycharm.sh'
 # exec --no-startup-id i3-msg 'workspace 4: $ws4; exec /local/bizzozzero/softwares/Zotero-5.0.66_linux-x86_64/zotero'
 # exec --no-startup-id i3-msg 'workspace 6: $ws6; exec /usr/bin/urxvt -e /local/bizzozzero/.venv/bin/ranger'
-exec --no-startup-id i3-msg 'workspace 8: $ws8; exec /usr/bin/keepass ~/keys/main.kdbx'
-# exec --no-startup-id i3-msg 'workspace 9: $ws9; exec /usr/bin/urxvt -e cmus'
-exec --no-startup-id i3-msg 'workspace 10: $ws10; exec /usr/bin/urxvt -e cmus'
+exec --no-startup-id i3-msg 'workspace 8: $ws8; exec /usr/bin/keepass'
+exec --no-startup-id i3-msg 'workspace 9: $ws9; exec /usr/bin/urxvt -e cmus'
+exec --no-startup-id i3-msg 'workspace 10: $ws10; exec /usr/bin/urxvt -e neomutt'
