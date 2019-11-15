@@ -1,3 +1,11 @@
+
+export PATH="$HOME/scripts"
+
+export EDITOR="nvim"
+export TERMINAL="urxvt"
+export BROWSER="firefox"
+
+
 # Add Python local bin dir to PATH
 export PATH="$HOME/.local/bin:$PATH"
 
