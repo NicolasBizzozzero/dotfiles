@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-fill '$HOME/images/wallpapers/ti9jKcI.jpg'
+feh --no-fehbg --randomize --bg-fill $DIR_WALLPAPERS/*

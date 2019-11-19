@@ -200,14 +200,14 @@ bar {
 
 # Binds
 # Bind win + l to lockscreen
-bindsym $mod+l exec i3lock-fancy
+bindsym $mod+l exec i3lock-fancy -f "/usr/share/fonts/powerline/Source Code Pro for Powerline.otf"
 
 # Disable Pycharm popups and wrong focus
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [instance="sun-awt-X11-XWindowPeer"] border pixel 0
 
 # execute softwares at launch
-exec --no-startup-id feh --bg-fill ~/images/wallpapers/ti9jKcI.jpg
+exec --no-startup-id feh --bg-fill `~/scripts/random_file.sh $DIR_WALLPAPERS`
 exec --no-startup-id i3-msg 'workspace 1: $ws1; exec /usr/bin/urxvt'
 exec --no-startup-id i3-msg 'workspace 2: $ws2; exec /usr/bin/firefox'
 # exec --no-startup-id i3-msg 'workspace 3: $ws3; exec /local/bizzozzero/softwares/pycharm-2019.2/bin/pycharm.sh'

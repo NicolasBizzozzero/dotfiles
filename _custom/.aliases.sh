@@ -1,6 +1,8 @@
+alias explorer="$EXPLORER"
+
 alias ls='ls --color --human-readable --literal'
 alias la='ls -A'
-alias ll='ls -lA | column -t'
+alias ll='ls -lA'
 
 alias mount='mount | column -t'
 
