@@ -9,6 +9,7 @@ stow compton
 stow git
 stow htop
 stow i3
+stow ipython
 stow ls
 stow nano
 stow neomutt
