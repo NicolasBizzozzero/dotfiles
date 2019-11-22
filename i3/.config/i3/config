@@ -207,7 +207,7 @@ for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [instance="sun-awt-X11-XWindowPeer"] border pixel 0
 
 # execute softwares at launch
-exec --no-startup-id feh --bg-fill `~/scripts/random_file.sh $DIR_WALLPAPERS`
+exec --no-startup-id feh --randomize --no-fehbg --bg-fill $HOME/pictures/wallpapers/*
 exec --no-startup-id i3-msg 'workspace 1: $ws1; exec /usr/bin/urxvt'
 exec --no-startup-id i3-msg 'workspace 2: $ws2; exec /usr/bin/firefox'
 # exec --no-startup-id i3-msg 'workspace 3: $ws3; exec /local/bizzozzero/softwares/pycharm-2019.2/bin/pycharm.sh'

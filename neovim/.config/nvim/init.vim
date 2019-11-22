@@ -14,6 +14,7 @@ Plug 'Konfekt/FastFold'
 Plug 'matze/vim-tex-fold'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'psliwka/vim-smoothie'
 
 
 " List ends here. Plugins become visible to Vim after this call.
