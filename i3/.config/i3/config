@@ -137,8 +137,8 @@ bindsym $mod+Shift+9 move container to workspace number 9: $ws9
 bindsym $mod+Shift+0 move container to workspace number 10: $ws10
 
 # Set workspaces to specific monitors
-set $monitor_1 DVI-I-1
-set $monitor_2 DP-0
+set $monitor_1 eDP1
+set $monitor_2 HDMI1
 
 workspace "1: $ws1" output $monitor_1
 workspace "2: $ws2" output $monitor_2
