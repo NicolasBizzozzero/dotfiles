@@ -1,0 +1,47 @@
+# Use GPG
+source $HOME/.config/neomutt/gpg.rc
+
+
+# Folder hooks
+# folder-hook 'ProtonMail' 'source $HOME/.config/neomutt/accounts/protonmail'
+folder-hook 'Gmail'      'source $HOME/.config/neomutt/accounts/gmail'
+folder-hook 'IRIT'       'source $HOME/.config/neomutt/accounts/irit'
+
+
+# Macros for switching account
+macro index <f2> '<sync-mailbox><enter-command>source $HOME/.config/neomutt/accounts/gmail<enter><change-folder>!<enter>'
+# macro index <f3> '<sync-mailbox><enter-command>source $HOME/.config/neomutt/accounts/protonmail<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source $HOME/.config/neomutt/accounts/irit<enter><change-folder>!<enter>'
+
+
+# Binds
+bind index G imap-fetch-mail
+
+
+# Configurations
+set date_format = "%A %d %b %Y à %H:%M:%S (%Z)"
+set mail_check  = 60
+set timeout     = 300
+set signature   = '$HOME/.config/neomutt/signature'
+set sleep_time  = 0
+
+
+# Cache & Certificates
+set header_cache     = $HOME/.cache/neomutt/headers
+set message_cachedir = $HOME/.cache/neomutt/bodies
+set certificate_file = $HOME/.cache/neomutt/certificates
+
+
+# Aliases file
+set alias_file    = $HOME/.config/neomutt/aliases
+set sort_alias    = alias
+set reverse_alias = yes
+source $alias_file
+
+
+# Colors
+source $HOME/.config/neomutt/colors/linux.colors
+
+
+# Load main accounts
+source $HOME/.config/neomutt/accounts/irit

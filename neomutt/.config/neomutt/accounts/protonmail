@@ -1,0 +1,33 @@
+# Common variables
+set my_email    = "nicolas.bizzozzero@protonmail.com"
+set my_name     = "Nicolas Bizzozzéro"
+set my_password = "`gpg --batch --quiet --decrypt $HOME/keys/pw_protonmail.gpg`"
+
+
+# IMAP configuration
+set imap_authenticators   = login
+set folder                = "imap://$my_email:$my_password@127.0.0.1/"
+set spoolfile             = "+INBOX"
+set trash                 = "+Trash"
+set mbox                  = "+Received"
+set record                = "+Sent"
+set postponed             = "+Drafts"
+set move                  = no
+set copy                  = no
+set postpone              = yes
+set imap_passive          = no
+set imap_check_subscribed = yes
+
+
+# SMTP configuration
+set from     = $my_email
+set smtp_url = "smtp://$my_email:$my_password@127.0.0.1"
+
+
+# Miscellaneous
+set ssl_starttls = yes
+
+
+# Sidebar
+set sidebar_visible    = yes
+set sidebar_short_path = yes
