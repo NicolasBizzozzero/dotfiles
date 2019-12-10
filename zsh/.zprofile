@@ -1,17 +1,19 @@
-
-export PATH="$HOME/scripts:$PATH"
-
+# Setup defaults softwares
+export SHELL="zsh"
+export PAGER="less"
 export EDITOR="nvim"
+export VISUAL=$EDITOR
 export TERMINAL="urxvt"
 export BROWSER="firefox"
 export EXPLORER="thunar"
 
 
-# Add Python local bin dir to PATH
+# Add local scripts to PATH
+export PATH="$HOME/scripts:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 
-#if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1  ]]; then
+# Start graphical environment
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
