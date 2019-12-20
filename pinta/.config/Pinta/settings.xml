@@ -1,0 +1,14 @@
+﻿<settings>
+  <setting name="new-image-width" type="System.Int32">1080</setting>
+  <setting name="new-image-height" type="System.Int32">1920</setting>
+  <setting name="default-image-type" type="System.String">png</setting>
+  <setting name="window-size-width" type="System.Int32">922</setting>
+  <setting name="window-size-height" type="System.Int32">998</setting>
+  <setting name="ruler-metric" type="System.Int32">0</setting>
+  <setting name="window-maximized" type="System.Boolean">False</setting>
+  <setting name="ruler-shown" type="System.Boolean">False</setting>
+  <setting name="toolbar-shown" type="System.Boolean">True</setting>
+  <setting name="pixel-grid-shown" type="System.Boolean">False</setting>
+  <setting name="last-dialog-directory" type="System.String">/home/johnlocke/pictures/screenshots</setting>
+  <setting name="new-image-bg" type="Pinta.NewImageDialog+BackgroundType">White</setting>
+</settings>

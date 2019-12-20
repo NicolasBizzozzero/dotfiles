@@ -37,7 +37,7 @@ client.background       #ffffff
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec /usr/bin/urxvt
+bindsym $mod+Return exec $TERMINAL
 
 # kill focused window
 bindsym $mod+Shift+A kill
@@ -209,11 +209,13 @@ for_window [instance="sun-awt-X11-XWindowPeer"] border pixel 0
 
 # execute softwares at launch
 exec --no-startup-id feh --randomize --no-fehbg --bg-fill $HOME/pictures/wallpapers/*
-exec --no-startup-id i3-msg 'workspace 1: $ws1; exec /usr/bin/urxvt'
-exec --no-startup-id i3-msg 'workspace 2: $ws2; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace 1: $ws1; exec $TERMINAL'
+exec --no-startup-id i3-msg 'workspace 2: $ws2; exec $BROWSER'
 # exec --no-startup-id i3-msg 'workspace 3: $ws3; exec /local/bizzozzero/softwares/pycharm-2019.2/bin/pycharm.sh'
 # exec --no-startup-id i3-msg 'workspace 4: $ws4; exec /local/bizzozzero/softwares/Zotero-5.0.66_linux-x86_64/zotero'
-# exec --no-startup-id i3-msg 'workspace 6: $ws6; exec /usr/bin/urxvt -e /local/bizzozzero/.venv/bin/ranger'
-exec --no-startup-id i3-msg 'workspace 8: $ws8; exec /usr/bin/keepass'
-exec --no-startup-id i3-msg 'workspace 9: $ws9; exec /usr/bin/urxvt -e cmus'
-exec --no-startup-id i3-msg 'workspace 10: $ws10; exec /usr/bin/urxvt -e neomutt'
+# exec --no-startup-id i3-msg 'workspace 6: $ws6; exec $TERMINAL -e /local/bizzozzero/.venv/bin/ranger'
+# exec --no-startup-id i3-msg 'workspace 8: $ws8; exec /usr/bin/keepass'
+# exec --no-startup-id i3-msg 'workspace 9: $ws9; exec $TERMINAL -e cmus'
+# exec --no-startup-id i3-msg 'workspace 10: $ws10; exec $TERMINAL -e neomutt'
+
+exec --no-startup-id picom -b

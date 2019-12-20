@@ -1,0 +1,7 @@
+[Added Associations]
+application/x-mswinurl=firefox.desktop;
+image/jpeg=feh.desktop;
+
+[Default Applications]
+image/jpeg=feh.desktop
+application/pdf=mupdf.desktop

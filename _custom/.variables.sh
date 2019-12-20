@@ -1,5 +1,5 @@
 DIR_PICTURES="$HOME/pictures"
-DIR_DOTFILES="$HOME/dotfiles"
+DIR_DOTFILES="$HOME/.dotfiles"
 DIR_DOWNLOADS="$HOME/downloads"
 DIR_KEYS="$HOME/keys"
 DIR_MAILS="$HOME/mails"
@@ -16,3 +16,9 @@ DIR_WALLPAPERS="$DIR_PICTURES/wallpapers"
 DIR_STEAM="$HOME/.local/share/Steam/steamapps/common/"
 
 SSH_OSIRIM="nbizzozz@osirim-slurm.irit.fr"
+
+# Python better-exceptions: https://github.com/qix-/better-exceptions
+export BETTER_EXCEPTIONS=1
+
+# iPython config file
+IPYTHONDIR="$HOME/.config/ipython"

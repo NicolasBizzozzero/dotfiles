@@ -3,7 +3,7 @@ export SHELL="zsh"
 export PAGER="less"
 export EDITOR="nvim"
 export VISUAL=$EDITOR
-export TERMINAL="urxvt"
+export TERMINAL="termite"
 export BROWSER="firefox"
 export EXPLORER="thunar"
 
