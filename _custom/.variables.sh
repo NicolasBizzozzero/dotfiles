@@ -8,6 +8,7 @@ DIR_MUSICS="$HOME/musics"
 DIR_PROJECTS="$HOME/projects"
 DIR_SAVES="$HOME/saves"
 DIR_SCRIPTS="$HOME/scripts"
+DIR_TODO="$HOME/todo"
 DIR_VRAC="$HOME/vrac"
 
 DIR_THESIS="$DIR_PROJECTS/thesis"
