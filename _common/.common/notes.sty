@@ -1,0 +1,332 @@
+\NeedsTeXFormat{LaTeX2e}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package name and information %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProvidesPackage{notes}[2020/01/14 Bizzozzéro Nicolas custom LaTeX style]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Most used packages %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}       % Encoding input
+\usepackage[T1]{fontenc}          % Encoding font
+\usepackage[hidelinks]{hyperref}
+\usepackage[french]{babel}        % Language used
+\usepackage[margin=3cm]{geometry} % Margin 
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{appendix}
+\usepackage{array}
+\usepackage{bbm}
+\usepackage[style=trad-plain,sorting=none,natbib=true]{biblatex}
+\usepackage{booktabs}
+\usepackage[makeroom]{cancel}
+\usepackage{catchfile}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{fancyvrb}
+\usepackage{float}
+% \usepackage{fourier}            % Warning: this package change the document's font
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{inconsolata}
+\usepackage{kbordermatrix}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{lstautogobble}
+\usepackage{mathtools}
+\usepackage[outputdir=bin]{minted}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{parskip}
+\usepackage{pgf}
+\usepackage{qtree}
+\usepackage{regexpatch}
+\usepackage{relsize}
+\usepackage{stmaryrd}
+\usepackage[colorinlistoftodos,prependcaption]{todonotes}
+\usepackage{verbatim}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{xstring}
+
+
+%%% Tikz configuration
+\usepackage{tikz}
+\usepackage[framemethod=tikz]{mdframed}
+\usetikzlibrary{arrows, automata, positioning}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+%%% Algorithm display
+\usepackage[ruled,vlined,linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+
+%%% Item symbol
+\AtBeginDocument{\def\labelitemi{$\bullet$}}
+
+%%% todonotes
+%% Making todonotes appear inline
+\makeatletter
+\xpatchcmd{\@todo}{\setkeys{todonotes}{#1}}{\setkeys{todonotes}{inline,#1}}{}{}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%% Bibliography %%%
+%%%%%%%%%%%%%%%%%%%%
+
+\addbibresource{notes.bib}
+
+
+%%%%%%%%%%%%%
+%%% Fonts %%%
+%%%%%%%%%%%%%
+
+%%% Default Math-Mode font
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Section name format %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{secnumdepth}{50}
+\setcounter{tocdepth}{50}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%% Environments %%%
+%%%%%%%%%%%%%%%%%%%%
+
+%%% lstlistings
+\lstset{
+    language=python,
+    backgroundcolor=\color{gray!10},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=true,
+    breaklines=true,
+    commentstyle=\color[HTML]{556b2f},
+    escapeinside={\%*}{*)},
+    extendedchars=true,
+    frame=single,
+    framexbottommargin=2pt,
+    framextopmargin=2pt,
+    inputencoding=utf8,
+    keywordstyle=\color{blue},
+    numbers=none,
+    numberstyle=\footnotesize,
+    rulecolor=\color{black!30},
+    stringstyle=\color{red},
+    tabsize=4,
+    title=\lstname,
+    literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {À}{{\`A}}1 {à}{{\`a}}1 {â}{{\^a}}1 {'}{{'}}1 {ç}{{\c{c}}}1 {`}{{`}}1
+}
+
+%%% Proof
+\newenvironment{myproof}[1][\proofname]{\proof[#1]\mbox{}\\*}{\endproof}
+
+%%% Questions / Answers (To create a quizz, for example)
+\newenvironment{questions}{\begin{enumerate}[label=$\bullet$]\bfseries}
+                          {\end{enumerate}}
+\newenvironment{answer}{\par\par\par\normalfont}{}
+
+%%
+% Enumerate conditions under an equation.
+%
+% Usage :
+% \begin{conditions}
+%     A & :           & notional permeability factor \\
+%     B & \sim        & number of waves \\
+%     C & \rightarrow & damage level
+% \end{conditions}
+% 
+% Source :
+% https://tex.stackexchange.com/a/225574
+%%
+\newenvironment{conditions}[1][where:]
+  {\begin{minipage}{\textwidth}
+   \vspace*{-.5\belowdisplayskip}%
+   \linespread{1}\selectfont #1 \begin{tabular}[t]{>{$}l<{$} @{${}:{}$} l}}
+  {\end{tabular}\end{minipage}\\[\belowdisplayskip]}
+
+\newenvironment{conditions*}[1][where:]
+  {\begin{minipage}{\textwidth}
+   \vspace*{-.5\belowdisplayskip}%
+   \linespread{1}\selectfont #1 \begin{tabular}[t]{>{$}l<{$} @{}>{${}}c<{{}$}@{} l}}
+  {\end{tabular}\end{minipage}\\[\belowdisplayskip]}
+
+
+%%%%%%%%%%%%%%%%
+%%% Commands %%%
+%%%%%%%%%%%%%%%%
+
+%%% Make tab's cells bold and centered. To use in every header cell
+\newcommand*{\thead}[1]{%
+\multicolumn{1}{c}{\bfseries\begin{tabular}{@{}c@{}}#1\end{tabular}}}
+
+%%% Put annotations under or over an equation
+\newcommand{\overAnnotation}[2]{\overset{\mathclap{\substack{#2\\ \Big\downarrow}}}{#1}}
+\newcommand{\underAnnotation}[2]{\underset{\mathclap{\substack{\Big\uparrow\\ #2}}}{#1}}
+
+%%% Proper mathematic syntax to define a function and its domains
+\newcommand{\functionDefinition}[5]{
+    \begin{align*}
+        #1 \colon #2 & \longrightarrow #3 \\
+                  #4 & \longmapsto #5
+    \end{align*}
+}
+
+%%% Derivative notation
+\newcommand{\derivative}[3]{\frac{\partial^{^{#3}}\! #1}{\partial#2^{^{#3}}}}
+
+%%% Highlight text needing updates
+\newcommand{\TODO}[1]{
+    \textbf{\textcolor{red}{
+        \LARGE{\underline{TODO:}}
+        \url{#1}
+    }}
+    \PackageWarning{TODO:}{#1!}
+}
+
+%%
+% Output an aligned left bracket with 3 columns.
+%
+% Parameters :
+% #1 : Prior
+% #2 : content
+%
+% Exemple :
+% \begin{equation}
+% \equationLeftBracket{f =}{
+%     a & = & y_1 \\
+%     b & \leq & y_2 \\
+%     c & \geq & y_3
+% }
+% \end{equation}
+%%
+\newcommand{\equationLeftBracket}[2]{
+#1 \left\{
+       \begin{array}{rcl}
+       #2
+       \end{array}
+   \right.
+}
+
+%%
+% Set the \commit and \branch variables, containing current git commit hash
+% and git branch of the .git directory at the same level as this file.
+%
+% Source:
+% https://tex.stackexchange.com/a/455397
+%%
+% \CatchFileDef{\headfull}{.git/HEAD.}{}
+% \StrGobbleRight{\headfull}{1}[\head]
+% \StrBehind[2]{\head}{/}[\branch]
+% \CatchFileDef{\commit}{.git/refs/heads/\branch.}{}
+
+%%
+% Create new column types which set a fixed size for a column.
+%
+% Parameters :
+% #1 : Size of the column
+%
+% Exemple :
+% \begin{table}[ht]
+%   \begin{center}
+%       \begin{tabular}{L{4cm} | R{4cm}}  % <- Used here
+%           a & b
+%       \end{tabular}
+%   \end{center}
+% \end{table}
+%%
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+%%%%%%%%%%%%%%
+%%% Macros %%%
+%%%%%%%%%%%%%%
+
+%%
+% Macro defining an augmented matrix.
+%
+% Usage :
+%    \begin{pmatrix}[cc|c]
+%        1 & 2 & 3\\
+%        4 & 5 & 6
+%    \end{pmatrix}
+%% 
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Operators & Delimiters %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Argmax and Argmin maths operators 
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+
+%%% Ceil and Floor delimiters paired
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+
+%%%%%%%%%%%%%%%
+%%% Symbols %%%
+%%%%%%%%%%%%%%%
+
+%%% Independence symbol
+\newcommand{\independent}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp$}}}}
+
+%%% Variance's function symbol
+\newcommand{\Var}{\mathcal{V}\text{ar}}
+
+%%%% Covariance's function symbol
+\newcommand{\Cov}{\mathcal{C}\text{ov}}
+
+%%% Correlation's function symbol
+\newcommand{\Corr}{\mathcal{C}\text{orr}}
+
+%%% Contradiction lighting symbol
+\newcommand{\contradiction}{\lightning}
+
+%%% Slice the page with an horizontal line
+\newcommand{\horizontalLine}{\rule{\linewidth}{0.5mm}}
+
+%%
+% Proof symbol, QED, empty square
+%%
+\makeatletter
+\DeclareRobustCommand{\qed}{%
+  \ifmmode
+    \eqno \def\@badmath{$$}%$$
+    \let\eqno\relax \let\leqno\relax \let\veqno\relax
+    \hbox{\openbox}%
+  \else
+    \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
+    \quad\hbox{\openbox}%
+  \fi
+}
+\makeatother
+
+%%% Integral differential symbol
+\newcommand{\diff}{\mathop{}\!d}
+
+
+\endinput

@@ -14,6 +14,7 @@ alias mount='mount | column -t'
 alias lp='lp -o orientation-requested=3 -o print-quality=5 -o sides=two-sided-long-edge'
 alias pdflatex='mkdir bin && pdflatex -halt-on-error -output-directory=bin'
 alias kmines='kmines --config $HOME/.config/kmines/kminesrc'
+alias calcurse='calcurse -D ~/.config/calcurse'
 
 
 alias fuck="sudo !!"

@@ -201,7 +201,7 @@ bar {
 
 # Binds
 # Bind win + l to lockscreen
-bindsym $mod+l exec i3lock-fancy -f "/usr/share/fonts/powerline/Source Code Pro for Powerline.otf"
+bindsym $mod+l exec i3lock-fancy-dualmonitor -f "/usr/share/fonts/powerline/Source Code Pro for Powerline.otf"
 
 # Disable Pycharm popups and wrong focus
 for_window [class="^jetbrains-.+"][window_type=dialog] focus

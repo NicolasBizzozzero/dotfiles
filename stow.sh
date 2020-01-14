@@ -4,6 +4,7 @@
 # install them in their proper location.
 
 
+stow _common
 stow _custom
 stow _games
 stow autorandr
@@ -35,6 +36,8 @@ stow vlc
 stow X
 stow xdg
 stow zeal
+stow zotero
 stow zsh
 
 # TODO: Stow root directories with -t param
+
