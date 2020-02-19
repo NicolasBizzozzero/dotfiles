@@ -48,7 +48,9 @@
 \usepackage{qtree}
 \usepackage{regexpatch}
 \usepackage{relsize}
+\usepackage{rotating}
 \usepackage{stmaryrd}
+\usepackage{tabularx}
 \usepackage[colorinlistoftodos,prependcaption]{todonotes}
 \usepackage{verbatim}
 \usepackage{wasysym}
@@ -60,7 +62,7 @@
 %%% Tikz configuration
 \usepackage{tikz}
 \usepackage[framemethod=tikz]{mdframed}
-\usetikzlibrary{arrows, automata, positioning}
+\usetikzlibrary{arrows, automata, mindmap, positioning}
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 
 %%% Algorithm display
@@ -74,6 +76,10 @@
 \makeatletter
 \xpatchcmd{\@todo}{\setkeys{todonotes}{#1}}{\setkeys{todonotes}{inline,#1}}{}{}
 \makeatother
+
+%%% tabularx
+%% New centered column-type
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -163,6 +169,21 @@
    \vspace*{-.5\belowdisplayskip}%
    \linespread{1}\selectfont #1 \begin{tabular}[t]{>{$}l<{$} @{}>{${}}c<{{}$}@{} l}}
   {\end{tabular}\end{minipage}\\[\belowdisplayskip]}
+
+
+%%
+% Provides an itemized environment for defining words.
+%
+% Usage :
+% \begin{worddefs}
+%   \item[Word1.] This word is a word.
+%   \item[Word2.] This word is also totally a word but with a longer definition than its predecessor.
+%   Its definition also spans over multiple lines.
+%   \item[BigAndLongWordThatIsExtraLong and with spaces.] Is it a word ? Yes it is. 
+% \end{worddefs}
+%%
+\newlist{worddefs}{description}{1}
+\setlist[worddefs]{font=\sffamily\bfseries, labelindent=\parindent, leftmargin=6em, style=sameline}
 
 
 %%%%%%%%%%%%%%%%
@@ -285,6 +306,25 @@
 %%% Ceil and Floor delimiters paired
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%% Tikz figures %%%
+%%%%%%%%%%%%%%%%%%%%
+
+%%
+% Add the \info command, adding an info box used as leafs in mindmaps.
+%%
+\newcommand*{\info}[4][16.3]{%
+  \node [ annotation, #3, scale=0.65, text width = #1em,
+          inner sep = 2mm ] at (#2) {%
+  \list{$\bullet$}{\topsep=0pt\itemsep=0pt\parsep=0pt
+    \parskip=0pt\labelwidth=8pt\leftmargin=8pt
+    \itemindent=0pt\labelsep=2pt}%
+    #4
+  \endlist
+  };
+}
 
 
 %%%%%%%%%%%%%%%

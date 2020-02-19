@@ -8,7 +8,6 @@ stow _common
 stow _custom
 stow _games
 stow autorandr
-stow bash
 stow clipster
 stow cups
 stow git
@@ -27,14 +26,16 @@ stow obs
 stow picom
 stow pinta
 stow profile
+stow python
 stow ranger
 stow rclone
 stow ssh
 stow systemd
 stow termite
 stow vlc
-stow X
+stow wget
 stow xdg
+stow X11
 stow zeal
 stow zotero
 stow zsh

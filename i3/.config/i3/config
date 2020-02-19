@@ -201,7 +201,7 @@ bar {
 
 # Binds
 # Bind win + l to lockscreen
-bindsym $mod+l exec i3lock-fancy-dualmonitor -f "/usr/share/fonts/powerline/Source Code Pro for Powerline.otf"
+bindsym $mod+l exec i3lock-fancy-dualmonitor -f "Source-Code-Pro-for-Powerline"
 
 # Disable Pycharm popups and wrong focus
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
@@ -214,7 +214,7 @@ exec --no-startup-id i3-msg 'workspace 2: $ws2; exec $BROWSER'
 # exec --no-startup-id i3-msg 'workspace 3: $ws3; exec /local/bizzozzero/softwares/pycharm-2019.2/bin/pycharm.sh'
 # exec --no-startup-id i3-msg 'workspace 4: $ws4; exec /local/bizzozzero/softwares/Zotero-5.0.66_linux-x86_64/zotero'
 # exec --no-startup-id i3-msg 'workspace 6: $ws6; exec $TERMINAL -e /local/bizzozzero/.venv/bin/ranger'
-# exec --no-startup-id i3-msg 'workspace 8: $ws8; exec /usr/bin/keepass'
+exec --no-startup-id i3-msg 'workspace 8: $ws8; exec /usr/bin/keepass /home/johnlocke/keys/main.kdbx'
 # exec --no-startup-id i3-msg 'workspace 9: $ws9; exec $TERMINAL -e cmus'
 # exec --no-startup-id i3-msg 'workspace 10: $ws10; exec $TERMINAL -e neomutt'
 
