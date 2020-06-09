@@ -7,7 +7,6 @@ Plug 'machakann/vim-sandwich', {'branch': 'master'}
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'honza/vim-snippets', {'branch': 'master'}
 Plug 'lervag/vimtex'
 Plug 'Konfekt/FastFold'
@@ -21,6 +20,5 @@ Plug 'psliwka/vim-smoothie'
 call plug#end()
 
 
-let g:deoplete#enable_at_startup = 1
 let g:airline_powerline_fonts = 1
 let g:neotex_enabled = 2

@@ -40,6 +40,7 @@ SSH_OSIRIM="nbizzozz@osirim-slurm.irit.fr"
 
 _JAVA_OPTIONS="-Xmx4096m"
 JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
+TORBROWSER_PKGLANG=`locale | head -n 1 | grep -E -o "([a-z]+\_[A-Z]+)"`
 
 
 ##

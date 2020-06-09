@@ -6,6 +6,8 @@ alias lt='ls -t'
 
 alias subl='subl3'
 
+alias sl='ls'
+
 
 # Default commands parameters
 alias ls='ls --color --human-readable --literal'
@@ -19,3 +21,8 @@ alias calcurse='calcurse -D ~/.config/calcurse'
 
 alias fuck="sudo !!"
 alias please="sudo"
+
+
+# Open files with favorite editor
+alias -s {yml,yaml,txt,py,csv,c,h,json}=$EDITOR
+

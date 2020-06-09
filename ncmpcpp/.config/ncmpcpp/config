@@ -94,12 +94,12 @@ lyrics_directory = ~/.config/ncmpcpp/lyrics
 ##
 #visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
 
-visualizer_fifo_path = "/tmp/mpd.fifo"
-visualizer_output_name = "fifo_visualization"
-visualizer_sync_interval = "10" 
-visualizer_in_stereo = "yes"
-visualizer_type = "spectrum"
-visualizer_look = "◆▋"
+#visualizer_fifo_path = "/tmp/mpd.fifo"
+#visualizer_output_name = "fifo_visualization"
+#visualizer_sync_interval = "10" 
+#visualizer_in_stereo = "yes"
+#visualizer_type = "spectrum"
+#visualizer_look = "◆▋"
 
 
 ##### system encoding #####
