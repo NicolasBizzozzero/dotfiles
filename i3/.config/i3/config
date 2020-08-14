@@ -102,60 +102,68 @@ bindsym $mod+q focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 main
-set $ws2 navigator
-set $ws3 code
-set $ws4 papers
-set $ws5 code
-set $ws6 files
-set $ws7 buffer
-set $ws8 keepass
-set $ws9 music
-set $ws10 mail
+set $wsmain main
+set $wsnavigator navigator
+set $wscode code
+set $wspapers papers
+set $wsfiles files
+set $wsbuffer buffer
+set $wskeepass keepass
+set $wsmusics musics
+set $wsmails mails
+set $wsmattermost mattermost
 
 # switch to workspace
-bindsym $mod+ampersand workspace 1: $ws1
-bindsym $mod+eacute workspace 2: $ws2
-bindsym $mod+quotedbl workspace 3: $ws3
-bindsym $mod+apostrophe workspace 4: $ws4
-bindsym $mod+parenleft workspace 5: $ws5
-bindsym $mod+minus workspace 6: $ws6
-bindsym $mod+egrave workspace 7: $ws7
-bindsym $mod+underscore workspace 8: $ws8
-bindsym $mod+ccedilla workspace 9: $ws9
-bindsym $mod+agrave workspace 10: $ws10
+bindsym $mod+ampersand workspace 1: $wsmain
+bindsym $mod+eacute workspace 2: $wsnavigator
+bindsym $mod+quotedbl workspace 3: $wscode
+bindsym $mod+apostrophe workspace 4: $wspapers
+bindsym $mod+parenleft workspace 5: $wsfiles
+bindsym $mod+minus workspace 6: $wsbuffer
+bindsym $mod+egrave workspace 7: $wsbuffer
+bindsym $mod+underscore workspace 8: $wskeepass
+bindsym $mod+ccedilla workspace 9: $wsmusics
+bindsym $mod+agrave workspace 10: $wsmattermost
+bindsym $mod+parenright workspace 11: $wsmails
+bindsym $mod+equal workspace 12: $wsbuffer
+bindsym $mod+Backspace workspace 13: $wsbuffer
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1: $ws1
-bindsym $mod+Shift+2 move container to workspace number 2: $ws2
-bindsym $mod+Shift+3 move container to workspace number 3: $ws3
-bindsym $mod+Shift+4 move container to workspace number 4: $ws4
-bindsym $mod+Shift+5 move container to workspace number 5: $ws5
-bindsym $mod+Shift+6 move container to workspace number 6: $ws6
-bindsym $mod+Shift+7 move container to workspace number 7: $ws7
-bindsym $mod+Shift+8 move container to workspace number 8: $ws8
-bindsym $mod+Shift+9 move container to workspace number 9: $ws9
-bindsym $mod+Shift+0 move container to workspace number 10: $ws10
+bindsym $mod+Shift+1 move container to workspace number 1: $wsmain
+bindsym $mod+Shift+2 move container to workspace number 2: $wsnavigator
+bindsym $mod+Shift+3 move container to workspace number 3: $wscode
+bindsym $mod+Shift+4 move container to workspace number 4: $wspapers
+bindsym $mod+Shift+5 move container to workspace number 5: $wsfiles
+bindsym $mod+Shift+6 move container to workspace number 6: $wsbuffer
+bindsym $mod+Shift+7 move container to workspace number 7: $wsbuffer
+bindsym $mod+Shift+8 move container to workspace number 8: $wskeepass
+bindsym $mod+Shift+9 move container to workspace number 9: $wsmusics
+bindsym $mod+Shift+0 move container to workspace number 10: $wsmattermost
+bindsym $mod+Shift+degree move container to workspace number 11: $wsmails
+bindsym $mod+Shift+plus move container to workspace number 12: $wsbuffer
+bindsym $mod+Shift+Backspace move container to workspace number 13: $wsbuffer
 
 # Set workspaces to specific monitors
 set $monitor_1 eDP1
 set $monitor_2 HDMI1
 
-workspace "1: $ws1" output $monitor_1
-workspace "2: $ws2" output $monitor_2
-workspace "3: $ws3" output $monitor_2
-workspace "4: $ws4" output $monitor_2
-workspace "5: $ws5" output $monitor_2
-workspace "6: $ws6" output $monitor_2
-workspace "7: $ws7" output $monitor_2
-workspace "8: $ws8" output $monitor_1
-workspace "9: $ws9" output $monitor_2
-workspace "10: $ws10" output $monitor_2
+workspace "1: $wsmain" output $monitor_1
+workspace "2: $wsnavigator" output $monitor_2
+workspace "3: $wscode" output $monitor_2
+workspace "4: $wspapers" output $monitor_2
+workspace "5: $wsfiles" output $monitor_2
+workspace "6: $wsbuffer" output $monitor_2
+workspace "7: $wsbuffer" output $monitor_2
+workspace "8: $wskeepass" output $monitor_1
+workspace "9: $wsmusics" output $monitor_1
+workspace "10: $wsmattermost" output $monitor_2
+workspace "11: $wsmails" output $monitor_2
+workspace "12: $wsbuffer" output $monitor_1
+workspace "13: $wsbuffer" output $monitor_1
 
 # Alternatively, set thoses workspaces to be fist visible when you start i3
-workspace "1: $ws1" output $monitor_1
-workspace "2: $ws2" output $monitor_2
-
+workspace "1: $wsmain" output $monitor_1
+workspace "2: $wsnavigator" output $monitor_2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -209,12 +217,12 @@ for_window [instance="sun-awt-X11-XWindowPeer"] border pixel 0
 
 # execute softwares at launch
 exec --no-startup-id feh --randomize --no-fehbg --bg-fill $HOME/pictures/wallpapers/*
-exec --no-startup-id i3-msg 'workspace 1: $ws1; exec $TERMINAL'
-exec --no-startup-id i3-msg 'workspace 2: $ws2; exec $BROWSER'
+exec --no-startup-id i3-msg 'workspace 1: $wsmain; exec $TERMINAL'
+exec --no-startup-id i3-msg 'workspace 2: $wsnavigator; exec $BROWSER'
 # exec --no-startup-id i3-msg 'workspace 3: $ws3; exec /local/bizzozzero/softwares/pycharm-2019.2/bin/pycharm.sh'
 # exec --no-startup-id i3-msg 'workspace 4: $ws4; exec /local/bizzozzero/softwares/Zotero-5.0.66_linux-x86_64/zotero'
 # exec --no-startup-id i3-msg 'workspace 6: $ws6; exec $TERMINAL -e /local/bizzozzero/.venv/bin/ranger'
-exec --no-startup-id i3-msg 'workspace 8: $ws8; exec /usr/bin/keepass /home/johnlocke/keys/main.kdbx'
+exec --no-startup-id i3-msg 'workspace 8: $wskeepass; exec /usr/bin/keepass /home/johnlocke/keys/main.kdbx'
 # exec --no-startup-id i3-msg 'workspace 9: $ws9; exec $TERMINAL -e cmus'
 # exec --no-startup-id i3-msg 'workspace 10: $ws10; exec $TERMINAL -e neomutt'
 

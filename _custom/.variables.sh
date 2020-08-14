@@ -8,6 +8,9 @@ GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 # iPython
 IPYTHONDIR="$HOME/.config/ipython"
 
+# Node
+NODE_PATH="$HOME/.local/share/node/node_modules"
+
 # Python
 PYTHONHISTFILE="$HOME/.local/share/python/python_history"
 PYTHONSTARTUP="$HOME/.config/python/startup.py"
@@ -22,7 +25,7 @@ WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 
 # Wine
-WINEPREFIX="$HOME/.local/share/wine"
+WINEPREFIX="$HOME/.wine"
 
 # Z
 _Z_DATA="$HOME/.local/share/z"
