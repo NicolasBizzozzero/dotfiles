@@ -1,6 +1,9 @@
 [Added Associations]
 application/x-mswinurl=firefox.desktop;
-image/jpeg=feh.desktop;
+image/jpeg=pinta.desktop;feh.desktop;
+text/x-python=sublime_text_3.desktop;
+image/png=feh.desktop;pinta.desktop;
+text/plain=sublime_text_3.desktop;
 
 [Default Applications]
 image/jpeg=feh.desktop

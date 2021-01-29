@@ -1,5 +1,5 @@
 ﻿###
-###  vlc 3.0.8
+###  vlc 3.0.11
 ###
 
 ###
@@ -641,6 +641,38 @@
 # x264 advanced options (string)
 #sout-x264-options=
 
+[kate] # Kate overlay decoder
+
+# Formatted Subtitles (boolean)
+#kate-formatted=1
+
+# Use Tiger for rendering (boolean)
+#kate-use-tiger=1
+
+# Rendering quality (float)
+#kate-tiger-quality=1.000000
+
+# Default font description (string)
+#kate-tiger-default-font-desc=
+
+# Default font effect (integer)
+#kate-tiger-default-font-effect=0
+
+# Default font effect strength (float)
+#kate-tiger-default-font-effect-strength=0.500000
+
+# Default font color (integer)
+#kate-tiger-default-font-color=16777215
+
+# Default font alpha (integer)
+#kate-tiger-default-font-alpha=255
+
+# Default background color (integer)
+#kate-tiger-default-background-color=16777215
+
+# Default background alpha (integer)
+#kate-tiger-default-background-alpha=0
+
 [subsusf] # USF subtitles decoder
 
 # Formatted Subtitles (boolean)
@@ -1177,6 +1209,68 @@
 # Opacity (boolean)
 #cc-opaque=1
 
+[qsv] # Intel QuickSync Video encoder for MPEG4-Part10/MPEG2 (aka H.264/H.262)
+
+# Enable software mode (boolean)
+#sout-qsv-software=0
+
+# Codec Profile (string)
+#sout-qsv-h264-profile=unspecified
+
+# Codec Level (string)
+#sout-qsv-h264-level=unspecified
+
+# Codec Profile (string)
+#sout-qsv-mpeg2-profile=unspecified
+
+# Codec Level (string)
+#sout-qsv-mpeg2-level=unspecified
+
+# Group of Picture size (integer)
+#sout-qsv-gop-size=32
+
+# Group of Picture Reference Distance (integer)
+#sout-qsv-gop-refdist=4
+
+# IDR interval (integer)
+#sout-qsv-idr-interval=0
+
+# Target Usage (string)
+#sout-qsv-target-usage=quality
+
+# Rate Control Method (string)
+#sout-qsv-rc-method=vbr
+
+# Quantization parameter (integer)
+#sout-qsv-qp=0
+
+# Quantization parameter for I-frames (integer)
+#sout-qsv-qpi=0
+
+# Quantization parameter for P-frames (integer)
+#sout-qsv-qpp=0
+
+# Quantization parameter for B-frames (integer)
+#sout-qsv-qpb=0
+
+# Maximum Bitrate (integer)
+#sout-qsv-bitrate-max=0
+
+# Accuracy of RateControl (integer)
+#sout-qsv-accuracy=0
+
+# Convergence time of 'avbr' RateControl (integer)
+#sout-qsv-convergence=0
+
+# Number of slices per frame (integer)
+#sout-qsv-num-slice=0
+
+# Number of reference frames (integer)
+#sout-qsv-num-ref-frame=0
+
+# Number of parallel operations (integer)
+#sout-qsv-async-depth=4
+
 [aribsub] # ARIB subtitles decoder
 
 # Ignore ruby (furigana) (boolean)
@@ -1478,6 +1572,17 @@
 # Audio configuration (string)
 #linsys-hdsdi-audio=0=1,1
 
+[cdda] # Audio CD input
+
+# Audio CD device (string)
+#cd-audio=/dev/sr0
+
+# CDDB Server (string)
+#cddb-server=freedb.videolan.org
+
+# CDDB port (integer)
+#cddb-port=80
+
 [dvdnav] # DVDnav Input
 
 # DVD angle (integer)
@@ -1618,6 +1723,11 @@
 
 # Sample rate (integer)
 #alsa-samplerate=48000
+
+[nfs] # NFS input
+
+# Set NFS uid/guid automatically (boolean)
+#nfs-auto-guid=1
 
 [access_jack] # JACK audio input
 
@@ -2144,6 +2254,15 @@
 
 # Use regular HTTP modules (boolean)
 #adaptive-use-access=0
+
+# Live Playback delay (ms) (integer)
+#adaptive-livedelay=15000
+
+# Max buffering (ms) (integer)
+#adaptive-maxbuffer=30000
+
+# Low latency (integer)
+#adaptive-lowlatency=-1
 
 [ncurses] # Ncurses interface
 
@@ -2911,7 +3030,7 @@ qt-privacy-ask=0
 #sout-avi-subject=
 
 # Encoder (string)
-#sout-avi-encoder=VLC Media Player - 3.0.8 Vetinari
+#sout-avi-encoder=VLC Media Player - 3.0.11 Vetinari
 
 # Keywords (string)
 #sout-avi-keywords=
@@ -2961,6 +3080,42 @@ qt-privacy-ask=0
 
 # Open GL/GLES hardware converter (string)
 #glconv=
+
+# Rendering intent for color conversion (integer)
+#rendering-intent=1
+
+# Display primaries (integer)
+#target-prim=0
+
+# Display gamma / transfer function (integer)
+#target-trc=0
+
+# Tone-mapping algorithm (integer)
+#tone-mapping=3
+
+# Tone-mapping parameter (float)
+#tone-mapping-param=0.000000
+
+# Highlight clipped pixels (boolean)
+#tone-mapping-warn=0
+
+# Dithering algorithm (integer)
+#dither-algo=-1
+
+# Dither depth override (0 = framebuffer depth) (integer)
+#dither-depth=0
+
+# Desaturation strength (float)
+#desat-strength=0.750000
+
+# Desaturation exponent (float)
+#desat-exponent=1.500000
+
+# Desaturation base (float)
+#desat-base=0.180000
+
+# Maximum brightness boost (float)
+#max-boost=0.000000
 
 [xcb_window] # X11 video window (XCB)
 
@@ -3185,6 +3340,29 @@ qt-privacy-ask=0
 
 # Video output URL (string)
 #sout-es-dst-video=
+
+[stream_out_chromecast] # Chromecast stream output
+
+# ? (string)
+#sout-chromecast-ip=
+
+# ? (integer)
+#sout-chromecast-port=8009
+
+# ? (boolean)
+#sout-chromecast-video=1
+
+# HTTP port (integer)
+#sout-chromecast-http-port=8010
+
+# Performance warning (integer)
+#sout-chromecast-show-perf-warning=1
+
+# Enable Audio passthrough (boolean)
+#sout-chromecast-audio-passthrough=0
+
+# Conversion quality (integer)
+#sout-chromecast-conversion-quality=1
 
 [stream_out_rtp] # RTP stream output
 
@@ -3992,7 +4170,7 @@ qt-privacy-ask=0
 #meta-url=
 
 # File caching (ms) (integer)
-#file-caching=300
+#file-caching=1000
 
 # Live capture caching (ms) (integer)
 #live-caching=300
@@ -4121,7 +4299,7 @@ qt-privacy-ask=0
 #random=0
 
 # Repeat all (boolean)
-#loop=0
+loop=1
 
 # Repeat current item (boolean)
 #repeat=0
