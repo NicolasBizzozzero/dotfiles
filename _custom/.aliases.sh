@@ -23,6 +23,13 @@ alias fuck="sudo !!"
 alias please="sudo"
 
 
+# WGET 
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts'
+
+# Yarn
+alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
+
+
 # Open files with favorite editor
 alias -s {yml,yaml,txt,py,csv,c,h,json}=$EDITOR
 

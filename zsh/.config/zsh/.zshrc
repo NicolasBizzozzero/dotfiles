@@ -84,7 +84,7 @@ source ~/.variables.sh
 
 
 # Set ls colors
-eval $(dircolors -b $HOME/.dircolors)
+eval $(dircolors "$XDG_CONFIG_HOME"/dircolors)
 
 # If a command is not found, find a package containing it
 source /usr/share/doc/pkgfile/command-not-found.zsh

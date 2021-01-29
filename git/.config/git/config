@@ -3,7 +3,7 @@
 	email = nicolas.bizzozzero@protonmail.com
 [core]
 	autocrlf = input
-[url "ssh://git@github.com/"]
+[url "git@github.com/"]
 	insteadOf = https://github.com/
 [url "ssh://git@gitlab.com/"]
 	insteadOf = https://gitlab.com/
@@ -13,3 +13,8 @@
 	insteadOf = "aur:"
 [url "ssh://aur@aur.archlinux.org/"]
 	pushInsteadOf = "aur:" 
+[pull]
+	rebase = false
+
+[init]
+	defaultBranch = master

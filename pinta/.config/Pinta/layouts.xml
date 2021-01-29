@@ -1,14 +1,14 @@
 ﻿<layouts>
-  <layout name="Default" width="1920" height="959" size="1920" prefSize="1920" defaultHorSize="-1" defaultVerSize="-1" type="Horizontal">
-    <group size="64" prefSize="64" defaultHorSize="65" defaultVerSize="130" type="Vertical">
-      <item size="478" prefSize="478" defaultHorSize="65" defaultVerSize="130" id="Toolbox" visible="True" status="Dockable" />
-      <item size="478" prefSize="478" defaultHorSize="65" defaultVerSize="130" id="Palette" visible="True" status="Dockable" />
+  <layout name="Default" width="474" height="398" size="474" prefSize="474" defaultHorSize="-1" defaultVerSize="-1" type="Horizontal">
+    <group size="63" prefSize="63" defaultHorSize="65" defaultVerSize="130" type="Vertical">
+      <item size="198" prefSize="198" defaultHorSize="65" defaultVerSize="130" id="Toolbox" visible="True" status="Dockable" />
+      <item size="199" prefSize="199" defaultHorSize="65" defaultVerSize="130" id="Palette" visible="True" status="Dockable" />
     </group>
-    <item size="1647" prefSize="1647" defaultHorSize="130" defaultVerSize="130" id="Canvas" visible="True" status="Dockable" />
-    <group size="203" prefSize="203" defaultHorSize="130" defaultVerSize="130" type="Vertical">
-      <item size="317" prefSize="317" defaultHorSize="130" defaultVerSize="130" id="Layers" visible="True" status="Dockable" />
-      <item size="317" prefSize="317" defaultHorSize="130" defaultVerSize="130" id="Images" visible="True" status="Dockable" />
-      <item size="319" prefSize="319" defaultHorSize="130" defaultVerSize="130" id="History" visible="True" status="Dockable" />
+    <item size="208" prefSize="208" defaultHorSize="130" defaultVerSize="130" id="Canvas" visible="True" status="Dockable" />
+    <group size="201" prefSize="201" defaultHorSize="130" defaultVerSize="130" type="Vertical">
+      <item size="265" prefSize="265" defaultHorSize="130" defaultVerSize="130" id="Layers" visible="True" status="Dockable" />
+      <item size="231" prefSize="231" defaultHorSize="130" defaultVerSize="130" id="Images" visible="True" status="Dockable" />
+      <item size="0" prefSize="0" defaultHorSize="130" defaultVerSize="130" id="History" visible="True" status="Dockable" />
     </group>
   </layout>
 </layouts>
