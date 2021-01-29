@@ -45,7 +45,7 @@ export WINEPREFIX="$HOME/.wine"
 
 # X11
 export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+# Removed because not working : export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 # Z
 export _Z_DATA="$XDG_DATA_HOME/z"
