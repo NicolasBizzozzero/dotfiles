@@ -74,13 +74,6 @@ PRINTER="HP-LaserJet-2"
 
 
 ##
-# Saves location
-##
-
-DIR_SAVES_NGUIDLE="$HOME/.local/share/Steam/steamapps/compatdata/1147690/pfx/drive_c/users/steamuser/AppData/LocalLow/NGU Industries/NGU Idle"
-
-
-##
 # Miscellaneous
 ##
 

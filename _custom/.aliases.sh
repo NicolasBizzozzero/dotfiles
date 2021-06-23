@@ -4,8 +4,6 @@ alias la='ls -A'
 alias ll='ls -lA'
 alias lt='ls -t'
 
-alias subl='subl3'
-
 alias sl='ls'
 
 
