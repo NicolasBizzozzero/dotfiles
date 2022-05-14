@@ -4,9 +4,13 @@
 
 # Cabal
 export CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config"
+export CABAL_DIR="$XDG_CACHE_HOME/cabal"
 
 # Cargo
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+
+# GNUGPG
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 
 # Gradle
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
@@ -20,6 +24,9 @@ export NODE_PATH="$XDG_DATA_HOME/node/node_modules"
 
 # NPM
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+
+# NVM
+export NVM_DIR="$XDG_DATA_HOME/nvm"
 
 # NLTK
 export NLTK_DATA="$XDG_DATA_HOME/nltk"
@@ -41,7 +48,7 @@ export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 
 # Wine
-export WINEPREFIX="$HOME/.wine"
+export WINEPREFIX="$XDG_DATA_HOME/wine"
 
 # X11
 export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
@@ -61,7 +68,7 @@ SSH_OSIRIM="nbizzozz@osirim-slurm.irit.fr"
 # Build parameters
 ## 
 
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
+export JAVA_HOME="/usr/lib/jvm/java-18-openjdk"
 export TORBROWSER_PKGLANG="fr"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 

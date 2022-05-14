@@ -24,13 +24,19 @@ alias please="sudo"
 # Spotify without adds (https://github.com/abba23/spotify-adblock)
 alias spotify-adblock="LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
 
+# Chromecast Wrapper
+alias chromecast="go-chromecast"
 
 # WGET 
-alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts'
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 # Yarn
 alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 
+# Youtube-dl
+alias youtube-dl='yt-dlp'
+
 # Open files with favorite editor
 alias -s {yml,yaml,txt,py,csv,c,h,json}=$EDITOR
+
 

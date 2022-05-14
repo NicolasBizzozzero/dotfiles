@@ -18,6 +18,8 @@ numlockx &
 # Solve Pycharm subwindows going funky
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# Disable terminal emulators scaling with DPI
+export WINIT_X11_SCALE_FACTOR=1
 
 exec i3
 

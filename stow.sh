@@ -7,6 +7,7 @@
 stow _common
 stow _custom
 stow _games
+stow alacritty
 stow autorandr
 stow calcurse
 stow clipster
@@ -23,6 +24,7 @@ stow ncmpcpp
 stow neomutt
 stow neovim
 stow nextcloud
+stow npm
 stow obs
 stow picom
 stow pinta

@@ -1,6 +1,7 @@
 acpi
 aic94xx-firmware
 ajour
+alacritty
 alsa-utils
 arch-install-scripts
 arch-wiki-docs
@@ -42,7 +43,6 @@ dos2unix
 dosbox
 downgrade
 doxygen
-drawio-desktop
 e1000e-dkms
 efibootmgr
 elasticsearch
@@ -54,8 +54,11 @@ ffmpegthumbnailer
 file
 findutils
 firefox
+firefox-extension-reddit-enhancement-suite
+firefox-extension-user-agent-switcher
 firefox-ublock-origin
 flex
+focalboard-bin
 fzf
 gallery-dl
 gawk
@@ -69,6 +72,8 @@ glpk
 gnome-control-center
 gnome-keyring
 gnome-screenshot
+gnucash
+go-chromecast-git
 gpsd
 grep
 groff
@@ -78,6 +83,7 @@ gvfs-afc
 gzip
 hashcat
 hashid
+hollywood
 htop
 i3-gaps
 i3blocks
@@ -88,20 +94,19 @@ i3lock-fancy-git
 i3status
 ifplugd
 img2pdf
+informant
 inkscape
 intel-compute-runtime
 intel-gpu-tools
 inxi
 ipython
 iw
-jack2
 jdk-openjdk
 jdk11-openjdk
 jdk8-openjdk
 jdownloader2
 jq
 jre8-openjdk
-jupyter
 jupyter-notebook
 jupyterlab
 keepass
@@ -120,7 +125,7 @@ lib32-v4l-utils
 lib32-vkd3d
 lib32-vulkan-icd-loader
 lib32-vulkan-intel
-libmemcached
+libmemcached-awesome
 libreoffice-fresh
 libtool
 libva-intel-driver
@@ -137,6 +142,7 @@ man-db
 mariadb
 matterhorn
 memcached
+mkchromecast-git
 mkinitcpio
 mlocate
 mono-basic
@@ -159,6 +165,7 @@ network-manager-applet
 nextcloud
 nextcloud-client
 nicotine+
+nodejs-lts-gallium
 noto-fonts
 npm
 nss-mdns
@@ -182,6 +189,7 @@ patch
 pavucontrol
 pbgopy
 pdfarranger
+phantomjs
 picom
 pilorama-git
 pinta
@@ -195,16 +203,20 @@ playerctl
 popcorntime-bin
 powerline
 powerline-fonts
+powertop
 pulseeffects-legacy
 pv
 pycharm-professional
 python-beautifulsoup4
 python-better-exceptions
 python-boto3
+python-cherche-git
 python-deap-git
 python-dill
+python-discord
 python-elasticsearch
 python-fasttext-git
+python-ffplaylist-git
 python-flask-babelex
 python-gensim
 python-graphviz
@@ -213,6 +225,7 @@ python-keyboard
 python-levenshtein
 python-logzero
 python-lyricwikia
+python-magic
 python-matplotlib
 python-mss
 python-mutagen
@@ -229,6 +242,7 @@ python-prettytable
 python-pyaudio
 python-pyautogui
 python-pykeepass
+python-pynput
 python-pynvim
 python-pytesseract
 python-pytorch-cuda
@@ -241,6 +255,7 @@ python-scipy
 python-seaborn
 python-selenium
 python-smart_open
+python-spacy
 python-spotdl
 python-spotipy
 python-statsmodels
@@ -251,12 +266,14 @@ python-torchvision-git
 python-tqdm
 python-ujson
 python-unicode-slugify
+python-virtualenv
 python-wheel
 python-xlrd
 python-xlwt
 python-yarl
 python2-better-exceptions
 python2-logzero
+python37
 qbittorrent
 qjackctl
 qtkeychain-qt6
@@ -266,7 +283,6 @@ redshift
 ripgrep
 rofi
 roficlip
-rust-docs
 rxvt-unicode
 samba
 scrcpy
@@ -276,6 +292,7 @@ sdl_gfx
 sdl_image
 sdl_mixer
 sdl_ttf
+seahorse
 sed
 shrinkpdf
 skypeforlinux-stable-bin
@@ -295,6 +312,7 @@ tdu
 teamspeak3
 tensorboard
 termite
+tesseract-data-eng
 texinfo
 texlive-bibtexextra
 texlive-bin
@@ -314,6 +332,8 @@ texlive-pictures
 texlive-pstricks
 texlive-publishers
 texlive-science
+texmaker
+thermald
 thunar
 thunar-archive-plugin
 thunar-media-tags-plugin
@@ -322,6 +342,7 @@ thunderbird
 tickrs
 tk
 tldr++
+tlp
 tmux
 tor
 tor-browser
@@ -364,6 +385,7 @@ wine-mono
 wine-staging
 wireless_tools
 wkhtmltopdf
+wowup
 wpa_supplicant_gui
 wqy-zenhei
 xautoclick
