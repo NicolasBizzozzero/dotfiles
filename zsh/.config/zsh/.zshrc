@@ -44,7 +44,7 @@ HIST_STAMPS="yyyy/mm/dd"
 # Add wisely, as too many plugins slow down shell startup.
 # Installed but not activated :
 #  * zsh-completions
-plugins=(git z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,6 +78,8 @@ export LANG=fr_FR.UTF-8
 # Disable sleep mode
 xset s off
 xset -dpms
+
+
 
 ### Fix slowness of pastes with zsh-syntax-highlighting.zsh
 pasteinit() {

@@ -40,3 +40,6 @@ alias youtube-dl='yt-dlp'
 alias -s {yml,yaml,txt,py,csv,c,h,json}=$EDITOR
 
 
+# Mouse Setup
+alias setup_mouse=rivalcfg
+

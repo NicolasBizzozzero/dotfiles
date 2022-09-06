@@ -2,22 +2,25 @@
 # Config files
 ##
 
+# Android-Studio
+export ANDROID_HOME="$XDG_DATA_HOME"/android
+
 # Cabal
-export CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config"
-export CABAL_DIR="$XDG_CACHE_HOME/cabal"
+export CABAL_CONFIG="$XDG_CONFIG_HOME"/cabal/config
+export CABAL_DIR="$XDG_DATA_HOME"/cabal
 
 # Cargo
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
 # GNUGPG
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 
 # Gradle
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 
 # iPython / Jupyter
-export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
-export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
+export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 
 # Node
 export NODE_PATH="$XDG_DATA_HOME/node/node_modules"
@@ -32,11 +35,11 @@ export NVM_DIR="$XDG_DATA_HOME/nvm"
 export NLTK_DATA="$XDG_DATA_HOME/nltk"
 
 # Python
-export PYTHONHISTFILE="$XDG_DATA_HOME/python/python_history"
-export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc.py"
 
 # Shell's history files
-export HISTFILE="$XDG_DATA_HOME/zsh/zsh_history"
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export HISTFILE="${XDG_STATE_HOME}"/zsh/zsh_history
 
 # TeamSpeak
 export TS3_CONFIG_DIR="$XDG_CONFIG_HOME/ts3client"

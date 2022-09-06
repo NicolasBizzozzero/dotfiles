@@ -3,7 +3,8 @@ application/x-mswinurl=firefox.desktop;
 image/jpeg=pinta.desktop;feh.desktop;
 text/x-python=sublime_text_3.desktop;
 image/png=feh.desktop;pinta.desktop;
-text/plain=sublime_text_3.desktop;
+text/plain=libreoffice-writer.desktop;sublime_text_3.desktop;
+application/pdf=firefox.desktop;
 
 [Default Applications]
 image/jpeg=feh.desktop
