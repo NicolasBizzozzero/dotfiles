@@ -40,7 +40,3 @@ cp pam/pam_env.conf /etc/security/pam_env.conf && chmod 644 /etc/security/pam_en
 # wpa_supplicant
 cp wpa_supplicant/wpa_supplicant-wlp2s0.conf /etc/wpa_supplicant/wpa_supplicant-wlp2s0.conf && chmod 644 /etc/wpa_supplicant/wpa_supplicant-wlp2s0.conf && chown root:root /etc/wpa_supplicant/wpa_supplicant-wlp2s0.conf
 
-
-# TODO: 
-# hash wpa passwords
-
