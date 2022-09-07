@@ -1,0 +1,35 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+
+127.0.0.1    localhost
+::1          localhost
+127.0.0.1    swan
+
+# Block non-productive websites
+#0.0.0.0      reddit.com
+#0.0.0.0      www.reddit.com
+#0.0.0.0      old.reddit.com
+#0.0.0.0      new.reddit.com
+0.0.0.0      mobile.reddit.com
+0.0.0.0      i.reddit.com
+0.0.0.0      np.reddit.com
+0.0.0.0      help.reddit.com
+
+0.0.0.0      ubereats.com
+0.0.0.0      www.ubereats.com
+
+#0.0.0.0      youtube.com
+#0.0.0.0      www.youtube.com
+
+#0.0.0.0      twitch.tv
+#0.0.0.0      www.twitch.tv
+
+#0.0.0.0      facebook.com
+#0.0.0.0      www.facebook.com
+
+#0.0.0.0      twitter.com
+#0.0.0.0      www.twitter.com
+
+#0.0.0.0      instagram.com
+#0.0.0.0      www.instagram.com
+

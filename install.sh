@@ -34,8 +34,6 @@ stow rclone
 stow ssh
 stow sublime_text
 stow systemd
-stow teamspeak
-stow termite
 stow vlc
 stow wget
 stow X11
