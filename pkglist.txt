@@ -1,13 +1,11 @@
 acpi
 aic94xx-firmware
-ajour
 alacritty
 alsa-utils
 android-file-transfer
 android-sdk-build-tools
 android-sdk-cmdline-tools-latest
 android-sdk-platform-tools
-anoise
 arch-install-scripts
 arch-wiki-docs
 at
@@ -54,6 +52,7 @@ dos2unix
 dosbox
 downgrade
 doxygen
+dunst
 e1000e-dkms
 efibootmgr
 evince
@@ -177,7 +176,6 @@ net-tools
 network-manager-applet
 nextcloud
 nextcloud-client
-nicotine+
 nodejs-lts-gallium
 noto-fonts
 npm
@@ -192,6 +190,7 @@ ocl-icd
 oh-my-zsh-git
 opencl-nvidia
 opensmtpd
+otf-monocraft-git
 otf-openmoji
 owncloud-client
 pacman
@@ -275,7 +274,6 @@ python-seaborn
 python-selenium
 python-smart_open
 python-spacy
-python-spotdl
 python-spotipy
 python-statsmodels
 python-symspellpy
@@ -369,6 +367,7 @@ texmaker
 thermald
 thunar
 thunar-archive-plugin
+thunar-custom-actions
 thunar-media-tags-plugin
 thunar-volman
 thunderbird
@@ -382,6 +381,7 @@ tor
 tor-browser
 ttf-font-awesome
 ttf-inconsolata
+ttf-iosevka-nerd
 ttf-liberation
 ttf-linux-libertine
 ttf-ms-fonts
@@ -410,7 +410,6 @@ vulkan-validation-layers
 w3m
 warcraftlogsuploader
 wd719x-firmware
-weechat
 wget
 which
 whois
@@ -419,9 +418,9 @@ wine-mono
 wine-staging
 wireless_tools
 wkhtmltopdf
-wowup
 wpa_supplicant_gui
 wqy-zenhei
+xarchiver
 xautoclick
 xbindkeys
 xclip

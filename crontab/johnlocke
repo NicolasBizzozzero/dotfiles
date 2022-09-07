@@ -1,0 +1,14 @@
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7)
+# |  |  |  |  |
+  00 *  *  *  *  DISPLAY=:0  /home/johnlocke/scripts/change_wallpaper.sh
+  00 *  *  *  *  rm --recursive --force --interactive=never $HOME/GPUCache
+  00 *  *  *  *  rmdir --ignore-fail-on-non-empty $HOME/Desktop $HOME/Downloads
+#  00 *  *  *  *  $HOME/scripts/sync_webdav.sh
+  *  00 *  *  *  $HOME/scripts/yay_lspkg.sh > $HOME/.dotfiles/pkglist.txt
+  *  00 *  *  *  rm -rf $HOME/node_modules
+

@@ -1,0 +1,23 @@
+# /dev/mapper/root
+UUID=967a2865-f2fb-4943-aeb9-f1920d0621e7	/         	ext4      	rw,relatime,data=ordered	0 1
+
+# /dev/nvme0n1p1
+UUID=43861d0d-0190-4338-8e7f-2c8f70d8b977	/boot     	ext4      	rw,relatime,data=ordered	0 2
+
+# /dev/nvme0n1p2
+UUID=c669e76b-d0f4-4003-91e5-0d6d9a9ada71	none      	swap      	defaults  	0 0
+
+# /dev/mapper/home
+UUID=c94b7f95-c125-426b-ae0e-39d2ce2d9439	/home     	ext4      	rw,relatime,data=ordered	0 2
+
+# /dev/nvme0n1p4
+UUID=FB41-EFC2     			 	/boot/efi 	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+
+
+# Phones
+## RIM BlackBerry Keyone (VID=0fca and PID=8042)
+
+
+# USB-devices
+## External HDD Samsung 250Gb
+#UUID=78A2AD70A2AD3412                           /mnt/usb        ntfs-3g         uid=johnlocke,gid=users,umask=0022	0 0

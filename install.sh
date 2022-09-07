@@ -1,9 +1,6 @@
-#!/usr/bin/zsh
-#
-# Launch the GNU Stow software on all directories of this repository to
-# install them in their proper location.
+#!/usr/bin/sh
 
-
+# Stow config files in home directory
 stow _common
 stow _custom
 stow _games
@@ -13,6 +10,7 @@ stow calcurse
 stow clipster
 stow cups
 stow dircolors
+stow dunst
 stow git
 stow gnupg
 stow htop
@@ -21,6 +19,7 @@ stow jupyter
 stow mpd
 stow nano
 stow ncmpcpp
+stow neofetch
 stow neomutt
 stow neovim
 stow nextcloud
@@ -33,6 +32,7 @@ stow python
 stow ranger
 stow rclone
 stow ssh
+stow sublime_text
 stow systemd
 stow teamspeak
 stow termite
@@ -45,5 +45,7 @@ stow zeal
 stow zotero
 stow zsh
 
-# TODO: Stow root directories with -t param
+
+# Force copy files in miscellaneous root directories
+cp "crontab/$USER" /var/spool/cron/
 

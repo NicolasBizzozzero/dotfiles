@@ -1,0 +1,26 @@
+{
+	"added_words":
+	[
+		"Query"
+	],
+	"dictionary": "Packages/Language - French - Français/fr_FR (all variants).dic",
+	"font_size": 11,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"open_externally_patterns":
+	[
+		"*.jpg",
+		"*.jpeg",
+		"*.png",
+		"*.gif",
+		"*.zip",
+		"*.pdf"
+	],
+	"rulers":
+	[
+		120
+	],
+	"translate_tabs_to_spaces": true,
+}
