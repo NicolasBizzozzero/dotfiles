@@ -1,0 +1,2 @@
+wpa_supplicant/wpa_supplicant-wlp2s0.conf filter=remove-pass
+
