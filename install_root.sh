@@ -17,19 +17,19 @@ cp etc/locale.conf /etc/locale.conf && chmod 644 /etc/locale.conf && chown root:
 cp etc/locale.gen /etc/locale.gen && chmod 644 /etc/locale.gen && chown root:root /etc/locale.gen
 
 # fstab
-cp fstab/fstab /etc/fstab && chmod 644 /etc/fstab && chown root:root /etc/fstab
+#cp fstab/fstab /etc/fstab && chmod 644 /etc/fstab && chown root:root /etc/fstab
 
 # git
-cp gitconfig/gitconfig /etc/gitconfig && chmod 644 /etc/gitconfig && chown root:root /etc/gitconfig
+#cp gitconfig/gitconfig /etc/gitconfig && chmod 644 /etc/gitconfig && chown root:root /etc/gitconfig
 
 # grub
-cp grub/grub /etc/default/grub && chmod 644 /etc/default/grub && chown root:root /etc/default/grub
+#cp grub/grub /etc/default/grub && chmod 644 /etc/default/grub && chown root:root /etc/default/grub
 
 # leiningen
 cp leiningen/profiles.clj /etc/leiningen/profiles.clj && chmod 644 /etc/leiningen/profiles.clj && chown root:root /etc/leiningen/profiles.clj
 
 # mkinitcpio
-cp mkinitcpio/mkinitcpio.conf /etc/mkinitcpio.conf && chmod 644 /etc/mkinitcpio.conf && chown root:root /etc/mkinitcpio.conf
+#cp mkinitcpio/mkinitcpio.conf /etc/mkinitcpio.conf && chmod 644 /etc/mkinitcpio.conf && chown root:root /etc/mkinitcpio.conf
 
 # pacman
 cp pacman/pacman.conf /etc/pacman.conf && chmod 644 /etc/pacman.conf && chown root:root /etc/pacman.conf
@@ -39,4 +39,3 @@ cp pam/pam_env.conf /etc/security/pam_env.conf && chmod 644 /etc/security/pam_en
 
 # wpa_supplicant
 cp wpa_supplicant/wpa_supplicant-wlp2s0.conf /etc/wpa_supplicant/wpa_supplicant-wlp2s0.conf && chmod 644 /etc/wpa_supplicant/wpa_supplicant-wlp2s0.conf && chown root:root /etc/wpa_supplicant/wpa_supplicant-wlp2s0.conf
-

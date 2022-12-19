@@ -3,8 +3,6 @@
 	email = nicolas.bizzozzero@protonmail.com
 [core]
 	autocrlf = input
-[url "git@github.com/"]
-	insteadOf = https://github.com/
 [url "ssh://git@gitlab.com/"]
 	insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
@@ -15,6 +13,13 @@
 	pushInsteadOf = "aur:" 
 [pull]
 	rebase = false
-
 [init]
 	defaultBranch = master
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[protocol "file"]
+	allow = always

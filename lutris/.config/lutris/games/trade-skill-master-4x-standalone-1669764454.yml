@@ -1,0 +1,40 @@
+game:
+  arch: win64
+  exe: drive_c/Program Files (x86)/TradeSkillMaster Application/app/TSMApplication.exe
+  prefix: /home/johnlocke/games/trade-skill-master
+  working_dir: /home/johnlocke/games/trade-skill-master
+game_slug: trade-skill-master
+name: Trade Skill Master
+requires: null
+script:
+  files:
+  - app: http://cdn.tradeskillmaster.com/setup.exe
+  game:
+    arch: win64
+    exe: drive_c/Program Files (x86)/TradeSkillMaster Application/app/TSMApplication.exe
+    prefix: $GAMEDIR
+    working_dir: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      prefix: /home/johnlocke/games/trade-skill-master
+      wine_path: /home/johnlocke/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/bin/wine
+  - task:
+      arch: win64
+      args: /silent
+      env: {}
+      executable: /home/johnlocke/.cache/lutris/installer/trade-skill-master/app/setup.exe
+      prefix: /home/johnlocke/games/trade-skill-master
+      wine_path: /home/johnlocke/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/bin/wine
+  system:
+    terminal: true
+  wine:
+    version: lutris-7.2-2-x86_64
+slug: trade-skill-master-4x-standalone
+system:
+  terminal: true
+variables: {}
+version: 4.X Standalone
+wine:
+  version: lutris-7.2-2-x86_64
+year: null

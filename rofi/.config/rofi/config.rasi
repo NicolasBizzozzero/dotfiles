@@ -1,0 +1,9 @@
+@theme "/usr/share/rofi/themes/Monokai.rasi"
+
+
+
+configuration {
+        kb-element-next: "";
+	kb-row-tab: "";
+	kb-row-select: "Tab";
+}

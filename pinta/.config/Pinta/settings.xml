@@ -1,11 +1,11 @@
 ﻿<settings>
-  <setting name="new-image-width" type="System.Int32">1141</setting>
-  <setting name="new-image-height" type="System.Int32">541</setting>
-  <setting name="default-image-type" type="System.String">png</setting>
+  <setting name="new-image-width" type="System.Int32">404</setting>
+  <setting name="new-image-height" type="System.Int32">432</setting>
+  <setting name="default-image-type" type="System.String">jpg</setting>
   <setting name="window-size-width" type="System.Int32">1906</setting>
   <setting name="window-size-height" type="System.Int32">1044</setting>
   <setting name="ruler-metric" type="System.Int32">2</setting>
-  <setting name="window-maximized" type="System.Boolean">False</setting>
+  <setting name="window-maximized" type="System.Boolean">True</setting>
   <setting name="ruler-shown" type="System.Boolean">False</setting>
   <setting name="toolbar-shown" type="System.Boolean">True</setting>
   <setting name="pixel-grid-shown" type="System.Boolean">False</setting>

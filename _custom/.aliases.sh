@@ -21,13 +21,20 @@ alias fuck="sudo !!"
 alias please="sudo"
 
 
+# Nvidia settings
+alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
+
+
+# Minecraft
+alias minecraft-launcher="minecraft-launcher --workDir $XDG_DATA_HOME/minecraft"
+
 # Spotify without adds (https://github.com/abba23/spotify-adblock)
 alias spotify-adblock="LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
 
 # Chromecast Wrapper
 alias chromecast="go-chromecast"
 
-# WGET 
+# WGET
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 # Yarn

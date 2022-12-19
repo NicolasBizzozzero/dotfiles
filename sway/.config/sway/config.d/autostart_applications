@@ -1,0 +1,12 @@
+# Start notification manager
+exec_always "pkill swaync; swaync"
+bindsym $mod+Shift+n exec swaync-client -t -sw
+
+# Autotiling
+exec_always "pkill autotiling; autotiling"
+
+# Set wallpapers
+exec_always python $HOME/scripts/set_random_wallpaper.py
+
+# Flashfocus
+# exec_always --no-startup-id flashfocus

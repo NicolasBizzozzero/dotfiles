@@ -50,7 +50,6 @@ source $ZSH/oh-my-zsh.sh
 
 
 ## User configuration
-
 export LANG=fr_FR.UTF-8
 
 # Preferred editor for local and remote sessions
@@ -75,11 +74,6 @@ export LANG=fr_FR.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Disable sleep mode
-xset s off
-xset -dpms
-
-
 
 ### Fix slowness of pastes with zsh-syntax-highlighting.zsh
 pasteinit() {
@@ -94,16 +88,18 @@ zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 ### Fix slowness of pastes
 
-
+# Set hardware acceleration
+export LIBVA_DRIVER_NAME=nvidia
+export VDPAU_DRIVER=nvidia
 
 source ~/.aliases.sh
 source ~/.variables.sh
 
+# Enable shell command correction
+setopt correct
 
 # Set ls colors
 eval $(dircolors "$XDG_CONFIG_HOME"/dircolors)
 
 # If a command is not found, find a package containing it
-source /usr/share/doc/pkgfile/command-not-found.zsh
-
-
+source /usr/share/doc/find-the-command/ftc.zsh quiet noprompt

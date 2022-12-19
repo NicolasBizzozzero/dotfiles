@@ -9,8 +9,8 @@
 PATH=~/.local/bin:$PATH
 
 
-# Start X11 server
-export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
-xinit
-
+# Start Wayland
+#if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+#  exec sway
+#fi
+exec sway --unsupported-gpu

@@ -1,0 +1,9 @@
+# Main laptop screen
+profile dual-philips {
+    output HDMI-A-1 position 0,0 mode 1920x1080
+    output eDP-1 position 1920,0 mode 1920x1080
+}
+
+profile monosource {
+    output eDP-1 enable
+}

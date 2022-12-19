@@ -12,8 +12,17 @@ export CABAL_DIR="$XDG_DATA_HOME"/cabal
 # Cargo
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
+# Cuda
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+
+# Docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+
 # GNUGPG
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+
+# Go
+export GOPATH="$XDG_DATA_HOME/go"
 
 # Gradle
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
@@ -34,8 +43,17 @@ export NVM_DIR="$XDG_DATA_HOME/nvm"
 # NLTK
 export NLTK_DATA="$XDG_DATA_HOME/nltk"
 
+# Nuget
+export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
+
+# Parallel
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+
+# pass
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
+
 # Python
-export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc.py"
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/startup.py"
 
 # Shell's history files
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
@@ -90,3 +108,6 @@ PRINTER="HP-LaserJet-2"
 # Python better-exceptions: https://github.com/qix-/better-exceptions
 export BETTER_EXCEPTIONS=1
 
+# Cursor theme (X11)
+export XCURSOR_THEME=volantes_cursors
+export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons:/usr/share/icons

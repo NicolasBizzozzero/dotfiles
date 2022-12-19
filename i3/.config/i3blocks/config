@@ -3,7 +3,7 @@ SCRIPT_DIR=/usr/lib64/i3blocks
 
 
 [usb]
-command=$SCRIPT_DIR/usb
+command=$SCRIPT_DIR/usb/usb
 markup=pango
 interval=10
 #IGNORE_LIST=[]
@@ -30,33 +30,27 @@ color=#c1f436
 
 
 [memory]
-command=$SCRIPT_DIR/memory
+command=$SCRIPT_DIR/memory/memory
 label=MEM
 interval=10
 
 
-#[memory]
-#command=$SCRIPT_DIR/memory
-#label=SWAP
-#instance=swap
-#interval=30
-
-[bandwidth]
-instance=wlp2s0;in
-label=
-command=$SCRIPT_DIR/bandwidth4/bandwidth
-markup=pango
-interval=1
-color=#4ff436
+#[bandwidth]
+#instance=wlp5s0;in
+#label=
+#command=$SCRIPT_DIR/bandwidth3/bandwidth3
+#markup=pango
+#interval=1
+#color=#4ff436
 
 
-[bandwidth2]
-instance=wlp2s0;out
-label=
-command=$SCRIPT_DIR/bandwidth4/bandwidth
-markup=pango
-interval=1
-color=#4ff436
+#[bandwidth2]
+#instance=wlp5s0;out
+#label=
+#command=$SCRIPT_DIR/bandwidth3/bandwidth3
+#markup=pango
+#interval=1
+#color=#4ff436
 
 
 [ssid]
@@ -67,30 +61,30 @@ markup=pango
 color=#ead15d
 
 
-[network]
-label=
-instance=eno1
-interval=10
-command=$SCRIPT_DIR/network/network
-markup=pango
-color=#ead15d
+#[network]
+#label=
+#instance=eno1
+#interval=10
+#command=$SCRIPT_DIR/network/network
+#markup=pango
+#color=#ead15d
 
 
-[network]
-label=
-instance=wlp2s0
-interval=10
-command=$SCRIPT_DIR/network/network
-markup=pango
-color=#ead15d
+#[network]
+#label=
+#instance=wlp2s0
+#interval=10
+#command=$SCRIPT_DIR/network/network
+#markup=pango
+#color=#ead15d
 
 
-[brightness]
-label=
-interval=5
-command=$SCRIPT_DIR/brightness/brightness
-markup=pango
-color=#de4134
+#[brightness]
+#label=
+#interval=5
+#command=$SCRIPT_DIR/brightness/brightness
+#markup=pango
+#color=#de4134
 
 
 [volume]
@@ -110,12 +104,12 @@ interval=5
 color=#4cd1e6
 
 
-[weather]
-instance=2643743
-interval=60
-markup=pango
-command=$SCRIPT_DIR/weather/weather
-color=#6977e1
+#[weather]
+#instance=2643743
+#interval=60
+#markup=pango
+#command=$SCRIPT_DIR/weather/weather
+#color=#6977e1
 
 
 [time]

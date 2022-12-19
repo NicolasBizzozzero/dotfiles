@@ -6,6 +6,8 @@ stow _custom
 stow _games
 stow alacritty
 stow autorandr
+stow autostart
+stow cabal
 stow calcurse
 stow clipster
 stow cups
@@ -13,9 +15,12 @@ stow dircolors
 stow dunst
 stow git
 stow gnupg
+stow gtk
 stow htop
 stow i3
 stow jupyter
+stow kanshi
+stow lutris
 stow mpd
 stow nano
 stow ncmpcpp
@@ -31,11 +36,15 @@ stow profile
 stow python
 stow ranger
 stow rclone
+stow rofi
 stow ssh
 stow sublime_text
+stow sway
 stow systemd
 stow vlc
+stow waybar
 stow wget
+stow wofi
 stow X11
 stow xdg
 stow yarn
