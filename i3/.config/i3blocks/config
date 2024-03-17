@@ -1,90 +1,52 @@
 separator_block_width=14
 SCRIPT_DIR=/usr/lib64/i3blocks
+SCRIPT_DIR_USER=/home/johnlocke/scripts
 
-
-[usb]
-command=$SCRIPT_DIR/usb/usb
+# Generic media player support
+#
+# This displays "ARTIST - SONG" if a music is playing.
+# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
+# Set to %any to automatically pick (Requires playerctl >=2.1.1)
+[mediaplayer]
+command=$SCRIPT_DIR/mediaplayer/mediaplayer
+label=🎧
+instance=vlc,spotify,%any
+interval=5
+signal=10
 markup=pango
-interval=10
-#IGNORE_LIST=[]
-#INFO_TEXT_COLOR=white
-#MOUNTED_COLOR=green
-#PLUGGED_COLOR=gray
-#LOCKED_COLOR=gray
-#UNLOCKED_NOT_MOUNTED_COLOR=yellow
-#PARTITIONLESS_COLOR=red
-#PARTITIONLESS_TEXT=no partitions
-#SEPARATOR=<span color='gray'> | </span>
-#LOCKED_INDICATOR= 
-#UNLOCKED_INDICATOR= 
-#READONLY_INDICATOR=ro
-#TRUNCATE_FS_LABELS=[not set by default, accepts +/- integers]
+
+
+[temperature]
+command=$SCRIPT_DIR/temperature/temperature
+instance=Core
+label=<span>  </span>
+markup=pango
+interval=5
+color=#f1fa8c
 
 
 [cpu_usage]
-label= CPU:
+label=CPU: 
 command=/usr/lib64/i3blocks/cpu_usage/cpu_usage
 markup=pango
 interval=3
-color=#c1f436
+color=#BF40BF
 
 
 [memory]
-command=$SCRIPT_DIR/memory/memory
-label=MEM
+command=$SCRIPT_DIR/memory/memory | head -n 1 | cut -d " " -f1 | sed 's/\// \/ /g'
+label=<span>   </span>
 interval=10
-
-
-#[bandwidth]
-#instance=wlp5s0;in
-#label=
-#command=$SCRIPT_DIR/bandwidth3/bandwidth3
-#markup=pango
-#interval=1
-#color=#4ff436
-
-
-#[bandwidth2]
-#instance=wlp5s0;out
-#label=
-#command=$SCRIPT_DIR/bandwidth3/bandwidth3
-#markup=pango
-#interval=1
-#color=#4ff436
-
-
-[ssid]
-label=
-interval=60
-command=$SCRIPT_DIR/ssid/ssid
 markup=pango
-color=#ead15d
+color=#ff5555
 
 
-#[network]
-#label=
-#instance=eno1
-#interval=10
-#command=$SCRIPT_DIR/network/network
-#markup=pango
-#color=#ead15d
-
-
-#[network]
-#label=
-#instance=wlp2s0
-#interval=10
-#command=$SCRIPT_DIR/network/network
-#markup=pango
-#color=#ead15d
-
-
-#[brightness]
-#label=
-#interval=5
-#command=$SCRIPT_DIR/brightness/brightness
-#markup=pango
-#color=#de4134
+[brightness]
+label=
+interval=5
+command=$SCRIPT_DIR/brightness/brightness
+markup=pango
+color=#de4134
 
 
 [volume]
@@ -93,7 +55,7 @@ command=/usr/lib64/i3blocks/volume/volume
 markup=pango
 interval=2
 signal=10
-color=#51dc8f
+color=#ffb86c
 
 
 [battery]
@@ -101,15 +63,14 @@ label=
 markup=pango
 command=/usr/lib64/i3blocks/battery2/battery2
 interval=5
-color=#4cd1e6
+color=#50fa7b
 
 
-#[weather]
-#instance=2643743
-#interval=60
-#markup=pango
-#command=$SCRIPT_DIR/weather/weather
-#color=#6977e1
+[weather]
+interval=60
+markup=pango
+command=python $SCRIPT_DIR_USER/notme/i3blocks-weather/weather.py -c Chelles
+color=#6977e1
 
 
 [time]
@@ -117,4 +78,4 @@ label=🕗
 command=date '+%a %d-%m-%Y %H:%M:%S %p'
 markup=pango
 interval=1
-color=#c752e4
+color=#ff79c6

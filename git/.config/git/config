@@ -3,6 +3,7 @@
 	email = nicolas.bizzozzero@protonmail.com
 [core]
 	autocrlf = input
+	editor = nano
 [url "ssh://git@gitlab.com/"]
 	insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]

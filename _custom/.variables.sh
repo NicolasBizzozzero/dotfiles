@@ -17,6 +17,7 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 
 # Docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export DOCKER_BUILDKIT=1
 
 # GNUGPG
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
@@ -30,6 +31,9 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 # iPython / Jupyter
 export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
+
+# kaggle
+export KAGGLE_CONFIG_DIR="${XDG_CONFIG_HOME}/kaggle"
 
 # Node
 export NODE_PATH="$XDG_DATA_HOME/node/node_modules"
@@ -46,6 +50,9 @@ export NLTK_DATA="$XDG_DATA_HOME/nltk"
 # Nuget
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 
+# OpenSSL
+export RANDFILE="$XDG_DATA_HOME"/openssl/.rnd
+
 # Parallel
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 
@@ -53,7 +60,7 @@ export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 
 # Python
-export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/startup.py"
+export PYTHONSTARTUP="/etc/python/pythonrc"
 
 # Shell's history files
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
@@ -67,6 +74,9 @@ export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 
 # wget
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+
+# w3m
+export W3M_DIR="$XDG_DATA_HOME"/w3m
 
 # Wine
 export WINEPREFIX="$XDG_DATA_HOME/wine"
@@ -83,11 +93,12 @@ export _Z_DATA="$XDG_DATA_HOME/z"
 # SSH
 ##
 SSH_OSIRIM="nbizzozz@osirim-slurm.irit.fr"
+alias ssh_personnal='ssh nicolas@51.38.187.4 -p 64219'
 
 
 ##
 # Build parameters
-## 
+##
 
 export JAVA_HOME="/usr/lib/jvm/java-18-openjdk"
 export TORBROWSER_PKGLANG="fr"

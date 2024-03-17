@@ -80,6 +80,8 @@ system:
     __GL_SHADER_DISK_CACHE: '1'
     __GL_SHADER_DISK_CACHE_PATH: /home/johnlocke/games/world-of-warcraft
   exclude_processes: Agent.exe "Battle.net Helper.exe"
+  game_path: /home/johnlocke/games
+  prime: true
 variables: {}
 version: Battle.net
 wine:
@@ -87,5 +89,5 @@ wine:
   overrides:
     nvapi: disabled
     nvapi64: disabled
-  version: system
+  version: lutris-7.2-2-x86_64
 year: 2004

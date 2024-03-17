@@ -39,7 +39,6 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec $TERMINAL
 
-
 # kill focused window
 bindsym $mod+Shift+A kill
 
@@ -89,8 +88,9 @@ bindsym $mod+s layout stacking
 bindsym $mod+z layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+# toggle tiling / floating + stick window in position
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+S sticky enable
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -106,6 +106,7 @@ bindsym $mod+q focus parent
 set $wsmain main
 set $wsnavigator navigator
 set $wscode code
+set $wsmovie movie
 set $wsbuffer buffer
 set $wskeepass keepass
 set $wsmusics musics
@@ -115,7 +116,7 @@ bindsym $mod+ampersand workspace 1: $wsmain
 bindsym $mod+eacute workspace 2: $wsnavigator
 bindsym $mod+quotedbl workspace 3: $wscode
 bindsym $mod+apostrophe workspace 4: $wsbuffer
-bindsym $mod+parenleft workspace 5: $wsbuffer
+bindsym $mod+parenleft workspace 5: $wsmovie
 bindsym $mod+minus workspace 6: $wsbuffer
 bindsym $mod+egrave workspace 7: $wsbuffer
 bindsym $mod+underscore workspace 8: $wskeepass
@@ -130,7 +131,7 @@ bindsym $mod+Shift+1 move container to workspace number 1: $wsmain
 bindsym $mod+Shift+2 move container to workspace number 2: $wsnavigator
 bindsym $mod+Shift+3 move container to workspace number 3: $wscode
 bindsym $mod+Shift+4 move container to workspace number 4: $wsbuffer
-bindsym $mod+Shift+5 move container to workspace number 5: $wsbuffer
+bindsym $mod+Shift+5 move container to workspace number 5: $wsmovie
 bindsym $mod+Shift+6 move container to workspace number 6: $wsbuffer
 bindsym $mod+Shift+7 move container to workspace number 7: $wsbuffer
 bindsym $mod+Shift+8 move container to workspace number 8: $wskeepass
@@ -142,14 +143,15 @@ bindsym $mod+Shift+BackSpace move container to workspace number 13: $wsbuffer
 
 # Set workspaces to specific monitors
 set $monitor_1 eDP1
+set $monitor_2 HDMI1
 
 workspace "3: $wscode" output $monitor_1
 workspace "4: $wsbuffer" output $monitor_1
-workspace "5: $wsbuffer" output $monitor_1
+workspace "5: $wsbuffer" output $monitor_2
 workspace "6: $wsbuffer" output $monitor_1
 workspace "7: $wsbuffer" output $monitor_1
 workspace "8: $wskeepass" output $monitor_1
-workspace "9: $wsmusics" output $monitor_1
+workspace "9: $wsmusics" output $monitor_2
 workspace "10: $wsbuffer" output $monitor_1
 workspace "11: $wsbuffer" output $monitor_1
 workspace "12: $wsbuffer" output $monitor_1
@@ -157,7 +159,8 @@ workspace "13: $wsbuffer" output $monitor_1
 
 # Alternatively, set thoses workspaces to be fist visible when you start i3
 workspace "1: $wsmain" output $monitor_1
-workspace "2: $wsnavigator" output $monitor_1
+workspace "2: $wsnavigator" output $monitor_2
+workspace "8: $wskeepass" output $monitor_1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -209,14 +212,25 @@ bindsym $mod+l exec i3lock-fancy-multimonitor
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [instance="sun-awt-X11-XWindowPeer"] border pixel 0
 
+# Enable Picture-In-Picture across all workspaces
+for_window [title="Picture-in-Picture"] sticky enable
+for_window [title="Picture In Picture"] sticky enable
+
+# Move floating window at the center of the current screen
+for_window [class=".*"] [floating] move absolute position center
+
 # execute softwares at launch
+exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
+exec_always --no-startup-id autorandr --change
 exec --no-startup-id feh --randomize --no-fehbg --bg-fill $HOME/pictures/wallpapers/*
 exec --no-startup-id i3-msg 'workspace 1: $wsmain; exec $TERMINAL'
 exec --no-startup-id i3-msg 'workspace 2: $wsnavigator; exec $BROWSER'
 
 # Start geoclue for geographical-based scripts & apps (eg: redshift)
-exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+# exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 
+# Start compositor
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Miscellaneous fixes
 # Origin client fix

@@ -1,7 +1,7 @@
 ﻿<settings>
-  <setting name="new-image-width" type="System.Int32">404</setting>
-  <setting name="new-image-height" type="System.Int32">432</setting>
-  <setting name="default-image-type" type="System.String">jpg</setting>
+  <setting name="new-image-width" type="System.Int32">1200</setting>
+  <setting name="new-image-height" type="System.Int32">2100</setting>
+  <setting name="default-image-type" type="System.String">png</setting>
   <setting name="window-size-width" type="System.Int32">1906</setting>
   <setting name="window-size-height" type="System.Int32">1044</setting>
   <setting name="ruler-metric" type="System.Int32">2</setting>
@@ -9,7 +9,7 @@
   <setting name="ruler-shown" type="System.Boolean">False</setting>
   <setting name="toolbar-shown" type="System.Boolean">True</setting>
   <setting name="pixel-grid-shown" type="System.Boolean">False</setting>
-  <setting name="last-dialog-directory" type="System.String">/home/johnlocke/downloads</setting>
+  <setting name="last-dialog-directory" type="System.String">file:///home/johnlocke/downloads</setting>
   <setting name="jpg-quality" type="System.Int32">100</setting>
   <setting name="image-tabs-shown" type="System.Boolean">True</setting>
   <setting name="dock-layers-minimized" type="System.Boolean">False</setting>
@@ -17,9 +17,9 @@
   <setting name="statusbar-shown" type="System.Boolean">True</setting>
   <setting name="toolbox-shown" type="System.Boolean">True</setting>
   <setting name="last-selected-tool" type="System.String">MoveSelectedTool</setting>
-  <setting name="primary-color" type="System.String">FF6F6C65</setting>
-  <setting name="secondary-color" type="System.String">FF5A5752</setting>
-  <setting name="recently-used-colors" type="System.String">FF6F6C65,FF5A5752,FF000000,FF303030,FFFF0000,FFFFB27F,FFFFFFFF,FFE5E5E5,FFE5E5E5,FFE5E5E5</setting>
+  <setting name="primary-color" type="System.String">FFFFFFFF</setting>
+  <setting name="secondary-color" type="System.String">FFFFFFFF</setting>
+  <setting name="recently-used-colors" type="System.String">FFFFFFFF,FFF5F5F5,FF6F6C65,FF5A5752,FF000000,FF303030,FFFF0000,FFFFB27F,FFE5E5E5,FFE5E5E5</setting>
   <setting name="selection-combine-mode" type="System.Int32">0</setting>
   <setting name="paintbrushtool-antialias" type="System.Int32">0</setting>
   <setting name="paintbrushtool-brush-width" type="System.Int32">2</setting>
@@ -29,12 +29,15 @@
   <setting name="color-picker-sample-size" type="System.Int32">0</setting>
   <setting name="rectangletool-antialias" type="System.Int32">0</setting>
   <setting name="rectangletool-brush-width" type="System.Int32">2</setting>
-  <setting name="rectangletool-fill-style" type="System.Int32">1</setting>
+  <setting name="rectangletool-fill-style" type="System.Int32">2</setting>
   <setting name="rectangletool-shape-type" type="System.Int32">1</setting>
   <setting name="rectangletool-dash-pattern" type="System.String">-</setting>
   <setting name="magicwandtool-fill-mode" type="System.Int32">0</setting>
   <setting name="magicwandtool-fill-tolerance" type="System.Int32">0</setting>
   <setting name="color-picker-tool-selection" type="System.Int32">0</setting>
   <setting name="color-picker-sample-type" type="System.Int32">0</setting>
+  <setting name="recolortool-antialias" type="System.Int32">0</setting>
+  <setting name="recolortool-brush-width" type="System.Int32">2</setting>
+  <setting name="recolor-tolerance" type="System.Int32">50</setting>
   <setting name="new-image-bg" type="Pinta.NewImageDialog+BackgroundType">White</setting>
 </settings>

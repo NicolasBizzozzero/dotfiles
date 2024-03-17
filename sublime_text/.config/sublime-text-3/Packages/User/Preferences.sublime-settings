@@ -3,8 +3,8 @@
 	[
 		"Query"
 	],
-	"dictionary": "Packages/Language - French - Français/fr_FR (all variants).dic",
-	"font_size": 9,
+	"dictionary": "Dictionaries/fr_FR.dic",
+	"font_size": 8,
 	"ignored_packages":
 	[
 		"Vintage",
