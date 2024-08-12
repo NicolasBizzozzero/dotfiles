@@ -22,5 +22,5 @@ export WINIT_X11_SCALE_FACTOR=1
 export DISPLAY=:0
 
 # if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-#   exec startx
+    exec startx
 # fi

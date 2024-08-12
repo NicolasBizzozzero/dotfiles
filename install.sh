@@ -54,5 +54,5 @@ stow zsh
 
 
 # Force copy files in miscellaneous root directories
-cp "crontab/$USER" /var/spool/cron/
+# cp "crontab/$USER" /var/spool/cron/
 

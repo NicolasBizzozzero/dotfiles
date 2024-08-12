@@ -4,7 +4,7 @@
 		"Query"
 	],
 	"dictionary": "Dictionaries/fr_FR.dic",
-	"font_size": 8,
+	"font_size": 12,
 	"ignored_packages":
 	[
 		"Vintage",

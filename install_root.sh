@@ -26,7 +26,7 @@ cp etc/locale.gen /etc/locale.gen && chmod 644 /etc/locale.gen && chown root:roo
 #cp grub/grub /etc/default/grub && chmod 644 /etc/default/grub && chown root:root /etc/default/grub
 
 # leiningen
-cp leiningen/profiles.clj /etc/leiningen/profiles.clj && chmod 644 /etc/leiningen/profiles.clj && chown root:root /etc/leiningen/profiles.clj
+# cp leiningen/profiles.clj /etc/leiningen/profiles.clj && chmod 644 /etc/leiningen/profiles.clj && chown root:root /etc/leiningen/profiles.clj
 
 # mkinitcpio
 #cp mkinitcpio/mkinitcpio.conf /etc/mkinitcpio.conf && chmod 644 /etc/mkinitcpio.conf && chown root:root /etc/mkinitcpio.conf

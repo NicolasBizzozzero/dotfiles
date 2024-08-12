@@ -100,7 +100,7 @@ alias ssh_personnal='ssh nicolas@51.38.187.4 -p 64219'
 # Build parameters
 ##
 
-export JAVA_HOME="/usr/lib/jvm/java-18-openjdk"
+export JAVA_HOME="/usr/lib/jvm/java-22-openjdk"
 export TORBROWSER_PKGLANG="fr"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 

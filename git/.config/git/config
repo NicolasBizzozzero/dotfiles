@@ -24,3 +24,5 @@
 	helper = !/usr/bin/gh auth git-credential
 [protocol "file"]
 	allow = always
+[credential]
+	helper = store

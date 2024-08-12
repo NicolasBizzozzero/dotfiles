@@ -44,7 +44,7 @@ HIST_STAMPS="yyyy/mm/dd"
 # Add wisely, as too many plugins slow down shell startup.
 # Installed but not activated :
 #  * zsh-completions
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-dircolors-solarized)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,6 +88,13 @@ zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 ### Fix slowness of pastes
 
+
+# Enable history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt hist_ignore_all_dups inc_append_history
+
 # Set hardware acceleration
 export LIBVA_DRIVER_NAME=nvidia
 export VDPAU_DRIVER=nvidia
@@ -97,9 +104,6 @@ source ~/.variables.sh
 
 # Enable shell command correction
 setopt correct
-
-# Set ls colors
-eval $(dircolors "$XDG_CONFIG_HOME"/dircolors)
 
 # If a command is not found, find a package containing it
 source /usr/share/doc/find-the-command/ftc.zsh quiet noprompt

@@ -386,7 +386,6 @@ python-css-parser
 python-deezer-py
 python-dill
 python-discord
-python-docker
 python-elasticsearch
 python-emoji
 python-fastapi
