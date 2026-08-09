@@ -11,6 +11,41 @@ $ stow zsh
 
 Running `install.sh` stows everything at once.
 
+## System overview
+The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize it:
+
+| Role | Software | Package here |
+|---|---|---|
+| Distribution | Arch Linux | - |
+| Window manager / compositor | Hyprland (Wayland) | `hypr` |
+| Status bar | Waybar | `waybar` |
+| Application launcher | Rofi | `rofi` |
+| Notification daemon | Mako | `mako` |
+| Login / display manager | ly | - |
+| Screen locker | Hyprlock | - |
+| Terminal emulator | kitty | `kitty` |
+| Shell | zsh | `zsh` |
+| Prompt | Starship | `starship` |
+| Primary editor | Neovim | `neovim` |
+| Secondary editor | nano | `nano` |
+| Version control | git | `git` |
+| Remote access | OpenSSH | `ssh` |
+| AUR helper | yay | - |
+| Web browser | Firefox | - |
+| Music daemon | MPD | `mpd` |
+| Video / media playback | VLC | `vlc` |
+| Offline documentation | Zeal | `zeal` |
+| Email client | NeoMutt | `neomutt` |
+| Terminal file manager | Yazi | `yazi` |
+| Process monitor | htop | `htop` |
+| System summary | fastfetch | `fastfetch` |
+| Printing | CUPS | `cups` |
+| Python tooling | Python, IPython/Jupyter | `python`, `jupyter` |
+| JavaScript package manager | Yarn | `yarn` |
+| AI coding assistant | Claude Code | `claude` |
+
+Entries with no package are either system-level (not something a home directory dotfile controls) or run fine on their defaults without any tracked configuration.
+
 ## What's in here
 A quick tour of the software behind each package, grouped by what it's used for.
 

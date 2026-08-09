@@ -45,7 +45,7 @@
         {
             "type": "custom",
             "key": "󰂚 Notifications",
-            "format": "dunst"
+            "format": "mako"
         },
         {
             "type": "custom",

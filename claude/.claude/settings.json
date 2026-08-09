@@ -1,3 +1,61 @@
 {
-  "theme": "dark"
+  "theme": "dark",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Grep",
+      "Glob",
+      "Bash(ls*)",
+      "Bash(pwd)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(file *)",
+      "Bash(stat *)",
+      "Bash(tree*)",
+      "Bash(realpath *)",
+      "Bash(readlink *)",
+      "Bash(which *)",
+      "Bash(type *)",
+      "Bash(du *)",
+      "Bash(df*)",
+      "Bash(grep *)",
+      "Bash(rg *)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git branch*)",
+      "Bash(git blame*)",
+      "Bash(git remote -v)",
+      "Bash(git stash list*)",
+      "Bash(git tag*)",
+      "Bash(git rev-parse*)",
+      "Bash(ps*)",
+      "Bash(whoami)",
+      "Bash(hostname)",
+      "Bash(uname*)",
+      "Bash(date*)",
+      "Bash(pacman -Q*)",
+      "Bash(systemctl status*)",
+      "Bash(systemctl --user status*)",
+      "Bash(systemctl is-active*)",
+      "Bash(systemctl is-enabled*)",
+      "Bash(systemctl list-unit-files*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read -r f; case \"$f\" in *.py) black -q \"$f\" ;; esac; } 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
 }
