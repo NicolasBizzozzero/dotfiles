@@ -1,1 +1,12 @@
-include /usr/share/nano-syntax-highlighting/*.nanorc
+# Show line numbers
+set linenumbers
+
+# Enable mouse support (allows clicking to move cursor)
+set mouse
+
+# Auto-indent new lines
+set autoindent
+
+# Include all the beautiful syntax highlighting rules!
+include "/usr/share/nano-syntax-highlighting/*.nanorc"
+

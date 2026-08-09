@@ -1,11 +1,4 @@
-[Added Associations]
-application/x-mswinurl=firefox.desktop;
-image/jpeg=pinta.desktop;feh.desktop;
-text/x-python=sublime_text_3.desktop;
-image/png=feh.desktop;pinta.desktop;
-text/plain=libreoffice-writer.desktop;sublime_text_3.desktop;
-application/pdf=firefox.desktop;
 
 [Default Applications]
-image/jpeg=feh.desktop
-application/pdf=mupdf.desktop
+x-scheme-handler/jetbrains=jetbrainsd.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop

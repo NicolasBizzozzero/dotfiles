@@ -1,0 +1,82 @@
+{
+    "include": [
+      "$HOME/.config/waybar/Modules",
+      "$HOME/.config/waybar/ModulesCustom",
+      "$HOME/.config/waybar/ModulesGroups",
+      "$HOME/.config/waybar/UserModules"
+    ],
+    "layer": "top", 
+    "position": "top", 
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "margin-left": 0,
+    "margin-right": 0,
+    "margin-top": 0,
+
+    "modules-left": [ 
+        "hyprland/workspaces",
+        "tray",
+        "mpris" 
+    ],
+    "modules-center": [
+        "custom/localweather",
+        "custom/frenchclock"
+    ],
+    "modules-right": [
+        "custom/claude_usage",
+        "temperature",
+        "cpu",
+        "memory",
+        "pulseaudio",       
+        "battery",
+        "custom/power"
+    ],
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "show-special": false,
+        "on-click": "activate",
+        "format": "{name}",
+        "sort-by-number": true
+    },
+
+    // the C++ formatting library (fmt) that Waybar uses natively has a known bug on Arch Linux where it sometimes completely ignores the system locale.
+    "custom/frenchclock": {
+        "exec": "date +'%A %d %B   %H:%M:%S'",
+        "interval": 1,
+        "tooltip": false,
+        "on-click": "GDK_BACKEND=x11 yad --calendar --undecorated --fixed --close-on-unfocus --no-buttons --geometry=+675+25"
+    },
+
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-full": "100% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "custom/claude_usage": {
+        "format": "{}",
+        "return-type": "json",
+        "interval": 60,
+        "exec": "~/scripts/ricing/claude_usage.sh",
+        "tooltip": true
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""],
+        "tooltip": false
+    },
+
+    "custom/localweather": {
+        "exec": "~/scripts/weather.sh",
+        "interval": 1800,
+        "format": "{}",
+        "tooltip": false
+    }
+}

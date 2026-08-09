@@ -1,9 +1,11 @@
-@theme "/usr/share/rofi/themes/Monokai.rasi"
-
-
-
 configuration {
-        kb-element-next: "";
-	kb-row-tab: "";
-	kb-row-select: "Tab";
+    modi: "drun,run,window";
+    show-icons: true;
+    display-drun: "  Apps";
+    display-run: "  Run";
+    display-window: "  Window";
+    drun-display-format: "{name}";
+    font: "JetBrainsMono Nerd Font 10";
 }
+
+@theme "tokyonight"

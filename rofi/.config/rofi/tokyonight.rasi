@@ -1,0 +1,69 @@
+* {
+    /* Stealth Dark Colors */
+    bg: #0a0a0c;       /* Almost pitch black */
+    bg-alt: #151518;   /* Just slightly lighter for the search bar */
+    fg: #cdd6f4;       /* Crisp, soft white for text */
+    fg-alt: #585b70;   /* Muted gray for placeholders */
+    accent: #3b3b42;   /* Subtle dark gray accent instead of blue */
+
+    background-color: transparent;
+    text-color: @fg;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    background-color: @bg;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 0px;
+    width: 700px;
+}
+
+inputbar {
+    padding: 10px; /* Tighter padding */
+    background-color: @bg-alt;
+    children: [prompt, entry];
+}
+
+prompt {
+    background-color: @accent;
+    text-color: @fg;
+    padding: 4px 8px;
+    margin: 0px 10px 0px 0px;
+}
+
+entry {
+    padding: 4px;
+    text-color: @fg;
+    placeholder: "Search...";
+    placeholder-color: @fg-alt;
+}
+
+listview {
+    border: 0px;
+    padding: 5px 0px;
+    columns: 1;
+    lines: 8;
+}
+
+element {
+    padding: 6px 15px;
+    spacing: 10px;
+}
+
+element-icon {
+    size: 1.2em; /* Shrunk the icons slightly */
+}
+
+element-text {
+    vertical-align: 0.5;
+}
+
+element selected.normal {
+    background-color: @bg-alt;
+    text-color: @fg;
+    border-left: 2px;
+    border-color: @fg; /* A clean white accent line instead of a blue block */
+}

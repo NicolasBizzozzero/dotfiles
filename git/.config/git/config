@@ -1,28 +1,39 @@
 [user]
-	name = NicolasBizzozzero
-	email = nicolas.bizzozzero@protonmail.com
+    name = Nicolas B.
+    email = nicolas@bizzozzero.me
+
 [core]
-	autocrlf = input
-	editor = nano
-[url "ssh://git@gitlab.com/"]
-	insteadOf = https://gitlab.com/
-[url "ssh://git@bitbucket.org/"]
-	insteadOf = https://bitbucket.org/
-[url "https://aur.archlinux.org/"]
-	insteadOf = "aur:"
-[url "ssh://aur@aur.archlinux.org/"]
-	pushInsteadOf = "aur:" 
-[pull]
-	rebase = false
+    autocrlf = input
+    editor = nvim
+
 [init]
-	defaultBranch = master
+    defaultBranch = main
+
+[pull]
+    rebase = false
+
+# --- URL Rewrites & Shortcuts ---
+[url "ssh://git@gitlab.com/"]
+    insteadOf = https://gitlab.com/
+
+[url "ssh://git@bitbucket.org/"]
+    insteadOf = https://bitbucket.org/
+
+[url "https://aur.archlinux.org/"]
+    insteadOf = "aur:"
+
+[url "ssh://aur@aur.archlinux.org/"]
+    pushInsteadOf = "aur:" 
+
+# --- GitHub CLI Authentication ---
 [credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+    helper = 
+    helper = !/usr/bin/gh auth git-credential
+
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+    helper = 
+    helper = !/usr/bin/gh auth git-credential
+
+# --- Local Protocols ---
 [protocol "file"]
-	allow = always
-[credential]
-	helper = store
+    allow = always

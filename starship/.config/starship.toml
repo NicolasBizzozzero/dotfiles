@@ -1,0 +1,92 @@
+# --- Core Settings ---
+add_newline = true
+scan_timeout = 10
+
+# --- Prompt Layout ---
+format = """$username$hostname:$directory\
+$git_branch\
+$git_status\
+$python\
+$c\
+$rust\
+$golang\
+$nodejs\
+$cmd_duration\
+$line_break\
+$character"""
+
+# --- User & Host (user@hostname) ---
+[username]
+style_user = "bold #9ece6a" # Green
+format = "[$user]($style)"
+show_always = true
+
+[hostname]
+ssh_only = false
+style = "bold #9ece6a" # Green
+format = "[@]($style)[$hostname]($style)"
+
+# --- Directory ---
+[directory]
+style = "bold #7aa2f7"               # Blue
+read_only = " "
+# truncation_length = 0 ensures it behaves exactly like %~ (shows full path from ~)
+truncation_length = 0
+truncate_to_repo = false
+format = "[$path]($style) "
+
+# --- The Lambda Character ---
+[character]
+success_symbol = "[λ](bold #9ece6a)"
+error_symbol = "[λ](bold #f7768e)"
+vicmd_symbol = "[❮](bold #e0af68)"
+
+# --- Git Integration ---
+[git_branch]
+symbol = " "
+style = "bold #bb9af7"
+format = "[$symbol$branch]($style)"
+
+[git_status]
+style = "bold #f7768e"
+# We removed the ugly [ ] brackets here
+format = '([ $all_status$ahead_behind]($style)) '
+
+# Custom, elegant Nerd Font icons
+modified = " "
+staged = " "
+untracked = " "
+deleted = " "
+renamed = " "
+stashed = " "
+ahead = "󰁞${count} "
+behind = "󰁆${count} "
+diverged = "󰡰 "
+conflicted = "󰞇 "
+
+# --- Languages & Environments ---
+[python]
+symbol = "🐍 "
+style = "bold #e0af68"
+format = '[$symbol(\($virtualenv\) )]($style)'
+
+[nodejs]
+symbol = "󰎙 "
+style = "bold #9ece6a"
+format = "[$symbol($version )]($style)"
+
+[rust]
+symbol = "󱘗 "
+style = "bold #f7768e"
+format = "[$symbol($version )]($style)"
+
+[c]
+symbol = " "
+style = "bold #7aa2f7"
+format = "[$symbol($version )]($style)"
+
+# --- Execution Time ---
+[cmd_duration]
+min_time = 2000
+style = "bold #e0af68"
+format = "[$duration]($style)"
