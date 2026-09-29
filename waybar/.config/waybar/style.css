@@ -207,6 +207,10 @@ label:focus {
     color: @accent3;
 }
 
+#custom-backlight {
+    color: @warning;
+}
+
 #backlight {
     color: #cdd6f4;
 }

@@ -27,6 +27,7 @@
         "custom/claude_usage",
         "temperature",
         "cpu",
+        "custom/backlight",
         "memory",
         "pulseaudio",       
         "battery",
@@ -71,6 +72,17 @@
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""],
         "tooltip": false
+    },
+
+    // Brightness: scroll to change. LUMINOSITY_MIN=5 because the screen turns off below that
+    "custom/backlight": {
+        "exec": "~/scripts/luminosity.sh get",
+        "interval": 30,
+        "signal": 8,
+        "format": "{} 󰃠",
+        "tooltip": false,
+        "on-scroll-up": "LUMINOSITY_MIN=5 ~/scripts/luminosity.sh up && pkill -RTMIN+8 waybar",
+        "on-scroll-down": "LUMINOSITY_MIN=5 ~/scripts/luminosity.sh down && pkill -RTMIN+8 waybar"
     },
 
     "custom/localweather": {

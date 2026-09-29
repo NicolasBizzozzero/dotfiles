@@ -104,6 +104,16 @@ hl.animation({ leaf = "fade", enabled = true, speed = 1.5, bezier = "default" })
 hl.animation({ leaf = "fadeIn", enabled = false })
 
 -- 4. WINDOW RULES
+-- Ignore maximize requests from apps (kitty asks for it on launch, which made a
+-- new terminal cover its tiled neighbour until fullscreen was toggled)
+hl.window_rule({
+    name  = "suppress-maximize-events",
+    match = {
+        class = ".*",
+    },
+    suppress_event = "maximize",
+})
+
 hl.window_rule({
     name  = "yad_calendar_rule",
     match = {
