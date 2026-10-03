@@ -37,8 +37,7 @@ window#waybar.hidden {
 }
 
 tooltip {
-    background: #1e1e2e;
-    opacity: 0.6;
+    background: rgba(30, 30, 46, 0.95);
     border-radius: 0px;
     border-width: 2px;
     border-style: solid;
@@ -165,7 +164,8 @@ tooltip {
 }
 
 #battery {
-    color: @accent5;
+    color: @accent2;
+    padding-left: 2px;
 }
 
 /* #battery.charging {
@@ -216,11 +216,16 @@ label:focus {
 }
 
 #bluetooth {
-    color: #1e66f5;
+    color: #7aa2f7;
+}
+
+#bluetooth.off,
+#bluetooth.disabled {
+    color: #606060;
 }
 
 #network {
-    color: @accent3;
+    color: #73daca;
 }
 
 #network.disconnected {
@@ -263,11 +268,7 @@ label:focus {
 }
 
 #custom-weather {
-    color: #66cc99;
-}
-
-#custom-localweather {
-    padding-right: 30px;
+    padding-right: 12px;
 }
 
 #custom-lock {

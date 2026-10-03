@@ -196,7 +196,7 @@ hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
 -- 6. AUTOSTART
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
-    hl.exec_cmd("wako")
+    hl.exec_cmd("mako")
     hl.exec_cmd("/home/johnlocke/scripts/ricing/change_wallpaper.sh")
     hl.exec_cmd("[workspace 1 silent] " .. terminal)
     hl.exec_cmd("[workspace 2 silent] " .. browser)
