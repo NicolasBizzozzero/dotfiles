@@ -9,7 +9,7 @@
 @define-color accent2 #b9f27c;
 @define-color accent3 #ff9e64;
 @define-color accent4 #bb9af7;
-@define-color accent5 #7da6ff;
+@define-color accent5 #e879f9;
 @define-color accent6 #0db9d7;
 
 * {
@@ -157,7 +157,8 @@ label:focus {
 }
 
 #custom-printer {
-    color: #c0caf5;
+    color: @accent5;
+    padding-left: 0px;
 }
 
 #custom-printer.problem {
