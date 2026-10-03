@@ -39,7 +39,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Terminal file manager | Yazi | `yazi` |
 | Process monitor | htop | `htop` |
 | System summary | fastfetch | `fastfetch` |
-| Printing | CUPS | `cups` |
+| Printing | CUPS | - |
 | Python tooling | Python, IPython/Jupyter | `python`, `jupyter` |
 | JavaScript package manager | Yarn | `yarn` |
 | AI coding assistant | Claude Code | `claude` |
@@ -68,4 +68,4 @@ The system runs Hyprland (`hypr`) as the window manager, with `waybar` as the st
 `zeal` is an offline documentation browser, and `neomutt` is the email client.
 
 ### System
-`fastfetch` prints a quick system summary, `htop` is the process monitor, `cups` handles printing, and `wget` is used for downloads from the command line.
+`fastfetch` prints a quick system summary, `htop` is the process monitor, and `wget` is used for downloads from the command line.

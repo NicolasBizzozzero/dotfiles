@@ -2,7 +2,6 @@
 
 # Stow config files in home directory
 stow claude
-stow cups
 stow environment
 stow fastfetch
 stow git

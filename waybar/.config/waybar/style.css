@@ -3,9 +3,6 @@
 
 @define-color critical #ff0000; /* critical color */
 @define-color warning #f3f809;  /* warning color */
-@define-color fgcolor #ffffff;  /* foreground color */
-@define-color bgcolor #303030;  /* background color */
-@define-color bgcolor #222436;  /* background color */
 @define-color alert   #df3320;
 
 @define-color accent1 #ff7a93;
@@ -44,7 +41,6 @@ tooltip {
     border-color: #11111b;
 }
 
-#taskbar button,
 #workspaces button {
     background-color: transparent;
     color: #ffffff;
@@ -54,7 +50,6 @@ tooltip {
     border-radius: 2px;
 }
 
-#taskbar button.active,
 #workspaces button.active {
     background-color: transparent;
     color: @accent1;
@@ -62,7 +57,6 @@ tooltip {
     padding-right: 4px;
 }
 
-#taskbar button:hover,
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.05);
 	color: @accent3;
@@ -78,89 +72,25 @@ tooltip {
     background-color: #eb4d4b;
 }
 
-#mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
-}
-
-#backlight,
-#backlight-slider,
 #battery,
 #bluetooth,
-#clock,
 #cpu,
-#disk,
-#idle_inhibitor,
-#keyboard-state,
 #memory,
-#mode,
 #mpris,
 #network,
-#power-profiles-daemon,
 #pulseaudio,
-#pulseaudio-slider,
-#taskbar,
 #temperature,
-#custom-claude,
 #tray,
-#window,
-#wireplumber,
 #workspaces,
 #custom-backlight,
-#custom-browser,
-#custom-cava_mviz,
-#custom-cycle_wall,
-#custom-dot_update,
-#custom-file_manager,
-#custom-keybinds,
-#custom-keyboard,
-#custom-light_dark,
-#custom-lock,
-#custom-hint,
-#custom-hypridle,
-#custom-menu,
-#custom-playerctl,
-#custom-power_vertical,
+#custom-claude,
 #custom-power,
-#custom-quit,
-#custom-reboot,
-#custom-settings,
-#custom-spotify,
-#custom-swaync,
-#custom-tty,
-#custom-updater,
-#custom-hyprpicker,
-#custom-weather,
-#custom-weather.clearNight,
-#custom-weather.cloudyFoggyDay,
-#custom-weather.cloudyFoggyNight,
-#custom-weather.default, 
-#custom-weather.rainyDay,
-#custom-weather.rainyNight,
-#custom-weather.severe,
-#custom-weather.showyIcyDay,
-#custom-weather.snowyIcyNight,
-#custom-weather.sunnyDay {
+#custom-printer,
+#custom-weather {
 	padding-top: 0px;
 	padding-bottom: 0px;
 	padding-right: 6px;
 	padding-left: 6px;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-}
-
-#clock {
-    color: @accent2;
-}
-
-#custom-updater {
-    color: #7287fd;
 }
 
 #battery {
@@ -193,12 +123,6 @@ label:focus {
     background-color: #000000;
 }
 
-#custom-menu{
-    color: #FFFFFF;
-    /*padding: 3px;*/
-}
-
-#custom-keyboard,
 #cpu {
     color: @accent1;
 }
@@ -209,10 +133,6 @@ label:focus {
 
 #custom-backlight {
     color: @warning;
-}
-
-#backlight {
-    color: #cdd6f4;
 }
 
 #bluetooth {
@@ -236,46 +156,23 @@ label:focus {
     color: @accent4;
 }
 
-#pulseaudio-muted {
-    color: @accent2;
-}
-#wireplumber {
-    color: @accent4;
+#custom-printer {
+    color: #c0caf5;
 }
 
-#wireplumber-muted {
-    color: @accent2;
-}
-
-#pluseaudio-source-muted{
-    color: #a0a0a0;
+#custom-printer.problem {
+    background-color: @alert;
+    color: #ffffff;
 }
 
 #custom-power {
     color: #cc3436;
 }
 
-#disk {
-    color: @accent5;
-}
-#custom-power_profile {
-    color: @accent3;
-}
-#custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
-}
-
 #custom-weather {
     padding-right: 12px;
 }
 
-#custom-lock {
-    color: #ffa000;
-}
-
-#keyboard-state,
 #temperature {
     color: @accent6;
     /* background-color: #f0932b; */
@@ -287,68 +184,4 @@ label:focus {
 
 #custom-claude {
     color: #32cd32;
-}
-
-#tray {
-    /* background-color: #505050; */
-}
-
-#custom-hypridle,
-#idle_inhibitor {
-	color: #f9e2af;
-    /*background-color: #2d3436;*/
-}
-
-/*-----Indicators----*/
-#custom-hypridle.notactive,
-#idle_inhibitor.activated {
-	color: #39FF14;
-}
-
-#mpd {
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
-}
-
-#custom-language {
-    color: @accent5;
-    min-width: 16px;
-}
-
-#custom-separator {
-    color: #606060;
-}
-
-#backlight-slider slider,
-#pulseaudio-slider slider {
-	min-width: 0px;
-	min-height: 0px;
-	opacity: 0;
-	background-image: none;
-	border: none;
-	box-shadow: none;
-}
-
-#backlight-slider trough,
-#pulseaudio-slider trough {
-	min-width: 80px;
-	min-height: 5px;
-	border-radius: 5px;
-}
-
-#backlight-slider highlight,
-#pulseaudio-slider highlight {
-	min-height: 10px;
-	border-radius: 5px;
 }

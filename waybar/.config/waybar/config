@@ -26,6 +26,7 @@
         "memory",
         "pulseaudio",
         "network",
+        "custom/printer",
         "battery",
         "custom/power"
     ],
@@ -210,6 +211,17 @@
         "on-click-right": "~/.config/waybar/scripts/network.sh toggle"
     },
 
+    // Icon + number of jobs while printing. Click: rofi menu (jobs, printers, CUPS)
+    "custom/printer": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/printer.sh status",
+        "interval": 10,
+        "signal": 10,
+        "tooltip": true,
+        "on-click": "~/.config/waybar/scripts/printer.sh menu"
+    },
+
     // Click: time left / percentage
     "battery": {
         "full-at": 100,
@@ -239,7 +251,7 @@
         "interval": 60,
         "signal": 9,
         "tooltip": true,
-        "on-click": "~/.config/waybar/scripts/power.sh logout",
+        "on-click": "~/.config/waybar/scripts/power.sh menu",
         "on-click-right": "~/.config/waybar/scripts/power.sh profiles"
     }
 }
