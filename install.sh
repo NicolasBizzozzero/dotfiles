@@ -13,13 +13,13 @@ stow kitty
 stow mako
 stow mpd
 stow nano
-stow neomutt
 stow neovim
 stow python
 stow qt
 stow rofi
 stow ssh
 stow starship
+stow systemd
 stow vlc
 stow waybar
 stow wget

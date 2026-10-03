@@ -35,7 +35,8 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Music daemon | MPD | `mpd` |
 | Video / media playback | VLC | `vlc` |
 | Offline documentation | Zeal | `zeal` |
-| Email client | NeoMutt | `neomutt` |
+| Email client | Thunderbird | - |
+| Proton Mail IMAP/SMTP bridge | Proton Mail Bridge | `systemd` |
 | Terminal file manager | Yazi | `yazi` |
 | Process monitor | htop | `htop` |
 | System summary | fastfetch | `fastfetch` |
@@ -65,7 +66,7 @@ The system runs Hyprland (`hypr`) as the window manager, with `waybar` as the st
 `mpd` runs as a background music daemon, and `vlc` handles video and other media playback.
 
 ### Documentation and mail
-`zeal` is an offline documentation browser, and `neomutt` is the email client.
+`zeal` is an offline documentation browser. Mail is read in Thunderbird; `systemd` runs Proton Mail Bridge in the background so Thunderbird can reach the Proton account over IMAP/SMTP.
 
 ### System
 `fastfetch` prints a quick system summary, `htop` is the process monitor, and `wget` is used for downloads from the command line.
