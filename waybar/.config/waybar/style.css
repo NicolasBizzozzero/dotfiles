@@ -93,9 +93,22 @@ tooltip {
 	padding-left: 6px;
 }
 
+/* Right modules: icons overhang their box by different amounts, so each module
+   gets its own padding to make every visible gap between them 18px (at 2x scale) */
+#custom-claude { padding-left: 6px; padding-right: 4px; }
+#temperature { padding-left: 4px; padding-right: 4px; }
+#cpu { padding-left: 4px; padding-right: 5px; }
+#bluetooth { padding-left: 5px; padding-right: 4px; }
+#custom-backlight { padding-left: 4px; padding-right: 6px; }
+#memory { padding-left: 6px; padding-right: 6px; }
+#pulseaudio { padding-left: 6px; padding-right: 4px; }
+#network { padding-left: 5px; padding-right: 4px; }
+#custom-printer { padding-left: 5px; padding-right: 5px; }
+#battery { padding-left: 5px; padding-right: 6px; }
+#custom-power { padding-left: 7px; padding-right: 6px; }
+
 #battery {
     color: @accent2;
-    padding-left: 2px;
 }
 
 /* #battery.charging {
@@ -153,12 +166,11 @@ label:focus {
 }
 
 #pulseaudio {
-    color: @accent4;
+    color: @accent5;
 }
 
 #custom-printer {
-    color: @accent5;
-    padding-left: 0px;
+    color: @accent4;
 }
 
 #custom-printer.problem {

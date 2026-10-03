@@ -128,8 +128,7 @@
         "format": "{usage}% 󰍛",
         "format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% 󰍛",
         "format-alt-click": "click",
-        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-        "min-length": 5
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
     },
 
     // Icon + device name. Left click: rofi menu, right click: power on/off
