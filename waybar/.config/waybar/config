@@ -1,0 +1,270 @@
+{
+    "layer": "top",
+    "position": "top",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "margin-left": 0,
+    "margin-right": 0,
+    "margin-top": 0,
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "tray",
+        "mpris"
+    ],
+    "modules-center": [
+        "custom/weather",
+        "custom/mail",
+        "custom/clock"
+    ],
+    "modules-right": [
+        "custom/claude",
+        "temperature",
+        "cpu",
+        "bluetooth",
+        "custom/backlight",
+        "memory",
+        "pulseaudio",
+        "network",
+        "custom/printer",
+        "battery",
+        "custom/power"
+    ],
+
+    // ---- Left ----
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "show-special": false,
+        "on-click": "activate",
+        "format": "{name}",
+        "sort-by-number": true
+    },
+
+    "tray": {
+        "icon-size": 20,
+        "spacing": 4
+    },
+
+    // Left click: previous, middle click: play/pause, right click: next, scroll: volume
+    "mpris": {
+        "interval": 10,
+        "format": "{player_icon} ",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "max-length": 30,
+        "player-icons": {
+            "chromium": "",
+            "default": "",
+            "firefox": "",
+            "kdeconnect": "",
+            "mopidy": "",
+            "mpv": "󰐹",
+            "spotify": "",
+            "vlc": "󰕼"
+        },
+        "status-icons": {
+            "paused": "󰐎",
+            "playing": "",
+            "stopped": ""
+        },
+        "tooltip": true,
+        "tooltip-format": "{status_icon} {dynamic}\nLeft Click: previous\nMid Click: Pause\nRight Click: Next",
+        "on-click": "playerctl previous",
+        "on-click-middle": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "scroll-step": 5.0,
+        "smooth-scrolling-threshold": 1,
+        "on-scroll-up": "~/.config/waybar/scripts/pulseaudio.sh up",
+        "on-scroll-down": "~/.config/waybar/scripts/pulseaudio.sh down"
+    },
+
+    // ---- Center ----
+
+    "custom/weather": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/weather.sh status",
+        "interval": 1800,
+        "tooltip": false
+    },
+
+    // Icon with a blue dot when there is unread mail, counts in the tooltip
+    // (accounts in ~/.config/waybar/mail-accounts.conf; "status --count" shows
+    // the total instead of the dot). Click: Thunderbird (its workspace, or open it here)
+    "custom/mail": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/mail.py status",
+        "interval": 60,
+        "signal": 11,
+        "tooltip": true,
+        "on-click": "~/.config/waybar/scripts/mail.py open"
+    },
+
+    // Click: calendar popup
+    "custom/clock": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/clock.sh status",
+        "interval": 1,
+        "tooltip": false,
+        "on-click": "~/.config/waybar/scripts/clock.sh calendar"
+    },
+
+    // ---- Right ----
+
+    "custom/claude": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/claude.sh status",
+        "interval": 60,
+        "tooltip": true
+    },
+
+    "temperature": {
+        "interval": 10,
+        "hwmon-path": [
+            "/sys/class/hwmon/hwmon1/temp1_input",
+            "/sys/class/thermal/thermal_zone0/temp"
+        ],
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-critical": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""],
+        "tooltip": false
+    },
+
+    // Click: per-core usage bars
+    "cpu": {
+        "interval": 1,
+        "format": "{usage}% 󰍛",
+        "format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% 󰍛",
+        "format-alt-click": "click",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+    },
+
+    // Icon + device name. Left click: rofi menu, right click: power on/off
+    "bluetooth": {
+        "format-no-controller": "",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-on": "󰂯",
+        "format-connected": "󰂱 {device_alias}",
+        "format-connected-battery": "󰂱 {device_alias} {device_battery_percentage}%",
+        "max-length": 28,
+        "tooltip": true,
+        "tooltip-format": "{controller_alias}: {status}",
+        "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}  {device_battery_percentage}%",
+        "on-click": "~/.config/waybar/scripts/bluetooth.sh menu",
+        "on-click-right": "~/.config/waybar/scripts/bluetooth.sh toggle"
+    },
+
+    // Scroll: change brightness
+    "custom/backlight": {
+        "format": "{} 󰃠",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/backlight.sh status",
+        "interval": 30,
+        "signal": 8,
+        "tooltip": false,
+        "on-scroll-up": "~/.config/waybar/scripts/backlight.sh up",
+        "on-scroll-down": "~/.config/waybar/scripts/backlight.sh down"
+    },
+
+    // Click: used memory / percentage
+    "memory": {
+        "interval": 10,
+        "format": "{used:0.1f}G 󰾆",
+        "format-alt": "{percentage}% 󰾆",
+        "format-alt-click": "click",
+        "tooltip": true,
+        "tooltip-format": "{used:0.1f}GB/{total:0.1f}G"
+    },
+
+    // Click: mute, scroll: volume
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": "󰖁",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", "󰕾", ""]
+        },
+        "tooltip-format": "{icon} {desc} | {volume}%",
+        "scroll-step": 5.0,
+        "smooth-scrolling-threshold": 1,
+        "on-click": "~/.config/waybar/scripts/pulseaudio.sh mute",
+        "on-scroll-up": "~/.config/waybar/scripts/pulseaudio.sh up",
+        "on-scroll-down": "~/.config/waybar/scripts/pulseaudio.sh down"
+    },
+
+    // Icon + SSID. Left click: rofi menu (iwd), right click: Wi-Fi on/off
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": "{icon} {essid}",
+        "format-ethernet": "󰈀 Wired",
+        "format-linked": "{icon} {essid} (no IP)",
+        "format-disconnected": "󰤮",
+        "format-disabled": "󰤭",
+        "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+        "max-length": 25,
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%, {frequency} GHz)\n{ipaddr}/{cidr} via {gwaddr}",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr} via {gwaddr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "~/.config/waybar/scripts/network.sh menu",
+        "on-click-right": "~/.config/waybar/scripts/network.sh toggle"
+    },
+
+    // Icon + number of jobs while printing. Click: rofi menu (jobs, printers, CUPS)
+    "custom/printer": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/printer.sh status",
+        "interval": 10,
+        "signal": 10,
+        "tooltip": true,
+        "on-click": "~/.config/waybar/scripts/printer.sh menu"
+    },
+
+    // Click: time left / percentage
+    "battery": {
+        "full-at": 100,
+        "design-capacity": false,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "100% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{icon} {time}",
+        "format-alt-click": "click",
+        "format-time": "{H}h {M}min",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": true,
+        "tooltip-format": "{timeTo} {power}w"
+    },
+
+    // Left click: logout menu, right click: power profile picker
+    "custom/power": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/power.sh status",
+        "interval": 60,
+        "signal": 9,
+        "tooltip": true,
+        "on-click": "~/.config/waybar/scripts/power.sh menu",
+        "on-click-right": "~/.config/waybar/scripts/power.sh profiles"
+    }
+}

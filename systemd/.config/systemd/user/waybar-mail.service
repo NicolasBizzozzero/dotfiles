@@ -1,0 +1,13 @@
+[Unit]
+Description=Unread mail count for the waybar mail module (IMAP IDLE)
+After=protonmail-bridge.service
+
+[Service]
+ExecStart=%h/.config/waybar/scripts/mail.py watch
+# The script retries on its own (keyring locked, Bridge or network down);
+# this only covers a crash
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target

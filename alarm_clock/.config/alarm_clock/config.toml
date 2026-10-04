@@ -1,0 +1,91 @@
+# AlarmClock configuration.
+#
+# This file belongs at ~/.config/alarm_clock/config.toml:
+#     mkdir -p ~/.config/alarm_clock
+#     cp config.example.toml ~/.config/alarm_clock/config.toml
+#
+# Every setting below is optional, and so is the file itself. What you leave out
+# is worked out from the machine. Run `alarm_clock paths` to see where this file
+# was found, and every other file the program uses.
+#
+# After editing, run `alarm_clock reload` to apply the changes without a restart.
+
+# IANA timezone name. Leave it out and the machine's own timezone is used,
+# which is almost always what you want. Set it only to override that.
+# timezone = "Europe/Paris"
+
+[sounds]
+# Where the alarm sounds live. Leave it out and the usual places are searched:
+# $ALARM_CLOCK_SOUNDS_DIR, then ~/.local/share/alarm_clock/sounds, then ./sounds.
+# A relative path is read against the folder holding this file.
+# directory = "sounds"
+
+# Only files with these extensions may be picked.
+extensions = [".m4a", ".ogg", ".mp3", ".wav", ".flac", ".opus"]
+
+# Never pick the same file two rings in a row. Ignored when the folder holds
+# only one file.
+avoid_repeat = true
+
+[playback]
+# Where the fade begins, inside the alarm's own audio. 0.2 means the clip starts
+# at a fifth of its recorded loudness. This is not the speaker volume; that is
+# system_volume below.
+start_volume = 0.2
+
+# Seconds to ramp from start_volume up to the clip's full loudness. Set to 0 for
+# no fade.
+fade_in_seconds = 30.0
+
+# Hard stop. The ring always ends after this many seconds, dismissed or not.
+# This is the safety net that stops a forgotten alarm ringing all day.
+max_duration_seconds = 300.0
+
+# The computer's speaker volume for the ring, where 1.0 is 100%. The ring raises
+# the volume to this, unmutes if needed, and puts back exactly what was there
+# when the ring ends — level and mute alike.
+#
+# Values above 1.0 amplify, up to 2.0. Set this to nothing at all (delete the
+# line) to leave the system volume alone.
+system_volume = 1.5
+
+# PulseAudio/PipeWire sink to play into. "default" follows your system default.
+audio_device = "default"
+
+[daemon]
+# Where the CLI reaches the daemon. Leave it out and $XDG_RUNTIME_DIR is used.
+# $ALARM_CLOCK_SOCKET overrides both.
+# control_socket = "$XDG_RUNTIME_DIR/alarm_clock.sock"
+
+# One of: DEBUG, INFO, WARNING, ERROR. Logs go to standard error, which under
+# systemd means the journal: journalctl --user -u alarm_clock -f
+log_level = "INFO"
+
+# The weekly schedule. Each [[alarms]] block fires once per listed day.
+# days accepts: mon tue wed thu fri sat sun
+# time is 24-hour "HH:MM".
+#
+# Several alarms may share a day — add as many blocks as you like. For a single
+# alarm that fires once and is then forgotten, use the command line instead:
+#     alarm_clock at 14:30
+#     alarm_clock in 20m
+
+[[alarms]]
+name = "Boulot début de semaine"
+days = ["mon", "tue"]
+time = "09:00"
+enabled = true
+
+
+[[alarms]]
+name = "Boulot fin de semaine"
+days = ["wed", "thu", "fri"]
+time = "09:30"
+enabled = true
+
+
+[[alarms]]
+name = "Weekend"
+days = ["sat", "sun"]
+time = "09:30"
+enabled = false

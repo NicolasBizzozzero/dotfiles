@@ -1,0 +1,23 @@
+[mgr]
+ratio          = [ 1, 4, 3 ]
+sort_by        = "alphabetical"
+sort_dir_first = true
+show_hidden    = true        
+linemode       = "size"
+
+[preview]
+tab_size        = 4
+max_width       = 1000
+max_height      = 1000
+image_filter    = "lanczos3" # High-quality image scaling
+image_quality   = 90
+
+[plugin]
+prepend_previewers = [
+  # Allows Yazi to preview archive contents without extracting them
+  { mime = "application/*zip", run = "archive" },
+  { mime = "application/x-tar", run = "archive" },
+  { mime = "application/x-bzip2", run = "archive" },
+  { mime = "application/x-7z-compressed", run = "archive" },
+  { mime = "application/x-rar", run = "archive" }
+]
