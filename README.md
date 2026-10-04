@@ -26,6 +26,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Cursor theme | Catppuccin Mocha Mauve | `hypr`, `gtk` (theme installed by `install.sh`) |
 | Password manager / keyring | KeePassXC | `keepassxc` |
 | Alarm clock | alarm_clock | `alarm_clock` |
+| Power / fan profiles | TUXEDO Control Center | `tuxedo` (profiles applied with `sudo ~/.config/tuxedo/apply.sh`, no GUI needed) |
 | Terminal emulator | kitty | `kitty` |
 | Shell | zsh | `zsh` |
 | Prompt | Starship | `starship` |

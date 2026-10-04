@@ -1,0 +1,244 @@
+[
+  {
+    "id": "dotfiles_power_saving",
+    "name": "Power saving",
+    "description": "Default: firmware power saving, EPP power, CPU capped at 3 GHz, fans Freezy",
+    "display": {
+      "brightness": 100,
+      "useBrightness": false,
+      "refreshRate": -1,
+      "useRefRate": false,
+      "xResolution": -1,
+      "yResolution": -1,
+      "useResolution": false
+    },
+    "cpu": {
+      "useMaxPerfGov": false,
+      "governor": "powersave",
+      "energyPerformancePreference": "power",
+      "noTurbo": false,
+      "onlineCores": 20,
+      "scalingMinFrequency": 400000,
+      "scalingMaxFrequency": 3000000
+    },
+    "webcam": {
+      "status": true,
+      "useStatus": true
+    },
+    "fan": {
+      "useControl": true,
+      "fanProfile": "Freezy",
+      "minimumFanspeed": 0,
+      "maximumFanspeed": 100,
+      "offsetFanspeed": 0,
+      "customFanCurve": {
+        "tableCPU": [
+          {
+            "temp": 20,
+            "speed": 12
+          },
+          {
+            "temp": 30,
+            "speed": 14
+          },
+          {
+            "temp": 40,
+            "speed": 22
+          },
+          {
+            "temp": 50,
+            "speed": 35
+          },
+          {
+            "temp": 60,
+            "speed": 44
+          },
+          {
+            "temp": 70,
+            "speed": 56
+          },
+          {
+            "temp": 80,
+            "speed": 79
+          },
+          {
+            "temp": 90,
+            "speed": 85
+          },
+          {
+            "temp": 100,
+            "speed": 90
+          }
+        ],
+        "tableGPU": [
+          {
+            "temp": 20,
+            "speed": 12
+          },
+          {
+            "temp": 30,
+            "speed": 14
+          },
+          {
+            "temp": 40,
+            "speed": 22
+          },
+          {
+            "temp": 50,
+            "speed": 35
+          },
+          {
+            "temp": 60,
+            "speed": 44
+          },
+          {
+            "temp": 70,
+            "speed": 56
+          },
+          {
+            "temp": 80,
+            "speed": 79
+          },
+          {
+            "temp": 90,
+            "speed": 85
+          },
+          {
+            "temp": 100,
+            "speed": 90
+          }
+        ]
+      }
+    },
+    "odmProfile": {
+      "name": "power_saving"
+    },
+    "odmPowerLimits": {
+      "tdpValues": []
+    },
+    "nvidiaPowerCTRLProfile": {
+      "cTGPOffset": 0
+    }
+  },
+  {
+    "id": "dotfiles_performance",
+    "name": "Performance",
+    "description": "On demand: firmware performance, no CPU cap, fans Freezy",
+    "display": {
+      "brightness": 100,
+      "useBrightness": false,
+      "refreshRate": -1,
+      "useRefRate": false,
+      "xResolution": -1,
+      "yResolution": -1,
+      "useResolution": false
+    },
+    "cpu": {
+      "useMaxPerfGov": false,
+      "governor": "powersave",
+      "energyPerformancePreference": "balance_performance",
+      "noTurbo": false,
+      "onlineCores": 20,
+      "scalingMinFrequency": 400000,
+      "scalingMaxFrequency": 4700000
+    },
+    "webcam": {
+      "status": true,
+      "useStatus": true
+    },
+    "fan": {
+      "useControl": true,
+      "fanProfile": "Freezy",
+      "minimumFanspeed": 0,
+      "maximumFanspeed": 100,
+      "offsetFanspeed": 0,
+      "customFanCurve": {
+        "tableCPU": [
+          {
+            "temp": 20,
+            "speed": 12
+          },
+          {
+            "temp": 30,
+            "speed": 14
+          },
+          {
+            "temp": 40,
+            "speed": 22
+          },
+          {
+            "temp": 50,
+            "speed": 35
+          },
+          {
+            "temp": 60,
+            "speed": 44
+          },
+          {
+            "temp": 70,
+            "speed": 56
+          },
+          {
+            "temp": 80,
+            "speed": 79
+          },
+          {
+            "temp": 90,
+            "speed": 85
+          },
+          {
+            "temp": 100,
+            "speed": 90
+          }
+        ],
+        "tableGPU": [
+          {
+            "temp": 20,
+            "speed": 12
+          },
+          {
+            "temp": 30,
+            "speed": 14
+          },
+          {
+            "temp": 40,
+            "speed": 22
+          },
+          {
+            "temp": 50,
+            "speed": 35
+          },
+          {
+            "temp": 60,
+            "speed": 44
+          },
+          {
+            "temp": 70,
+            "speed": 56
+          },
+          {
+            "temp": 80,
+            "speed": 79
+          },
+          {
+            "temp": 90,
+            "speed": 85
+          },
+          {
+            "temp": 100,
+            "speed": 90
+          }
+        ]
+      }
+    },
+    "odmProfile": {
+      "name": "performance"
+    },
+    "odmPowerLimits": {
+      "tdpValues": []
+    },
+    "nvidiaPowerCTRLProfile": {
+      "cTGPOffset": 0
+    }
+  }
+]

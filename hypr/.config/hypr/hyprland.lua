@@ -14,16 +14,16 @@ local fileManager = "yazi"
 local menu = "rofi -show drun -show-icons"
 local browser = "firefox"
 
--- NVIDIA Wayland Environment Variables
-hl.env("LIBVA_DRIVER_NAME", "nvidia")
+-- Hybrid laptop: the screen and Hyprland run on the Intel GPU (i915), the NVIDIA
+-- one sleeps unless an app is started on it (prime-run, from nvidia-prime).
+-- Video decoding on the Intel GPU (intel-media-driver), not on the CPU.
+hl.env("LIBVA_DRIVER_NAME", "iHD")
 hl.env("XDG_SESSION_TYPE", "wayland")
 -- Cursor: Catppuccin Mocha Mauve, in ~/.local/share/icons (installed by install.sh)
 hl.env("HYPRCURSOR_THEME", "catppuccin-mocha-mauve-cursors")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("XCURSOR_THEME", "catppuccin-mocha-mauve-cursors")
 hl.env("XCURSOR_SIZE", "24")
-hl.env("GBM_BACKEND", "nvidia-drm")
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 
 -- 3. CORE CONFIGURATION
 hl.config({

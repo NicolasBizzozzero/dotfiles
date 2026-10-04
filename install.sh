@@ -22,6 +22,7 @@ stow ssh
 stow starship
 stow systemd
 stow thunderbird
+stow tuxedo
 stow vlc
 stow waybar
 stow wget
@@ -57,3 +58,9 @@ sudo systemctl enable --now \
     bluetooth.service \
     cups.socket \
     cronie.service
+
+# Power: TUXEDO Control Center is the only power manager (power-profiles-daemon
+# would fight over the same CPU settings); install the profiles, power saving by default
+sudo systemctl enable --now tccd.service
+sudo systemctl mask --now power-profiles-daemon.service
+sudo ~/.config/tuxedo/apply.sh
