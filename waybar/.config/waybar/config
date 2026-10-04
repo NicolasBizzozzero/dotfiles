@@ -20,7 +20,7 @@
     ],
     "modules-right": [
         "custom/claude",
-        "temperature",
+        "custom/temperature",
         "cpu",
         "bluetooth",
         "custom/backlight",
@@ -123,17 +123,13 @@
         "tooltip": true
     },
 
-    "temperature": {
+    // ACPI temperature, every sensor in the tooltip
+    "custom/temperature": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/temperature.sh status",
         "interval": 10,
-        "hwmon-path": [
-            "/sys/class/hwmon/hwmon1/temp1_input",
-            "/sys/class/thermal/thermal_zone0/temp"
-        ],
-        "critical-threshold": 80,
-        "format": "{temperatureC}°C {icon}",
-        "format-critical": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""],
-        "tooltip": false
+        "tooltip": true
     },
 
     // Click: per-core usage bars

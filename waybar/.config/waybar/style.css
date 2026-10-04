@@ -79,7 +79,7 @@ tooltip {
 #mpris,
 #network,
 #pulseaudio,
-#temperature,
+#custom-temperature,
 #tray,
 #workspaces,
 #custom-backlight,
@@ -96,7 +96,7 @@ tooltip {
 /* Right modules: icons overhang their box by different amounts, so each module
    gets its own padding to make every visible gap between them 18px (at 2x scale) */
 #custom-claude { padding-left: 6px; padding-right: 4px; }
-#temperature { padding-left: 4px; padding-right: 4px; }
+#custom-temperature { padding-left: 4px; padding-right: 4px; }
 #cpu { padding-left: 4px; padding-right: 5px; }
 #bluetooth { padding-left: 5px; padding-right: 4px; }
 #custom-backlight { padding-left: 4px; padding-right: 6px; }
@@ -195,14 +195,10 @@ label:focus {
     color: #606060;
 }
 
-#temperature {
+#custom-temperature {
     color: @accent6;
-    /* background-color: #f0932b; */
 }
 
-#temperature.critical {
-    background-color: @critical;
-}
 
 #custom-claude {
     color: #32cd32;
