@@ -12,7 +12,7 @@
 #qt-minimal-view=0
 
 # Systray icon (boolean)
-#qt-system-tray=1
+qt-system-tray=0
 
 # Show notification popup on track change (integer)
 #qt-notification=1

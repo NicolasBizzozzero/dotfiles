@@ -6,7 +6,7 @@
 #   mail.py watch    keep a push (IDLE) connection per account, update the count (systemd service)
 #   mail.py status   JSON for waybar: mail icon with a blue dot when there is unread mail,
 #                    unread counts per account in the tooltip (--count: show the total instead)
-#   mail.py open     focus Thunderbird (switching workspace), or start it on the current one
+#   mail.py open     focus Thunderbird (switching workspace), or start it on workspace 10
 
 # Accounts are private, so they are not in the dotfiles: one per line in
 # ~/.config/waybar/mail-accounts.conf (format in mail-accounts.example.conf).
@@ -43,6 +43,7 @@ RETRY_MAX_SECONDS = 300
 CONFIG = Path.home() / ".config/waybar/mail-accounts.conf"
 STATE = Path(os.environ.get("XDG_RUNTIME_DIR", "/tmp")) / "waybar-mail.json"
 THUNDERBIRD_CLASS = "org.mozilla.Thunderbird"
+THUNDERBIRD_WORKSPACE = 10
 
 state = {}
 state_lock = threading.Lock()
@@ -219,12 +220,9 @@ def open_thunderbird():
             capture_output=True,
         )
     else:
-        subprocess.Popen(
-            ["thunderbird"],
-            start_new_session=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
+        # Always on its own workspace, and go there
+        subprocess.run(["hyprctl", "dispatch", f'hl.dsp.exec_cmd("[workspace {THUNDERBIRD_WORKSPACE}] thunderbird")'],
+                       capture_output=True)
 
 
 if __name__ == "__main__":

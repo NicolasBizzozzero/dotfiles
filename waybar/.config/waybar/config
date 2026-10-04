@@ -72,7 +72,7 @@
 
     // Icon with a blue dot when there is unread mail, counts in the tooltip
     // (accounts in ~/.config/waybar/mail-accounts.conf; "status --count" shows
-    // the total instead of the dot). Click: Thunderbird (its workspace, or open it here)
+    // the total instead of the dot). Click: Thunderbird (its workspace, or open it on workspace 10)
     "custom/mail": {
         "format": "{}",
         "return-type": "json",
