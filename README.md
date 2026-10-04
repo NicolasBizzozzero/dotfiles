@@ -23,6 +23,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Notification daemon | Mako | `mako` |
 | Login / display manager | ly | - |
 | Screen locker | Hyprlock | - |
+| Cursor theme | Catppuccin Mocha Mauve | `hypr`, `gtk` (theme installed by `install.sh`) |
 | Password manager / keyring | KeePassXC | `keepassxc` |
 | Alarm clock | alarm_clock | `alarm_clock` |
 | Terminal emulator | kitty | `kitty` |

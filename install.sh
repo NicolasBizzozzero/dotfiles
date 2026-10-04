@@ -35,6 +35,17 @@ stow zsh
 [ -e ~/.config/keepassxc/keepassxc.ini ] ||
     cp ~/.config/keepassxc/keepassxc.base.ini ~/.config/keepassxc/keepassxc.ini
 
+# Cursor theme (Catppuccin Mocha Mauve, xcursor + hyprcursor), not packaged in
+# the official repos: install the upstream release for the user
+CURSOR=catppuccin-mocha-mauve-cursors
+if [ ! -d ~/.local/share/icons/$CURSOR ]; then
+    mkdir -p ~/.local/share/icons
+    curl -sL -o /tmp/$CURSOR.zip \
+        https://github.com/catppuccin/cursors/releases/download/v2.0.0/$CURSOR.zip &&
+        python3 -c "import zipfile, os; zipfile.ZipFile('/tmp/$CURSOR.zip').extractall(os.path.expanduser('~/.local/share/icons'))"
+    rm -f /tmp/$CURSOR.zip
+fi
+
 # Services
 systemctl --user daemon-reload
 systemctl --user enable --now \

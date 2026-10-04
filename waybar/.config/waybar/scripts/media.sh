@@ -12,6 +12,8 @@
 # else the most recent paused one. Nothing running: empty output, module hidden.
 
 MAX_LENGTH=40
+# Players never shown (comma-separated MPRIS names, as listed by `playerctl -l`)
+IGNORED_PLAYERS="vlc"
 LAST_ACTIVE="${XDG_RUNTIME_DIR:-/tmp}/waybar-media-player"
 ICON_PAUSED=$'\U000f03e4'
 
@@ -41,7 +43,7 @@ shown_player() {
             Playing) playing+=("$name") ;;
             Paused)  paused+=("$name") ;;
         esac
-    done < <(playerctl -l 2>/dev/null)
+    done < <(playerctl --ignore-player="$IGNORED_PLAYERS" -l 2>/dev/null)
 
     local -a group
     if ((${#playing[@]})); then group=("${playing[@]}")
@@ -91,7 +93,7 @@ follow() {
     # playerctl prints a line at every change of any player: use it as a trigger
     # and recompute everything (several players, players appearing/vanishing)
     while true; do
-        playerctl -a --follow metadata --format $'{{playerName}}\t{{status}}' 2>/dev/null |
+        playerctl --ignore-player="$IGNORED_PLAYERS" -a --follow metadata --format $'{{playerName}}\t{{status}}' 2>/dev/null |
             while IFS=$'\t' read -r name status; do
                 [[ $status == Playing ]] && echo "$name" > "$LAST_ACTIVE"
                 print_state
