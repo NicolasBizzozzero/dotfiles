@@ -2,7 +2,7 @@
   {
     "id": "dotfiles_power_saving",
     "name": "Power saving",
-    "description": "Default: firmware power saving, EPP power, CPU capped at 3 GHz, fans Freezy",
+    "description": "Default: firmware power saving, EPP power, CPU capped at 3 GHz, fans silent up to 60°C then stronger than Freezy",
     "display": {
       "brightness": 100,
       "useBrightness": false,
@@ -27,7 +27,7 @@
     },
     "fan": {
       "useControl": true,
-      "fanProfile": "Freezy",
+      "fanProfile": "Custom",
       "minimumFanspeed": 0,
       "maximumFanspeed": 100,
       "offsetFanspeed": 0,
@@ -35,77 +35,77 @@
         "tableCPU": [
           {
             "temp": 20,
-            "speed": 12
+            "speed": 0
           },
           {
             "temp": 30,
-            "speed": 14
+            "speed": 0
           },
           {
             "temp": 40,
-            "speed": 22
+            "speed": 0
           },
           {
             "temp": 50,
-            "speed": 35
+            "speed": 0
           },
           {
             "temp": 60,
-            "speed": 44
+            "speed": 0
           },
           {
             "temp": 70,
-            "speed": 56
+            "speed": 50
           },
           {
             "temp": 80,
-            "speed": 79
+            "speed": 75
           },
           {
             "temp": 90,
-            "speed": 85
+            "speed": 95
           },
           {
             "temp": 100,
-            "speed": 90
+            "speed": 100
           }
         ],
         "tableGPU": [
           {
             "temp": 20,
-            "speed": 12
+            "speed": 0
           },
           {
             "temp": 30,
-            "speed": 14
+            "speed": 0
           },
           {
             "temp": 40,
-            "speed": 22
+            "speed": 0
           },
           {
             "temp": 50,
-            "speed": 35
+            "speed": 0
           },
           {
             "temp": 60,
-            "speed": 44
+            "speed": 0
           },
           {
             "temp": 70,
-            "speed": 56
+            "speed": 50
           },
           {
             "temp": 80,
-            "speed": 79
+            "speed": 75
           },
           {
             "temp": 90,
-            "speed": 85
+            "speed": 95
           },
           {
             "temp": 100,
-            "speed": 90
+            "speed": 100
           }
         ]
       }
