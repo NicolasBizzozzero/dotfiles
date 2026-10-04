@@ -50,7 +50,11 @@ max_duration_seconds = 300.0
 system_volume = 1.5
 
 # PulseAudio/PipeWire sink to play into. "default" follows your system default.
-audio_device = "default"
+# Set to the laptop speakers, so the alarm rings out loud even when the Bluetooth
+# headset is connected (and default); system_volume is applied to this sink.
+# Other sinks: `pactl list short sinks`. If this one ever disappears, the alarm
+# falls back to the default sink instead of staying silent.
+audio_device = "alsa_output.pci-0000_00_1f.3.analog-stereo"
 
 [daemon]
 # Where the CLI reaches the daemon. Leave it out and $XDG_RUNTIME_DIR is used.
