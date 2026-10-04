@@ -46,6 +46,19 @@ if [ ! -d ~/.local/share/icons/$CURSOR ]; then
         python3 -c "import zipfile, os; zipfile.ZipFile('/tmp/$CURSOR.zip').extractall(os.path.expanduser('~/.local/share/icons'))"
     rm -f /tmp/$CURSOR.zip
 fi
+# The text (I-beam) cursor is drawn too tall: render it at the requested size
+# instead of 4/3 of it (hyprcursor: pixel size = size / nominal_size)
+python3 - "$HOME/.local/share/icons/$CURSOR/hyprcursors/text.hlc" <<'PY'
+import os, re, sys, zipfile
+path = sys.argv[1]
+with zipfile.ZipFile(path) as z:
+    files = {name: z.read(name) for name in z.namelist()}
+files["meta.hl"] = re.sub(rb"nominal_size = [0-9.]+", b"nominal_size = 1.0", files["meta.hl"])
+with zipfile.ZipFile(path + ".new", "w", zipfile.ZIP_DEFLATED) as z:
+    for name, data in files.items():
+        z.writestr(name, data)
+os.replace(path + ".new", path)
+PY
 
 # Services
 systemctl --user daemon-reload
