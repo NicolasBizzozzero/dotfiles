@@ -10,8 +10,8 @@
 
     "modules-left": [
         "hyprland/workspaces",
-        "tray",
-        "mpris"
+        "custom/media",
+        "tray"
     ],
     "modules-center": [
         "custom/weather",
@@ -48,36 +48,16 @@
         "spacing": 4
     },
 
-    // Left click: previous, middle click: play/pause, right click: next, scroll: volume
-    "mpris": {
-        "interval": 10,
-        "format": "{player_icon} ",
-        "format-paused": "{status_icon} <i>{dynamic}</i>",
-        "max-length": 30,
-        "player-icons": {
-            "chromium": "",
-            "default": "",
-            "firefox": "",
-            "kdeconnect": "",
-            "mopidy": "",
-            "mpv": "󰐹",
-            "spotify": "",
-            "vlc": "󰕼"
-        },
-        "status-icons": {
-            "paused": "󰐎",
-            "playing": "",
-            "stopped": ""
-        },
+    // Now playing (any MPRIS player, the playing one first); hidden when nothing runs.
+    // Click: play/pause, right click: next, middle click: previous
+    "custom/media": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/media.sh follow",
         "tooltip": true,
-        "tooltip-format": "{status_icon} {dynamic}\nLeft Click: previous\nMid Click: Pause\nRight Click: Next",
-        "on-click": "playerctl previous",
-        "on-click-middle": "playerctl play-pause",
-        "on-click-right": "playerctl next",
-        "scroll-step": 5.0,
-        "smooth-scrolling-threshold": 1,
-        "on-scroll-up": "~/.config/waybar/scripts/pulseaudio.sh up",
-        "on-scroll-down": "~/.config/waybar/scripts/pulseaudio.sh down"
+        "on-click": "~/.config/waybar/scripts/media.sh toggle",
+        "on-click-right": "~/.config/waybar/scripts/media.sh next",
+        "on-click-middle": "~/.config/waybar/scripts/media.sh previous"
     },
 
     // ---- Center ----

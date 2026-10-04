@@ -76,7 +76,7 @@ tooltip {
 #bluetooth,
 #cpu,
 #memory,
-#mpris,
+#custom-media,
 #network,
 #pulseaudio,
 #custom-temperature,
@@ -202,4 +202,12 @@ label:focus {
 
 #custom-claude {
     color: #32cd32;
+}
+
+#custom-media {
+    color: #ffffff;
+}
+
+#custom-media.paused {
+    color: #606060;
 }
