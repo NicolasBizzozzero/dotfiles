@@ -1,0 +1,13 @@
+[Unit]
+Description=Murmurs background-sound mixer (http://murmurs.localhost:8642/)
+Documentation=file://%h/work/projects/Murmurs/README.md
+# Murmurs only listens on loopback, so it needs no network. Build the player
+# once with scripts/build.sh before enabling this.
+
+[Service]
+ExecStart=%h/work/projects/Murmurs/scripts/start.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
