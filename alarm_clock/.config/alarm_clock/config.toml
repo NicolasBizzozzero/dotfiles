@@ -47,7 +47,7 @@ max_duration_seconds = 300.0
 #
 # Values above 1.0 amplify, up to 2.0. Set this to nothing at all (delete the
 # line) to leave the system volume alone.
-system_volume = 1.5
+system_volume = 0.8
 
 # PulseAudio/PipeWire sink to play into. "default" follows your system default.
 # Set to the laptop speakers, so the alarm rings out loud even when the Bluetooth

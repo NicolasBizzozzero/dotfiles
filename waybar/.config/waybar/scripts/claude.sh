@@ -11,7 +11,7 @@ usage() { sed -n 's/^#   /  /p' "$0" >&2; }
 
 status() {
     local raw_output
-    raw_output=$(claude -p "/usage" < /dev/null 2>/dev/null)
+    raw_output=$(claude --no-session-persistance -p "/usage" < /dev/null 2>/dev/null)
 
     if [[ -z "$raw_output" ]]; then
         jq -c -n --arg text '<span color="#df3320">󰚩 Err</span>' \
