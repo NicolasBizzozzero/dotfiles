@@ -198,7 +198,7 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 
 hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
 
--- Cat mode, toggled from the waybar cat icon (scripts/cat.sh): every key of
+-- Cat mode, toggled from the waybar cat icon (scripts/cat.py): every key of
 -- every keyboard is swallowed, modifiers included; the touchpad still works
 hl.define_submap("cat", function()
     hl.bind("catchall", hl.dsp.no_op(), { ignore_mods = true })

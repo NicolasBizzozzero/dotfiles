@@ -98,11 +98,11 @@
     "custom/cat": {
         "format": "{}",
         "return-type": "json",
-        "exec": "~/.config/waybar/scripts/cat.sh status",
+        "exec": "~/.config/waybar/scripts/cat.py status",
         "interval": 5,
         "signal": 12,
         "tooltip": true,
-        "on-click": "~/.config/waybar/scripts/cat.sh toggle"
+        "on-click": "~/.config/waybar/scripts/cat.py toggle"
     },
 
     // ---- Right ----
