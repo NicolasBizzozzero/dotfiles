@@ -191,6 +191,16 @@ label:focus {
     padding-right: 12px;
 }
 
+#custom-cat {
+    padding-left: 12px;
+    padding-right: 6px;
+    color: #606060;
+}
+
+#custom-cat.on {
+    color: @accent3;
+}
+
 #custom-mail.problem {
     color: #606060;
 }

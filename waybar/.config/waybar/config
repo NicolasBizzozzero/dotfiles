@@ -16,7 +16,8 @@
     "modules-center": [
         "custom/weather",
         "custom/mail",
-        "custom/clock"
+        "custom/clock",
+        "custom/cat"
     ],
     "modules-right": [
         "custom/claude",
@@ -91,6 +92,17 @@
         "interval": 1,
         "tooltip": false,
         "on-click": "~/.config/waybar/scripts/clock.sh calendar"
+    },
+
+    // Cat mode: click to disable/enable every keyboard (the touchpad keeps working)
+    "custom/cat": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/cat.sh status",
+        "interval": 5,
+        "signal": 12,
+        "tooltip": true,
+        "on-click": "~/.config/waybar/scripts/cat.sh toggle"
     },
 
     // ---- Right ----
