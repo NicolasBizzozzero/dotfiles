@@ -29,7 +29,7 @@ import sys
 from pathlib import Path
 
 WAYBAR_SIGNAL = 12
-ICON = "\U000f011b"
+ICON = "\ueeed"
 SCRIPT = os.path.realpath(__file__)
 CSS = b"window { background-color: transparent; }"
 # Seconds without waybar's bar before cat mode turns off (a waybar reload is shorter)
