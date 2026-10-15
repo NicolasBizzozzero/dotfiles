@@ -29,6 +29,7 @@ bindkey '^[[Z' reverse-menu-complete       # Shift+Tab to go backward in complet
 # --- 3. Sources (Aliases & Variables) ---
 source "$ZDOTDIR/.variables.sh"
 source "$ZDOTDIR/.aliases.sh"
+[[ -r "$HOME/scripts/ricing/claude.zsh" ]] && source "$HOME/scripts/ricing/claude.zsh"  # claude resumes the directory's session
 
 # --- 4. Completion System ---
 autoload -Uz compinit
