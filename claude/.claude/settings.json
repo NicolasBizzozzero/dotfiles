@@ -62,5 +62,5 @@
   },
   "theme": "dark",
   "model": "opus",
-  "cleanupPeriodDays": 365
+  "cleanupPeriodDays": 1100
 }
