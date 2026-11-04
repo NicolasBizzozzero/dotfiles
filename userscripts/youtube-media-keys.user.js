@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube media keys: next / previous everywhere
 // @namespace    https://github.com/NicolasBizzozzero/dotfiles
-// @version      1.4
+// @version      1.5
 // @description  Next and previous video from media keys and MPRIS (waybar custom/media), in a playlist or not
 // @match        https://www.youtube.com/*
 // @run-at       document-start
@@ -17,7 +17,8 @@
 // Firefox reports CanGoNext/CanGoPrevious false over MPRIS and `playerctl next`
 // does nothing. This registers both, for every video:
 //   next      the player's Next button: next playlist item, or the suggested video
-//   previous  the player's Previous button in a playlist; otherwise the video
+//   previous  the previous playlist item (YouTube's Previous button restarts the
+//             video instead once it has played a bit); otherwise the video
 //             watched before in this tab, or back to the start if there is none
 //             (through the tab's history when it was the page just before: a
 //             full reload would not autoplay, Firefox blocks it without a click)
@@ -98,6 +99,15 @@
     }
 
     function previous() {
+        // Playlist: the item before the current one in the playlist panel (the
+        // player's Previous button restarts the video once it has played a bit)
+        const item = document.querySelector("ytd-playlist-panel-video-renderer[selected]");
+        const before = item && item.previousElementSibling;
+        const link = before && before.querySelector("a#wc-endpoint");
+        if (link) {
+            link.click();
+            return;
+        }
         const button = visibleButton(".ytp-prev-button");
         if (button) {
             button.click();
