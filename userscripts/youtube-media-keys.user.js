@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube media keys: next / previous everywhere
 // @namespace    https://github.com/NicolasBizzozzero/dotfiles
-// @version      1.3
+// @version      1.4
 // @description  Next and previous video from media keys and MPRIS (waybar custom/media), in a playlist or not
 // @match        https://www.youtube.com/*
 // @run-at       document-start
@@ -19,6 +19,8 @@
 //   next      the player's Next button: next playlist item, or the suggested video
 //   previous  the player's Previous button in a playlist; otherwise the video
 //             watched before in this tab, or back to the start if there is none
+//             (through the tab's history when it was the page just before: a
+//             full reload would not autoplay, Firefox blocks it without a click)
 // YouTube clears the handlers when a video loads: its own calls for these two
 // actions are ignored, and ours are set again at each video.
 //
@@ -58,10 +60,19 @@
         return location.pathname === "/watch" ? new URLSearchParams(location.search).get("v") : null;
     }
 
+    // Video shown, and the one shown before it in this page (null: not a video,
+    // or the page was loaded fresh): going back to it needs no reload
+    let shown = currentId();
+    let cameFrom = null;
+
     // Arriving on the previous video (Previous, or the browser's back) moves back
     // in the list instead of adding to it
     function track() {
         const id = currentId();
+        if (id !== shown) {
+            cameFrom = shown;
+            shown = id;
+        }
         if (!id) return;
         const ids = watched();
         if (ids[ids.length - 1] === id) return;
@@ -94,7 +105,9 @@
         }
         const ids = watched();
         if (ids.length >= 2) {
-            location.assign("/watch?v=" + encodeURIComponent(ids[ids.length - 2]));
+            const id = ids[ids.length - 2];
+            if (id === cameFrom) history.back();
+            else location.assign("/watch?v=" + encodeURIComponent(id));
             return;
         }
         const video = document.querySelector("video");
