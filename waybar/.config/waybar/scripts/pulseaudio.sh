@@ -17,9 +17,14 @@ usage() { sed -n 's/^#   /  /p' "$0" >&2; }
 
 notify() {
     local id args=(-a Volume -u low -t 1500 -p)
+    # Fast scrolling runs several instances at once: without the lock, they all
+    # read the id before any writes it back, and each stacks its own notification
+    exec 9>> "$ID_FILE.lock"
+    flock 9
     id=$(cat "$ID_FILE" 2>/dev/null)
     [[ -n $id ]] && args+=(-r "$id")
-    notify-send "${args[@]}" "$@" > "$ID_FILE"
+    notify-send "${args[@]}" "$@" > "$ID_FILE.tmp" && mv "$ID_FILE.tmp" "$ID_FILE"
+    flock -u 9
 }
 
 notify_volume() {
