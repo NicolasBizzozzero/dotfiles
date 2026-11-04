@@ -1,18 +1,22 @@
-# --- Mako Config (Waybar Matched) ---
+# --- Mako Config (Catppuccin Mocha, square like waybar) ---
 
 # Appearance
 font=JetBrainsMono Nerd Font 10
-background-color=#1e1e2e
-text-color=#ffffff
-border-color=#11111b
+background-color=#1e1e2ef2
+text-color=#cdd6f4
+border-color=#89b4fa
 border-size=2
 border-radius=0
+progress-color=over #89b4fa40
+icons=1
+max-icon-size=40
+format=<b>%s</b>\n%b
 
 # Layout
-width=300
-height=100
-margin=20
-padding=15
+width=340
+height=120
+margin=12
+padding=14,16
 
 # Positioning
 layer=overlay
@@ -22,3 +26,13 @@ anchor=top-right
 default-timeout=5000
 ignore-timeout=1
 
+# Urgent notifications stay until dismissed
+[urgency=critical]
+border-color=#fab387
+default-timeout=0
+
+# Volume (waybar/scripts/pulseaudio.sh): one line, the progress bar shows the level
+[app-name=Volume]
+border-color=#cba6f7
+progress-color=over #cba6f740
+format=%s
