@@ -5,11 +5,14 @@
 # Usage:
 #   media.sh follow     print a JSON line for waybar at every player change (continuous)
 #   media.sh toggle     play/pause the shown player
-#   media.sh next       next track on the shown player (YouTube: next suggested video)
+#   media.sh next       next track on the shown player
 #   media.sh previous   previous track on the shown player
 
 # The shown player is the one playing (the most recently started if several),
 # else the most recent paused one. Nothing running: empty output, module hidden.
+#
+# YouTube outside a playlist has no next/previous over MPRIS: the userscript
+# userscripts/youtube-media-keys.user.js (Violentmonkey) adds them.
 
 MAX_LENGTH=40
 # Players never shown (comma-separated MPRIS names, as listed by `playerctl -l`)
@@ -108,30 +111,10 @@ control() {
     [[ -n $player ]] && playerctl -p "$player" "$1"
 }
 
-# A YouTube video outside a playlist has no MPRIS next (CanGoNext false): send
-# YouTube's own Shift+N (next suggested video) to the browser window showing it
-next() {
-    local player can_next title window
-    player=$(shown_player)
-    [[ -z $player ]] && return
-    can_next=$(busctl --user get-property "org.mpris.MediaPlayer2.$player" /org/mpris/MediaPlayer2 \
-        org.mpris.MediaPlayer2.Player CanGoNext 2>/dev/null)
-    if [[ $can_next != "b false" ]]; then
-        playerctl -p "$player" next
-        return
-    fi
-    # Only when the video's tab is the one shown, so the key can't land elsewhere
-    title=$(playerctl -p "$player" metadata title 2>/dev/null)
-    window=$(hyprctl clients -j | jq -r --arg t "$title - YouTube" \
-        'first(.[] | select(.title | startswith($t)) | .address) // empty')
-    [[ -n $window ]] && hyprctl dispatch \
-        "hl.dsp.send_shortcut({ mods = \"SHIFT\", key = \"N\", window = \"address:$window\" })" >/dev/null
-}
-
 case ${1:-} in
     follow)   follow ;;
     toggle)   control play-pause ;;
-    next)     next ;;
+    next)     control next ;;
     previous) control previous ;;
     *)        usage; exit 1 ;;
 esac

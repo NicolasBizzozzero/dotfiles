@@ -35,7 +35,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Version control | git | `git` |
 | Remote access | OpenSSH | `ssh` |
 | AUR helper | yay | - |
-| Web browser | Firefox | - |
+| Web browser | Firefox (+ Violentmonkey) | `userscripts` (installed in Violentmonkey, not stowed) |
 | Music daemon | MPD | `mpd` |
 | Video / media playback | VLC | `vlc` |
 | Offline documentation | Zeal | `zeal` |
@@ -67,6 +67,10 @@ The system runs Hyprland (`hypr`) as the window manager, with `waybar` as the st
 
 ### Media
 `mpd` runs as a background music daemon, and `vlc` handles video and other media playback.
+
+### Browser
+`userscripts` holds Firefox userscripts. They are not stowed: they need the **Violentmonkey** extension, and each is installed by opening its raw GitHub URL in Firefox (Violentmonkey then keeps it up to date from this repository).
+- `youtube-media-keys.user.js`: YouTube next/previous over MPRIS (waybar `custom/media` right/middle click, media keys), in a playlist or not. Install: <https://raw.githubusercontent.com/NicolasBizzozzero/dotfiles/master/userscripts/youtube-media-keys.user.js>
 
 ### Documentation and mail
 `zeal` is an offline documentation browser. Mail is read in Thunderbird (`thunderbird`), which stores it as Maildir under `~/.local/share/mail` instead of inside its profile. `systemd` runs Proton Mail Bridge in the background so Thunderbird can reach the Proton account over IMAP/SMTP; Bridge already keeps a local copy of that account, so Thunderbird does not download one.
