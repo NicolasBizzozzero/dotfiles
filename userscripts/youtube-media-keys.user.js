@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube media keys: next / previous everywhere
 // @namespace    https://github.com/NicolasBizzozzero/dotfiles
-// @version      1.1
+// @version      1.2
 // @description  Next and previous video from media keys and MPRIS (waybar custom/media), in a playlist or not
 // @match        https://www.youtube.com/*
 // @run-at       document-start
@@ -92,23 +92,38 @@
         if (video) video.currentTime = 0;
     }
 
+    // The page's own window, where handlers must live for Firefox to use them
+    // (exportFunction makes ours callable from there)
+    const page = unsafeWindow.wrappedJSObject;
+    const inPage = Boolean(page && page.MediaSession && typeof exportFunction === "function");
+    const nativeSet = inPage ? page.MediaSession.prototype.setActionHandler : null;
+
     // Page-side setActionHandler ignores next/previous, so YouTube can't clear ours
     function guard() {
-        const page = unsafeWindow.wrappedJSObject;
-        if (!page || typeof exportFunction !== "function" || !page.MediaSession) return;
-        const proto = page.MediaSession.prototype;
-        const original = proto.setActionHandler;
-        proto.setActionHandler = exportFunction(function (action, handler) {
+        if (!inPage) return;
+        page.MediaSession.prototype.setActionHandler = exportFunction(function (action, handler) {
             if (action === "nexttrack" || action === "previoustrack") return;
-            return original.call(this, action, handler);
+            return nativeSet.call(this, action, handler);
         }, page);
     }
 
+    function setHandler(action, handler) {
+        if (inPage) nativeSet.call(page.navigator.mediaSession, action, exportFunction(handler, page));
+        else navigator.mediaSession.setActionHandler(action, handler);
+    }
+
+    // Outcome kept in the tab's sessionStorage (media-keys-status), to diagnose
     function register() {
-        if (!("mediaSession" in navigator)) return;
+        const errors = [];
+        for (const [action, handler] of [["nexttrack", next], ["previoustrack", previous]]) {
+            try {
+                setHandler(action, handler);
+            } catch (e) {
+                errors.push(action + ": " + e);
+            }
+        }
         try {
-            navigator.mediaSession.setActionHandler("nexttrack", next);
-            navigator.mediaSession.setActionHandler("previoustrack", previous);
+            sessionStorage.setItem("media-keys-status", (inPage ? "page" : "content") + (errors.length ? " | " + errors.join(" | ") : " ok"));
         } catch (e) {}
     }
 
@@ -123,7 +138,11 @@
     }
     try {
         guard();
-    } catch (e) {}
+    } catch (e) {
+        try {
+            sessionStorage.setItem("media-keys-guard", String(e));
+        } catch (e2) {}
+    }
     track();
     register();
 })();
