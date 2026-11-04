@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube media keys: next / previous everywhere
 // @namespace    https://github.com/NicolasBizzozzero/dotfiles
-// @version      1.2
+// @version      1.3
 // @description  Next and previous video from media keys and MPRIS (waybar custom/media), in a playlist or not
 // @match        https://www.youtube.com/*
 // @run-at       document-start
@@ -27,6 +27,15 @@
 
 (function () {
     "use strict";
+
+    // What the script did, kept in the tab's sessionStorage to diagnose it
+    // (Firefox's session file holds it: sessionstore-backups/recovery.jsonlz4)
+    function report(text, key = "media-keys-status") {
+        try {
+            sessionStorage.setItem(key, GM_info.script.version + " | " + text);
+        } catch (e) {}
+    }
+    report("started");
 
     // Videos watched in this tab, oldest first, to find the previous one
     const HISTORY_KEY = "media-keys-watched";
@@ -94,9 +103,15 @@
 
     // The page's own window, where handlers must live for Firefox to use them
     // (exportFunction makes ours callable from there)
-    const page = unsafeWindow.wrappedJSObject;
-    const inPage = Boolean(page && page.MediaSession && typeof exportFunction === "function");
-    const nativeSet = inPage ? page.MediaSession.prototype.setActionHandler : null;
+    let page = null;
+    let nativeSet = null;
+    try {
+        page = unsafeWindow.wrappedJSObject || unsafeWindow;
+        if (typeof exportFunction === "function") nativeSet = page.MediaSession.prototype.setActionHandler;
+    } catch (e) {
+        report("page window: " + e, "media-keys-error");
+    }
+    const inPage = Boolean(nativeSet);
 
     // Page-side setActionHandler ignores next/previous, so YouTube can't clear ours
     function guard() {
@@ -112,7 +127,6 @@
         else navigator.mediaSession.setActionHandler(action, handler);
     }
 
-    // Outcome kept in the tab's sessionStorage (media-keys-status), to diagnose
     function register() {
         const errors = [];
         for (const [action, handler] of [["nexttrack", next], ["previoustrack", previous]]) {
@@ -122,9 +136,7 @@
                 errors.push(action + ": " + e);
             }
         }
-        try {
-            sessionStorage.setItem("media-keys-status", (inPage ? "page" : "content") + (errors.length ? " | " + errors.join(" | ") : " ok"));
-        } catch (e) {}
+        report((inPage ? "page" : "content") + (errors.length ? " | " + errors.join(" | ") : " ok") + " at " + new Date().toLocaleTimeString());
     }
 
     // yt-navigate-finish: YouTube changes page without reloading it
@@ -139,9 +151,7 @@
     try {
         guard();
     } catch (e) {
-        try {
-            sessionStorage.setItem("media-keys-guard", String(e));
-        } catch (e2) {}
+        report("guard: " + e, "media-keys-error");
     }
     track();
     register();
