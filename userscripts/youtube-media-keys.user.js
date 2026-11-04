@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         YouTube media keys: next / previous everywhere
 // @namespace    https://github.com/NicolasBizzozzero/dotfiles
-// @version      1.0
+// @version      1.1
 // @description  Next and previous video from media keys and MPRIS (waybar custom/media), in a playlist or not
 // @match        https://www.youtube.com/*
 // @run-at       document-start
-// @grant        none
+// @grant        unsafeWindow
+// @inject-into  content
 // @downloadURL  https://raw.githubusercontent.com/NicolasBizzozzero/dotfiles/master/userscripts/youtube-media-keys.user.js
 // @updateURL    https://raw.githubusercontent.com/NicolasBizzozzero/dotfiles/master/userscripts/youtube-media-keys.user.js
 // ==/UserScript==
@@ -18,7 +19,11 @@
 //   next      the player's Next button: next playlist item, or the suggested video
 //   previous  the player's Previous button in a playlist; otherwise the video
 //             watched before in this tab, or back to the start if there is none
-// YouTube resets the handlers when a video loads, so they are set again each time.
+// YouTube clears the handlers when a video loads: its own calls for these two
+// actions are ignored, and ours are set again at each video.
+//
+// Content mode: YouTube's CSP blocks scripts injected into the page. Calls made
+// from here go to Firefox's native methods, whatever the page changes.
 
 (function () {
     "use strict";
@@ -87,6 +92,18 @@
         if (video) video.currentTime = 0;
     }
 
+    // Page-side setActionHandler ignores next/previous, so YouTube can't clear ours
+    function guard() {
+        const page = unsafeWindow.wrappedJSObject;
+        if (!page || typeof exportFunction !== "function" || !page.MediaSession) return;
+        const proto = page.MediaSession.prototype;
+        const original = proto.setActionHandler;
+        proto.setActionHandler = exportFunction(function (action, handler) {
+            if (action === "nexttrack" || action === "previoustrack") return;
+            return original.call(this, action, handler);
+        }, page);
+    }
+
     function register() {
         if (!("mediaSession" in navigator)) return;
         try {
@@ -104,6 +121,9 @@
     for (const type of ["loadedmetadata", "playing"]) {
         document.addEventListener(type, register, true);
     }
+    try {
+        guard();
+    } catch (e) {}
     track();
     register();
 })();
