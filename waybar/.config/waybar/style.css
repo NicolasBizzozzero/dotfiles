@@ -95,17 +95,18 @@ tooltip {
 }
 
 /* Right modules: icons overhang their box by different amounts, so each module
-   gets its own padding to make every visible gap between them 18px (at 2x scale) */
+   gets its own padding to make every visible gap between them 11 physical px
+   (at the screen's 1.2 scale: paddings are whole px, so 1.2 physical px steps) */
 #custom-claude { padding-left: 6px; padding-right: 4px; }
 #custom-temperature { padding-left: 4px; padding-right: 4px; }
 #cpu { padding-left: 4px; padding-right: 5px; }
 #bluetooth { padding-left: 5px; padding-right: 4px; }
-#custom-microphone { padding-left: 5px; padding-right: 5px; }
+#custom-microphone { padding-left: 5px; padding-right: 4px; }
 #custom-backlight { padding-left: 4px; padding-right: 6px; }
 #memory { padding-left: 6px; padding-right: 6px; }
 #pulseaudio { padding-left: 6px; padding-right: 4px; }
 #network { padding-left: 5px; padding-right: 4px; }
-#custom-printer { padding-left: 5px; padding-right: 5px; }
+#custom-printer { padding-left: 5px; padding-right: 6px; }
 #battery { padding-left: 5px; padding-right: 6px; }
 #custom-power { padding-left: 7px; padding-right: 6px; }
 

@@ -49,7 +49,7 @@ status() {
     else icon=$ICON_LOW; fi
     ((value >= CRITICAL)) && class=critical
 
-    jq -c -n --arg text "${value}°C $icon" --arg tooltip "$tooltip" --arg class "$class" \
+    jq -c -n --arg text "${value}°C<span font_size='33%'> </span>$icon" --arg tooltip "$tooltip" --arg class "$class" \
         '{text: $text, tooltip: $tooltip, class: $class}'
 }
 

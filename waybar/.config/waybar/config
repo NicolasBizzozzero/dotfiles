@@ -108,6 +108,14 @@
 
     // ---- Right ----
 
+    // Number–symbol spacing: a space shrunk with <span font_size> so that every
+    // gap is about 4.5 physical px. Text snaps to whole px: a full space is 6 px,
+    // 50% is 3 px, 33% 2 px, 67% 4 px, 83% 5 px, 17% 1 px. Nerd Font icons
+    // overflow their cell to the right, by up to a space and a half, so each
+    // icon gets its own width (volume icons). A module ending with a less
+    // overflowing icon (charging, muted) gets a trailing space, to keep the
+    // same gap to the next module.
+
     "custom/claude": {
         "format": "{}",
         "return-type": "json",
@@ -128,8 +136,8 @@
     // Click: per-core usage bars
     "cpu": {
         "interval": 1,
-        "format": "{usage}% 󰍛",
-        "format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% 󰍛",
+        "format": "{usage}%<span font_size='50%'> </span>󰍛",
+        "format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}%<span font_size='50%'> </span>󰍛",
         "format-alt-click": "click",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
     },
@@ -168,7 +176,7 @@
 
     // Scroll: change brightness
     "custom/backlight": {
-        "format": "{} 󰃠",
+        "format": "{}<span font_size='50%'> </span>󰃠",
         "return-type": "json",
         "exec": "~/.config/waybar/scripts/backlight.sh status",
         "interval": 30,
@@ -181,8 +189,8 @@
     // Click: used memory / percentage
     "memory": {
         "interval": 10,
-        "format": "{used:0.1f}G 󰾆",
-        "format-alt": "{percentage}% 󰾆",
+        "format": "{used:0.1f}G<span font_size='50%'> </span>󰾆",
+        "format-alt": "{percentage}%<span font_size='50%'> </span>󰾆",
         "format-alt-click": "click",
         "tooltip": true,
         "tooltip-format": "{used:0.1f}GB/{total:0.1f}G"
@@ -190,18 +198,18 @@
 
     // Click: mute, scroll: volume
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-bluetooth": "{icon} {volume}%",
-        "format-muted": "󰖁",
+        "format": "{icon}{volume}%",
+        "format-bluetooth": "{icon}{volume}%",
+        "format-muted": "󰖁<span font_size='17%'> </span>",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", "󰕾", ""]
+            "headphone": " ",
+            "hands-free": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": ["<span font_size='50%'> </span>", "<span font_size='83%'> </span>", "󰕾<span font_size='67%'> </span>", " <span font_size='50%'> </span>"]
         },
-        "tooltip-format": "{icon} {desc} | {volume}%",
+        "tooltip-format": "{icon}{desc} | {volume}%",
         "scroll-step": 5.0,
         "smooth-scrolling-threshold": 1,
         "on-click": "~/.config/waybar/scripts/pulseaudio.sh mute",
@@ -247,10 +255,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-full": "100% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format": "{capacity}%<span font_size='50%'> </span>{icon}",
+        "format-full": "100%<span font_size='50%'> </span>{icon}",
+        "format-charging": "{capacity}%<span font_size='50%'> </span><span font_size='50%'> </span>",
+        "format-plugged": "{capacity}%<span font_size='50%'> </span><span font_size='50%'> </span>",
         "format-alt": "{icon} {time}",
         "format-alt-click": "click",
         "format-time": "{H}h {M}min",

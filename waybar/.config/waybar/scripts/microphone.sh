@@ -46,9 +46,9 @@ print_state() {
     local volume text class
     volume=$(pamixer --default-source --get-volume)
     if is_muted; then
-        text=$ICON_MUTED class=muted
+        text="$ICON_MUTED<span font_size='17%'> </span>" class=muted
     else
-        text="$ICON $volume%" class=on
+        text="$ICON<span font_size='50%'> </span>$volume%" class=on
     fi
     local tooltip="$name | $volume%"$'\n\n'"Scroll: volume, right click: mute, click: choose the microphone"
     jq -c -n --arg text "$text" --arg tooltip "$(escape "$tooltip")" --arg class "$class" \
