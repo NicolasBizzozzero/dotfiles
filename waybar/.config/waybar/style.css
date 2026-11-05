@@ -83,6 +83,7 @@ tooltip {
 #tray,
 #workspaces,
 #custom-backlight,
+#custom-microphone,
 #custom-claude,
 #custom-power,
 #custom-printer,
@@ -99,6 +100,7 @@ tooltip {
 #custom-temperature { padding-left: 4px; padding-right: 4px; }
 #cpu { padding-left: 4px; padding-right: 5px; }
 #bluetooth { padding-left: 5px; padding-right: 4px; }
+#custom-microphone { padding-left: 5px; padding-right: 5px; }
 #custom-backlight { padding-left: 4px; padding-right: 6px; }
 #memory { padding-left: 6px; padding-right: 6px; }
 #pulseaudio { padding-left: 6px; padding-right: 4px; }
@@ -154,6 +156,14 @@ label:focus {
 
 #bluetooth.off,
 #bluetooth.disabled {
+    color: #606060;
+}
+
+#custom-microphone {
+    color: #c19a6b; /* brown */
+}
+
+#custom-microphone.muted {
     color: #606060;
 }
 

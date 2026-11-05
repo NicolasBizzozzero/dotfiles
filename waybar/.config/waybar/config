@@ -24,6 +24,7 @@
         "custom/temperature",
         "cpu",
         "bluetooth",
+        "custom/microphone",
         "custom/backlight",
         "memory",
         "pulseaudio",
@@ -149,6 +150,20 @@
         "tooltip-format-enumerate-connected-battery": "{device_alias}  {device_battery_percentage}%",
         "on-click": "~/.config/waybar/scripts/bluetooth.sh menu",
         "on-click-right": "~/.config/waybar/scripts/bluetooth.sh toggle"
+    },
+
+    // Default microphone. Scroll: volume, right click: mute, click: rofi menu to
+    // choose the microphone (kept across reboots by WirePlumber)
+    "custom/microphone": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/microphone.sh follow",
+        "tooltip": true,
+        "smooth-scrolling-threshold": 1,
+        "on-click": "~/.config/waybar/scripts/microphone.sh menu",
+        "on-click-right": "~/.config/waybar/scripts/microphone.sh mute",
+        "on-scroll-up": "~/.config/waybar/scripts/microphone.sh up",
+        "on-scroll-down": "~/.config/waybar/scripts/microphone.sh down"
     },
 
     // Scroll: change brightness

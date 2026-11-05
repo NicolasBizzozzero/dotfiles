@@ -36,3 +36,9 @@ default-timeout=0
 border-color=#cba6f7
 progress-color=over #cba6f740
 format=%s
+
+# Microphone (waybar/scripts/microphone.sh): same, brown like its waybar module
+[app-name=Microphone]
+border-color=#c19a6b
+progress-color=over #c19a6b40
+format=%s

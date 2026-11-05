@@ -186,7 +186,7 @@ hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("/home/johnlocke/.config/waybar/scripts/pulseaudio.sh up"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("/home/johnlocke/.config/waybar/scripts/pulseaudio.sh down"), { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("/home/johnlocke/.config/waybar/scripts/pulseaudio.sh mute"), { locked = true })
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("/home/johnlocke/.config/waybar/scripts/microphone.sh mute"), { locked = true })
 
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("/home/johnlocke/.config/waybar/scripts/backlight.sh up"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("/home/johnlocke/.config/waybar/scripts/backlight.sh down"), { locked = true, repeating = true })
