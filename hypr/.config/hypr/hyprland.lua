@@ -25,6 +25,9 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("XCURSOR_THEME", "catppuccin-mocha-mauve-cursors")
 hl.env("XCURSOR_SIZE", "24")
 
+-- Touchpad ignored while keys are pressed (palm rejection), except in cat mode
+local touchpad_disable_while_typing = true
+
 -- 3. CORE CONFIGURATION
 hl.config({
     ecosystem = {
@@ -42,7 +45,7 @@ hl.config({
         sensitivity = 0,
         touchpad = {
             natural_scroll = false,
-            disable_while_typing = true,
+            disable_while_typing = touchpad_disable_while_typing,
             tap_to_click = false,
             clickfinger_behavior = false,
             middle_button_emulation = false,
@@ -203,6 +206,14 @@ hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
 hl.define_submap("cat", function()
     hl.bind("catchall", hl.dsp.no_op(), { ignore_mods = true })
 end)
+
+-- Turns cat mode on/off, called by cat.py through `hyprctl eval`. Keys are only
+-- swallowed after libinput saw them: with disable_while_typing, a cat lying on
+-- the keyboard would also turn the touchpad off, and the cat icon with it
+function cat_mode(on)
+    hl.config({ input = { touchpad = { disable_while_typing = touchpad_disable_while_typing and not on } } })
+    hl.dispatch(hl.dsp.submap(on and "cat" or "reset"))
+end
 
 -- 6. AUTOSTART
 hl.on("hyprland.start", function()
