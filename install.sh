@@ -77,3 +77,9 @@ sudo systemctl enable --now \
 sudo systemctl enable --now tccd.service
 sudo systemctl mask --now power-profiles-daemon.service
 sudo ~/.config/tuxedo/apply.sh
+
+# Boot: kernel errors (Bluetooth firmware, ACPI BIOS bugs) and systemd's status
+# lines are printed on the console, which is ly's screen: they landed over the
+# login box. Only critical kernel messages and failed units are shown now; all
+# of it stays in the journal
+sudo sed -i '/^options /{/ quiet/!s/$/ quiet loglevel=3/}' /boot/loader/entries/*.conf
