@@ -204,6 +204,12 @@ hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
 -- Cat mode, toggled from the waybar cat icon (scripts/cat.py): every key of
 -- every keyboard is swallowed, modifiers included; the touchpad still works
 hl.define_submap("cat", function()
+    -- Since Hyprland 0.57 the catch-all also takes mouse buttons and wheels:
+    -- these binds let them through (cat.py's overlay blocks them outside waybar),
+    -- whatever modifier the cat holds
+    for _, button in ipairs({ "mouse:272", "mouse:273", "mouse:274", "mouse_down", "mouse_up", "mouse_left", "mouse_right" }) do
+        hl.bind(button, hl.dsp.no_op(), { ignore_mods = true, non_consuming = true })
+    end
     hl.bind("catchall", hl.dsp.no_op(), { ignore_mods = true })
 end)
 
