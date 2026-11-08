@@ -36,6 +36,9 @@ stow zsh
 [ -e ~/.config/keepassxc/keepassxc.ini ] ||
     cp ~/.config/keepassxc/keepassxc.base.ini ~/.config/keepassxc/keepassxc.ini
 
+# MPD doesn't create its playlist directory, and git can't track an empty one
+mkdir -p ~/.config/mpd/playlists
+
 # Cursor theme (Catppuccin Mocha Mauve, xcursor + hyprcursor), not packaged in
 # the official repos: install the upstream release for the user
 CURSOR=catppuccin-mocha-mauve-cursors
@@ -81,5 +84,6 @@ sudo ~/.config/tuxedo/apply.sh
 # Boot: kernel errors (Bluetooth firmware, ACPI BIOS bugs) and systemd's status
 # lines are printed on the console, which is ly's screen: they landed over the
 # login box. Only critical kernel messages and failed units are shown now; all
-# of it stays in the journal
-sudo sed -i '/^options /{/ quiet/!s/$/ quiet loglevel=3/}' /boot/loader/entries/*.conf
+# of it stays in the journal. find, not a glob: /boot is 700, so the user's shell
+# can't expand a path inside it
+sudo find /boot/loader/entries -name '*.conf' -exec sed -i '/^options /{/ quiet/!s/$/ quiet loglevel=3/}' {} +
