@@ -20,6 +20,7 @@ export CABAL_DIR="$XDG_DATA_HOME/cabal"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export NUGET_PACKAGES="$XDG_CACHE_HOME/NuGetPackages"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 
 # --- Python / Data Science ---
 export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"

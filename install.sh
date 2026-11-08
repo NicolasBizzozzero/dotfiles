@@ -36,8 +36,9 @@ stow zsh
 [ -e ~/.config/keepassxc/keepassxc.ini ] ||
     cp ~/.config/keepassxc/keepassxc.base.ini ~/.config/keepassxc/keepassxc.ini
 
-# MPD doesn't create its playlist directory, and git can't track an empty one
-mkdir -p ~/.config/mpd/playlists
+# MPD creates neither its playlist nor its music directory, and git can't track
+# an empty one
+mkdir -p ~/.config/mpd/playlists ~/musics
 
 # Cursor theme (Catppuccin Mocha Mauve, xcursor + hyprcursor), not packaged in
 # the official repos: install the upstream release for the user
