@@ -9,7 +9,18 @@ For example, if you want to install my *zsh* configuration files, simply run:
 $ stow zsh
 ```
 
-Running `install.sh` stows everything at once and enables the services the configuration relies on (Proton Mail Bridge, the waybar mail watcher, MPD, the alarm clock, Bluetooth, CUPS and cron).
+Running `install.sh` stows everything at once and enables the services the machine relies on.
+
+## Outside the home directory
+`system/` holds what _GNU Stow_ can't place, as reference copies for a new machine:
+- `system/etc/`: files added or edited in `/etc`, to copy back by hand with `sudo cp`. Do `pacman.conf` first: some packages come from multilib.
+- `system/packages.txt` and `system/packages-aur.txt`: explicitly installed packages, refreshed with `pacman -Qqen` and `pacman -Qqem`.
+- `system/crontab`: installed by `install.sh` when there is no crontab yet.
+
+```bash
+$ sudo pacman -S --needed - < system/packages.txt
+$ yay -S --needed - < system/packages-aur.txt
+```
 
 ## System overview
 The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize it:
@@ -47,6 +58,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Printing | CUPS | - |
 | Python tooling | Python, IPython/Jupyter | `python`, `jupyter` |
 | AI coding assistant | Claude Code | `claude` |
+| Voice assistant | vocal-assistant | `vocal-assistant` (the wake word model is trained locally and not tracked) |
 
 Entries with no package are either system-level (not something a home directory dotfile controls) or run fine on their defaults without any tracked configuration.
 

@@ -1892,7 +1892,7 @@ qt-privacy-ask=0
 #subsdec-align=-1
 
 # Subtitle text encoding (string)
-#subsdec-encoding=
+subsdec-encoding=UTF-8
 
 # UTF-8 subtitle autodetection (boolean)
 #subsdec-autodetect-utf8=1

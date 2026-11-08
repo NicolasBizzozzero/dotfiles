@@ -24,6 +24,7 @@ stow systemd
 stow thunderbird
 stow tuxedo
 stow vlc
+stow vocal-assistant
 stow waybar
 stow wget
 stow xdg
@@ -70,15 +71,29 @@ systemctl --user enable --now \
     protonmail-bridge.service \
     waybar-mail.service \
     mpd.service \
-    alarm_clock.service
+    alarm_clock.service \
+    murmurs.service \
+    vocal-assistant.service
 sudo systemctl enable --now \
     bluetooth.service \
     cups.socket \
-    cronie.service
+    cronie.service \
+    iwd.service \
+    avahi-daemon.service \
+    docker.service \
+    ollama.service \
+    lm_sensors.service \
+    thermald.service \
+    cpupower.service
+
+# Only when there is none, so that a rerun keeps later edits of the real crontab
+crontab -l >/dev/null 2>&1 || crontab system/crontab
 
 # Power: TUXEDO Control Center is the only power manager (power-profiles-daemon
 # would fight over the same CPU settings); install the profiles, power saving by default
 sudo systemctl enable --now tccd.service
+# Not --now: this unit stops tccd, it is only meant to run while the laptop sleeps
+sudo systemctl enable tccd-sleep.service
 sudo systemctl mask --now power-profiles-daemon.service
 sudo ~/.config/tuxedo/apply.sh
 

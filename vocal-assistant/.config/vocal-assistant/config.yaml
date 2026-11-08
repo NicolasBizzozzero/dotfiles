@@ -1,0 +1,161 @@
+# Le seul fichier à modifier. Une fois enregistré : vocal-assistant apply
+#
+# Seules les sections wake_word, llm, voice et commands sont obligatoires. Dans
+# les autres, un réglage absent garde la valeur par défaut indiquée ici.
+
+wake_word:
+  # Fournis : hey_mycroft (dis « Hé Maïcroft »), alexa, hey_jarvis, hey_rhasspy.
+  # Ou l'un des tiens : vocal-assistant wake-word train "ok ordi"
+  model: ordinateur
+  # De 0 à 1. Plus haut : réagit plus facilement, mais aussi plus souvent à tort.
+  sensitivity: 0.5
+
+llm:
+  # N'importe quel modèle Ollama. Il est téléchargé et essayé avant la bascule.
+  # Choisis-le selon la mémoire du GPU : voir « Choisir le LLM » dans le README.
+  model: qwen3.5:2b
+  url: http://127.0.0.1:11434
+  # Attente maximale d'une réponse, en secondes.
+  timeout: 60
+
+voice:
+  # Reconnaissance vocale (Vosk). Le paquet fournit vosk-model-small-fr-0.22.
+  # Pour en changer, écris le nom d'un modèle de https://alphacephei.com/vosk/models
+  # puis lance vocal-assistant apply : il est téléchargé une fois, à côté du service.
+  # Plus précis, mais 1,4 Go et bien plus de mémoire : vosk-model-fr-0.22
+  recognition: vosk-model-small-fr-0.22
+  # Synthèse vocale (Piper). Le paquet fournit fr_FR-siwis-medium. Les autres voix
+  # de https://huggingface.co/rhasspy/piper-voices se changent de la même façon.
+  synthesis: fr_FR-siwis-medium
+  # Volume de la voix, en pourcentage, de 0 à 200. Au-delà de 100, le son est
+  # amplifié et peut saturer.
+  volume: 100
+  # Vitesse de la voix, de 0.5 à 2 : 1 est la vitesse normale, 1.2 va 20 % plus vite.
+  speed: 1.0
+
+listening:
+  # Secondes laissées pour commencer à parler, après le wake word.
+  start_timeout: 5
+  # Secondes de silence qui terminent ta phrase. Plus court : réponse plus rapide,
+  # mais une pause au milieu de la phrase la coupe.
+  end_silence: 1.0
+  # Durée maximale d'une phrase, en secondes. Elle borne aussi l'attente quand le
+  # bruit de la pièce est pris pour de la parole.
+  max_duration: 15
+
+sounds:
+  # Volume des trois sons, en pourcentage, de 0 à 200.
+  volume: 100
+  # Chaque son vaut « beep » pour le bip intégré, « none » pour le silence, ou un
+  # fichier audio : mp3, m4a, ogg, wav… Un chemin relatif part de
+  # ~/.config/vocal-assistant/, par exemple sounds/accept.wav
+  #
+  # Après le wake word, quand l'assistant commence à t'écouter. Garde-le court :
+  # il enregistre ta phrase pendant qu'il le joue.
+  listening: sounds/listening.wav
+  # Quand il a compris ta demande, juste avant sa réponse.
+  accept: sounds/accept.wav
+  # Quand il n'entend rien après le wake word, ne comprend pas, ou rencontre une
+  # erreur, juste avant sa réponse.
+  failure: sounds/failure.wav
+
+notifications:
+  # Affiche chaque réponse dans une notification, sous la phrase entendue.
+  show_response: true
+
+matching:
+  # Ressemblance minimale, de 0 à 1, entre ce que tu dis et une phrase de commande.
+  # En dessous, le LLM décide. Plus bas : tolère plus d'erreurs d'écoute, mais
+  # confond plus facilement deux commandes proches.
+  similarity: 0.85
+
+apply:
+  # Applique ce fichier dès que tu l'enregistres, tant que l'assistant tourne :
+  # plus besoin de lancer vocal-assistant apply. Une notification dit le résultat.
+  automatic: true
+
+# name          nom unique de la commande
+# phrases       ce que tu diras ; une petite erreur d'écoute est tolérée
+# description   sert au LLM à reconnaître une demande formulée autrement
+# script        facultatif : commande shell lancée avec ton compte. Un script à
+#               toi doit être exécutable : chmod +x ~/scripts/mon-script.sh
+#               La phrase entendue lui arrive dans $VOCAL_ASSISTANT_PHRASE.
+# response      phrase prononcée ensuite ; "" pour n'en dire aucune
+# sound         facultatif : son joué avant la réponse, accept (par défaut),
+#               failure ou none
+# speak_output  facultatif : true pour attendre la fin du script et lire à voix
+#               haute ce qu'il affiche, à la place de response
+# timeout       facultatif, avec speak_output : attente maximale du script, en
+#               secondes (15 par défaut)
+#
+# Le LLM peut choisir n'importe quelle commande de cette liste : n'y mets rien
+# de destructif.
+commands:
+  - name: test
+    phrases:
+      - lance le test
+      - fais un test
+    description: Affiche une notification de test
+    script: notify-send "Assistant vocal" "Ça marche"
+    response: Test lancé.
+
+  # Sans script ni réponse : l'assistant joue failure et arrête de t'écouter.
+  - name: annuler
+    phrases:
+      - annule
+      - annuler
+      - laisse tomber
+      - oublie
+    description: Annule la demande, quand la personne change d'avis
+    response: ""
+    sound: failure
+
+  # --- Exemples : enlève les # d'un bloc pour l'activer ----------------------
+
+  # Lance ton script. Crée-le, puis rends-le exécutable :
+  #   chmod +x ~/scripts/mode-chat.sh
+  - name: mode_chat
+    phrases:
+      - active le mode chat
+      - lance le mode chat
+    description: Active le mode chat
+    script: ~/scripts/mode-chat.sh
+    response: Mode chat activé.
+
+  # Ouvrir un site dans le navigateur.
+  # - name: youtube
+  #   phrases:
+  #     - ouvre youtube
+  #   description: Ouvre YouTube dans le navigateur
+  #   script: xdg-open https://www.youtube.com
+  #   response: J'ouvre YouTube.
+
+  # Lire une information prise sur internet : la météo, avec wttr.in.
+  # Le site renvoie « Bruine légère, +10°C ». Piper lirait « plus dix degrés C »,
+  # et ignorerait le signe moins : sed écrit la température en mots.
+  # - name: meteo
+  #   phrases:
+  #     - quel temps fait-il
+  #     - donne-moi la météo
+  #   description: Donne la météo actuelle
+  #   script: >-
+  #     curl -sf --max-time 8 "https://wttr.in/Paris?format=%C,+%t&lang=fr&m"
+  #     | sed 's/+\([0-9]*\)°C/\1 degrés/; s/-\([0-9]*\)°C/moins \1 degrés/'
+  #   speak_output: true
+  #   timeout: 10
+
+  # Chercher un sujet dit à voix haute : « cherche ordinateur sur wikipédia ».
+  # Une phrase avec un sujet ne ressemble à aucun exemple : c'est le LLM qui
+  # choisit la commande, grâce à sa description. Le script tire le sujet de la
+  # phrase entendue, puis lit la première phrase du résumé de Wikipédia.
+  # - name: wikipedia
+  #   phrases:
+  #     - cherche sur wikipédia
+  #   description: Cherche un sujet sur Wikipédia et lit le début de son résumé
+  #   script: |
+  #     sujet=$(printf '%s' "$VOCAL_ASSISTANT_PHRASE" \
+  #       | sed -E 's/^(cherche|recherche) //; s/ (sur|dans) wikip[ée]dia$//')
+  #     curl -sfL --max-time 8 \
+  #       "https://fr.wikipedia.org/api/rest_v1/page/summary/$(printf '%s' "$sujet" | jq -sRr @uri)" \
+  #       | jq -r .extract | cut -d. -f1 | sed 's/$/./'
+  #   speak_output: true
