@@ -6,6 +6,8 @@
 #   claude.sh status   JSON for waybar: session usage, session and weekly usage in tooltip
 
 export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:/usr/local/bin:$PATH"
+# Without it, a waybar started before the variable existed recreates ~/.claude
+export CLAUDE_CONFIG_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.config/claude}"
 
 usage() { sed -n 's/^#   /  /p' "$0" >&2; }
 
