@@ -1,6 +1,6 @@
 # --- Core Settings ---
 add_newline = true
-scan_timeout = 10
+scan_timeout = 100 # ms; only reached in huge directories, a tight value warns on any slow disk read
 
 # --- Prompt Layout ---
 format = """$username$hostname:$directory\
