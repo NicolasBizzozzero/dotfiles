@@ -255,6 +255,21 @@ label:focus {
     margin: -1px 0;
 }
 
+/* Optical centering, on top of Propo's: the mics 1px to the right, the speaker
+   1px to the right and 1px down. The margins move the label without changing
+   its size: what one side gains, the other loses */
+#custom-vocal-assistant.stopped label,
+#custom-vocal-assistant.starting label,
+#custom-vocal-assistant.idle label,
+#custom-vocal-assistant.listening label,
+#custom-vocal-assistant.mic_problem label {
+    margin: -1px -1px -1px 1px;
+}
+
+#custom-vocal-assistant.speaking label {
+    margin: 0 -1px -2px 1px;
+}
+
 #custom-vocal-assistant.stopped {
     color: #606060;
     border-color: alpha(#606060, 0.5);
