@@ -1,0 +1,14 @@
+# Every night at a random time between 3:00 and 3:30, so that requests don't
+# come at the same second every day. A night missed while the laptop was off
+# or asleep is caught up as soon as it's back.
+#   systemctl --user list-timers 'monitor-sync@*'
+[Unit]
+Description=%i: sync every night
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+RandomizedDelaySec=30min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

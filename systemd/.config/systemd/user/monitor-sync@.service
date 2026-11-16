@@ -1,0 +1,20 @@
+# Syncs the project ~/work/projects/<instance> (InstaMonitor, TwitterMonitor),
+# started every night by monitor-sync@<instance>.timer. Each run's output:
+#   journalctl --user -u monitor-sync@InstaMonitor
+# and the detailed log in the project's data/logs/
+[Unit]
+Description=%i: sync
+# Skipped, not failed, on a machine without the project
+ConditionPathExists=%h/work/projects/%i/main.py
+
+[Service]
+Type=oneshot
+# A run missed while the laptop was off starts as soon as the session does,
+# often before Wi-Fi is up: wait for a default route for up to 5 minutes
+ExecStartPre=/bin/sh -c 'for _ in $$(seq 60); do ip route show default | grep -q . && exit 0; sleep 5; done; echo "no network" >&2; exit 1'
+ExecStart=%h/work/projects/%i/.venv/bin/python %h/work/projects/%i/main.py sync
+# Only real failures notify (a cooldown still running exits 0)
+ExecStopPost=/bin/sh -c '[ "$$SERVICE_RESULT" = success ] || notify-send --urgency=critical --app-name=%i "%i: sync failed" "journalctl --user -u monitor-sync@%i"'
+# Can run for a long time: stay out of the way
+Nice=10
+IOSchedulingClass=idle

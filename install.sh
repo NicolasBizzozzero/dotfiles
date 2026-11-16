@@ -73,7 +73,9 @@ systemctl --user enable --now \
     mpd.service \
     alarm_clock.service \
     murmurs.service \
-    vocal-assistant.service
+    vocal-assistant.service \
+    monitor-sync@InstaMonitor.timer \
+    monitor-sync@TwitterMonitor.timer
 sudo systemctl enable --now \
     bluetooth.service \
     cups.socket \

@@ -52,6 +52,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Offline documentation | Zeal | `zeal` |
 | Email client | Thunderbird | `thunderbird` |
 | Proton Mail IMAP/SMTP bridge | Proton Mail Bridge | `systemd` |
+| Nightly sync of my monitoring projects | systemd user timers | `systemd` (`monitor-sync@InstaMonitor`, `monitor-sync@TwitterMonitor`) |
 | Terminal file manager | Yazi | `yazi` |
 | Process monitor | htop | `htop` |
 | System summary | fastfetch | `fastfetch` |
@@ -89,3 +90,12 @@ The system runs Hyprland (`hypr`) as the window manager, with `waybar` as the st
 
 ### System
 `fastfetch` prints a quick system summary, `htop` is the process monitor, and `wget` is used for downloads from the command line.
+
+### Scheduled jobs
+`systemd` also holds `monitor-sync@.service` and `monitor-sync@.timer`, a template that runs `main.py sync` of a project in `~/work/projects/<name>` every night between 3:00 and 3:30. It's enabled for `InstaMonitor` and `TwitterMonitor`. A night missed while the laptop was off or asleep is made up as soon as it's back. Only a failed sync sends a notification.
+```bash
+$ systemctl --user list-timers 'monitor-sync@*'        # last and next run
+$ journalctl --user -u monitor-sync@InstaMonitor       # what a run printed
+$ systemctl --user start monitor-sync@TwitterMonitor   # sync now (never twice at once)
+```
+Other scripts live in a separate private repository, `~/scripts`; the hourly wallpaper change comes from its `ricing/` folder through `system/crontab`.
