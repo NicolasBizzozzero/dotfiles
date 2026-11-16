@@ -233,20 +233,22 @@ label:focus {
 
 #custom-vocal-assistant {
     color: @assistant;
-    min-width: 18px;
-    min-height: 18px;
-    /* 11 physical px from the ring to its neighbors, like the gaps above */
-    margin: 1px 5px;
+    min-width: 16px;
+    min-height: 16px;
+    /* 15 physical px to the weather, like the gaps between the other center modules */
+    margin: 2px 5px 2px 0;
     padding: 0;
     border: 2px solid @assistant-dim;
-    border-radius: 11px;
+    border-radius: 10px;
 }
 
 /* The ring is the module's box, the icon its label: as wide as the box to be
-   centered in it */
+   centered in it. The line of a 12px font is 17px tall: it overflows by 1px at
+   the top and bottom, or the ring and the bar would grow */
 #custom-vocal-assistant label {
-    font-size: 13px;
-    min-width: 18px;
+    font-size: 12px;
+    min-width: 16px;
+    margin: -1px 0;
 }
 
 #custom-vocal-assistant.stopped {

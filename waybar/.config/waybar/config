@@ -14,6 +14,7 @@
         "tray"
     ],
     "modules-center": [
+        "custom/vocal-assistant",
         "custom/weather",
         "custom/mail",
         "custom/clock",
@@ -21,7 +22,6 @@
     ],
     "modules-right": [
         "custom/claude",
-        "custom/vocal-assistant",
         "custom/temperature",
         "cpu",
         "bluetooth",
@@ -126,10 +126,10 @@
     },
 
     // vocal-assistant, the local voice assistant: its state as it changes, the
-    // mic level in the tooltip. Click: on/off. The ring around the icon (style.css)
-    // turns while it listens
+    // mic level and the LLM in the tooltip. Right click: on/off. The ring around
+    // the icon (style.css) turns while it listens
     "custom/vocal-assistant": {
-        "exec": "vocal-assistant state --follow",
+        "exec": "~/.config/waybar/scripts/vocal_assistant.py",
         "return-type": "json",
         "restart-interval": 5,
         "escape": true,
@@ -145,7 +145,7 @@
             "mic_problem": "󰍬",
             "failed": "󰀦"
         },
-        "on-click": "vocal-assistant toggle",
+        "on-click-right": "vocal-assistant toggle",
         "tooltip": true
     },
 

@@ -59,7 +59,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Printing | CUPS | - |
 | Python tooling | Python, IPython/Jupyter | `python`, `jupyter` |
 | AI coding assistant | Claude Code | `claude` |
-| Voice assistant | vocal-assistant | `vocal-assistant` (the wake word model is trained locally and not tracked), and a `waybar` module: its state, a click to turn it on/off |
+| Voice assistant | vocal-assistant | `vocal-assistant` (the wake word model is trained locally and not tracked), and a `waybar` module: its state and LLM, a right click to turn it on/off |
 
 Entries with no package are either system-level (not something a home directory dotfile controls) or run fine on their defaults without any tracked configuration.
 
