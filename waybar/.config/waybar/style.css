@@ -244,8 +244,12 @@ label:focus {
 
 /* The ring is the module's box, the icon its label: as wide as the box to be
    centered in it. The line of a 12px font is 17px tall: it overflows by 1px at
-   the top and bottom, or the ring and the bar would grow */
+   the top and bottom, or the ring and the bar would grow.
+   Propo: the regular Nerd Font gives every icon the width of one letter but
+   draws it wider, to the right, so each icon would sit right of the center by
+   its own amount; Propo gives each icon its real width */
 #custom-vocal-assistant label {
+    font-family: "JetBrainsMono Nerd Font Propo";
     font-size: 12px;
     min-width: 16px;
     margin: -1px 0;
