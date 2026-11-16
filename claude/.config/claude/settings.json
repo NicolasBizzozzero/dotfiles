@@ -1,4 +1,5 @@
 {
+  "cleanupPeriodDays": 1100,
   "permissions": {
     "allow": [
       "Read",
@@ -44,6 +45,7 @@
       "Bash(systemctl list-unit-files*)"
     ]
   },
+  "model": "opus",
   "hooks": {
     "PostToolUse": [
       {
@@ -60,7 +62,38 @@
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true
   },
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    }
+  },
   "theme": "dark",
-  "model": "opus",
-  "cleanupPeriodDays": 1100
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: not queryable here (gh reported visibility as not queryable) — treat as possibly public: scope commits/pushes to this repo as for a public repo",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: master (default); no rulesets or protected branches listed via gh",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine (this appears to be the user's personal Arch Linux workstation) with open internet",
+      "**Source control**: The trusted repo (github.com:NicolasBizzozzero/dotfiles.git) and its remote only — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: personal dotfiles / system configuration management (Arch Linux, Hyprland desktop environment)",
+      "**Trusted repo**: /home/johnlocke/.dotfiles, remote github.com:NicolasBizzozzero/dotfiles.git — visibility not confirmed, treat as possibly public for scoping commits/pushes",
+      "**Org-specific CLIs**: None configured — frequent local system CLIs observed (hyprctl, pacman, systemctl, journalctl, busctl, bluetoothctl, stow, makoctl, playerctl) are ordinary Linux desktop administration tools, not org-specific services"
+    ]
+  }
 }
