@@ -233,41 +233,44 @@ label:focus {
 
 #custom-vocal-assistant {
     color: @assistant;
+    /* An 18px ring, thin, centered in the 24px bar with 3px above and below */
     min-width: 16px;
     min-height: 16px;
     /* 15 physical px to the weather, like the gaps between the other center modules */
-    margin: 2px 5px 2px 0;
+    margin: 3px 5px 3px 0;
     padding: 0;
-    border: 2px solid @assistant-dim;
-    border-radius: 10px;
+    border: 1px solid @assistant-dim;
+    border-radius: 9px;
 }
 
 /* The ring is the module's box, the icon its label: as wide as the box to be
-   centered in it. The line of a 12px font is 17px tall: it overflows by 1px at
-   the top and bottom, or the ring and the bar would grow.
+   centered in it.
    Propo: the regular Nerd Font gives every icon the width of one letter but
    draws it wider, to the right, so each icon would sit right of the center by
-   its own amount; Propo gives each icon its real width */
+   its own amount; Propo gives each icon its real width.
+   11.5px: the size that, with the shifts below, puts the mics half a physical
+   px right of the center (the bar moves things by whole 1.2 physical px) */
 #custom-vocal-assistant label {
     font-family: "JetBrainsMono Nerd Font Propo";
-    font-size: 12px;
+    font-size: 11.5px;
     min-width: 16px;
-    margin: -1px 0;
 }
 
-/* Optical centering, on top of Propo's: the mics 1px to the right, the speaker
-   1px to the right and 1px down. The margins move the label without changing
-   its size: what one side gains, the other loses */
+/* Optical centering, measured on screenshots: the mics, the speaker and the
+   alert half a physical px right of the center, the speaker also 1.5px low;
+   the thought bubble 0.5px left, unshifted. The margins move the label
+   without changing its size: what one side gains, the other loses */
 #custom-vocal-assistant.stopped label,
 #custom-vocal-assistant.starting label,
 #custom-vocal-assistant.idle label,
 #custom-vocal-assistant.listening label,
-#custom-vocal-assistant.mic_problem label {
-    margin: -1px -1px -1px 1px;
+#custom-vocal-assistant.mic_problem label,
+#custom-vocal-assistant.failed label {
+    margin: 0 -1px 0 1px;
 }
 
 #custom-vocal-assistant.speaking label {
-    margin: 0 -1px -2px 1px;
+    margin: 1px -1px -1px 1px;
 }
 
 #custom-vocal-assistant.stopped {
