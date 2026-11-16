@@ -21,6 +21,7 @@
     ],
     "modules-right": [
         "custom/claude",
+        "custom/vocal-assistant",
         "custom/temperature",
         "cpu",
         "bluetooth",
@@ -121,6 +122,30 @@
         "return-type": "json",
         "exec": "~/.config/waybar/scripts/claude.sh status",
         "interval": 60,
+        "tooltip": true
+    },
+
+    // vocal-assistant, the local voice assistant: its state as it changes, the
+    // mic level in the tooltip. Click: on/off. The ring around the icon (style.css)
+    // turns while it listens
+    "custom/vocal-assistant": {
+        "exec": "vocal-assistant state --follow",
+        "return-type": "json",
+        "restart-interval": 5,
+        "escape": true,
+        "align": 0.5,
+        "format": "{icon}",
+        "format-icons": {
+            "stopped": "󰍭",
+            "starting": "󰍬",
+            "idle": "󰍬",
+            "listening": "󰍬",
+            "thinking": "󰟶",
+            "speaking": "󰕾",
+            "mic_problem": "󰍬",
+            "failed": "󰀦"
+        },
+        "on-click": "vocal-assistant toggle",
         "tooltip": true
     },
 

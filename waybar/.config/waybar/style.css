@@ -225,6 +225,72 @@ label:focus {
     color: #32cd32;
 }
 
+/* vocal-assistant: its icon inside a ring, the same in every state. While it
+   listens, a bright arc goes around the ring: GTK can't rotate a label, but it
+   animates border colors */
+@define-color assistant #87cefa;
+@define-color assistant-dim alpha(#87cefa, 0.2);
+
+#custom-vocal-assistant {
+    color: @assistant;
+    min-width: 18px;
+    min-height: 18px;
+    /* 11 physical px from the ring to its neighbors, like the gaps above */
+    margin: 1px 5px;
+    padding: 0;
+    border: 2px solid @assistant-dim;
+    border-radius: 11px;
+}
+
+/* The ring is the module's box, the icon its label: as wide as the box to be
+   centered in it */
+#custom-vocal-assistant label {
+    font-size: 13px;
+    min-width: 18px;
+}
+
+#custom-vocal-assistant.stopped {
+    color: #606060;
+    border-color: alpha(#606060, 0.5);
+}
+
+#custom-vocal-assistant.starting,
+#custom-vocal-assistant.thinking {
+    animation: assistant-breathe 0.8s ease-in-out infinite alternate;
+}
+
+#custom-vocal-assistant.listening {
+    animation: assistant-spin 0.8s linear infinite;
+}
+
+#custom-vocal-assistant.speaking {
+    border-color: @assistant;
+}
+
+#custom-vocal-assistant.mic_problem {
+    color: @warning;
+    border-color: @warning;
+}
+
+#custom-vocal-assistant.failed {
+    color: @alert;
+    border-color: @alert;
+}
+
+@keyframes assistant-breathe {
+    from { border-color: @assistant-dim; }
+    to { border-color: @assistant; }
+}
+
+/* Top, right, bottom, left: the colors in between fade, so the arc slides */
+@keyframes assistant-spin {
+    0% { border-color: @assistant @assistant-dim @assistant-dim @assistant-dim; }
+    25% { border-color: @assistant-dim @assistant @assistant-dim @assistant-dim; }
+    50% { border-color: @assistant-dim @assistant-dim @assistant @assistant-dim; }
+    75% { border-color: @assistant-dim @assistant-dim @assistant-dim @assistant; }
+    100% { border-color: @assistant @assistant-dim @assistant-dim @assistant-dim; }
+}
+
 #custom-media {
     color: #ffffff;
 }
