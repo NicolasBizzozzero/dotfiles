@@ -5,6 +5,8 @@
 # Usage:
 #   cat.py status    JSON for waybar: cat icon, highlighted while cat mode is on
 #   cat.py toggle    turn cat mode on/off
+#   cat.py turn_on   turn cat mode on unless it already is (fails while waybar's bar is out of reach)
+#   cat.py turn_off  turn cat mode off unless it already is
 #   cat.py overlay   cover every screen except waybar while cat mode lasts (started by toggle)
 
 # Cat mode is cat_mode() in hyprland.lua (the "cat" submap: a catch-all bind
@@ -99,18 +101,15 @@ def bar_reachable():
 
 
 def overlay_running():
-    return (
-        subprocess.run(
-            ["pgrep", "-f", OVERLAY], capture_output=True
-        ).returncode
-        == 0
-    )
+    return subprocess.run(["pgrep", "-f", OVERLAY], capture_output=True).returncode == 0
 
 
 def start_overlay():
     if not overlay_running():
+        # The system python, which has GTK: the shebang would pick a virtualenv's
+        # python when run from a terminal where one is active
         subprocess.Popen(
-            [SCRIPT, "overlay"],
+            ["/usr/bin/python3", SCRIPT, "overlay"],
             stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
@@ -147,6 +146,23 @@ def toggle():
         start_overlay()
         set_mode(True)
     refresh_waybar()
+
+
+def turn_on():
+    if is_on() and overlay_running():
+        return
+    if is_on():
+        # Left on without its overlay (killed hard): toggle would turn it off
+        set_mode(False)
+    toggle()
+    if not is_on():
+        sys.exit("cat.py: waybar's bar is out of reach, cat mode stays off")
+
+
+def turn_off():
+    # Also when the overlay is gone: toggle turns the submap off either way
+    if is_on():
+        toggle()
 
 
 def overlay():
@@ -215,6 +231,10 @@ if __name__ == "__main__":
         status()
     elif command == "toggle":
         toggle()
+    elif command == "turn_on":
+        turn_on()
+    elif command == "turn_off":
+        turn_off()
     elif command == "overlay":
         overlay()
     else:
