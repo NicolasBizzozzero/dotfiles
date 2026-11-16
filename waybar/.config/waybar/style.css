@@ -256,10 +256,14 @@ label:focus {
     min-width: 16px;
 }
 
-/* Optical centering, measured on screenshots: the mics, the speaker and the
-   alert half a physical px right of the center, the speaker also 1.5px low;
-   the thought bubble 0.5px left, unshifted. The margins move the label
-   without changing its size: what one side gains, the other loses */
+/* Optical centering, tuned by eye on screenshots for the bar as laid out on
+   2026-11-16: the 1.2 screen scale makes the rendering move by up to half a
+   physical px whenever the center group changes width (weekday, temperature),
+   since it is centered in the bar.
+   Mics and alert: half a physical px right of the center. Thought bubble and
+   speaker: 10px, which centers their mass (both are heavier on one side).
+   The margins move the label without changing its size: what one side gains,
+   the other loses */
 #custom-vocal-assistant.stopped label,
 #custom-vocal-assistant.starting label,
 #custom-vocal-assistant.idle label,
@@ -269,8 +273,9 @@ label:focus {
     margin: 0 -1px 0 1px;
 }
 
+#custom-vocal-assistant.thinking label,
 #custom-vocal-assistant.speaking label {
-    margin: 1px -1px -1px 1px;
+    font-size: 10px;
 }
 
 #custom-vocal-assistant.stopped {
