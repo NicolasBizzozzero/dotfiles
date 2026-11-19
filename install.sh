@@ -91,6 +91,13 @@ sudo systemctl enable --now \
 # Only when there is none, so that a rerun keeps later edits of the real crontab
 crontab -l >/dev/null 2>&1 || crontab system/crontab
 
+# Printer: a permanent IPP Everywhere queue, CUPS's on-the-fly queues for the
+# printers it discovers fail now and then. Needs the printer on (home network)
+# and system/etc/nsswitch.conf, which resolves its .local name through avahi
+lpstat -p Brother_HL_L1240W >/dev/null 2>&1 ||
+    sudo lpadmin -p Brother_HL_L1240W -E -v ipps://BRW4845E61C861B.local:443/ipp/print -m everywhere ||
+    echo "Brother HL-L1240W not reachable: its print queue was not created"
+
 # Power: TUXEDO Control Center is the only power manager (power-profiles-daemon
 # would fight over the same CPU settings); install the profiles, power saving by default
 sudo systemctl enable --now tccd.service

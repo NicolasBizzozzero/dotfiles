@@ -56,7 +56,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Terminal file manager | Yazi | `yazi` |
 | Process monitor | htop | `htop` |
 | System summary | fastfetch | `fastfetch` |
-| Printing | CUPS | - |
+| Printing | CUPS, Brother HL-L1240W | - (queue created by `install.sh`; mDNS left to avahi by `system/etc`) |
 | Python tooling | Python, IPython/Jupyter | `python`, `jupyter` |
 | AI coding assistant | Claude Code | `claude` |
 | Voice assistant | vocal-assistant | `vocal-assistant` (the wake word model is trained locally and not tracked), and a `waybar` module: its state and LLM, a right click to turn it on/off |

@@ -47,7 +47,7 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 # --- Miscellaneous ---
 export TORBROWSER_PKGLANG="fr"
 export PATH_DIR_WEBSITE="/home/johnlocke/work/projects/personal_website"
-export PRINTER="HP-LaserJet-2"
+export PRINTER="Brother_HL_L1240W"
 export EDITOR="nvim"
 export VISUAL="nvim"
 

@@ -6,7 +6,8 @@ RequiredForOnline=routable
 
 [Network]
 DHCP=yes
-MulticastDNS=yes
+# mDNS is avahi's (CUPS finds printers through it): two mDNS stacks make it unreliable
+MulticastDNS=no
 
 # systemd-networkd does not set per-interface-type default route metrics
 # https://github.com/systemd/systemd/issues/17698
