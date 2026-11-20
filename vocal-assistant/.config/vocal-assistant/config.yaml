@@ -6,7 +6,7 @@
 wake_word:
   # Fournis : hey_mycroft (dis « Hé Maïcroft »), alexa, hey_jarvis, hey_rhasspy.
   # Ou l'un des tiens : vocal-assistant wake-word train "ok ordi"
-  model: ordinateur
+  model: he_ordinateur
   # De 0 à 1. Plus haut : réagit plus facilement, mais aussi plus souvent à tort.
   sensitivity: 0.5
 
@@ -68,6 +68,14 @@ matching:
   # En dessous, le LLM décide. Plus bas : tolère plus d'erreurs d'écoute, mais
   # confond plus facilement deux commandes proches.
   similarity: 0.85
+  # Mots que Vosk entend de travers, suivis de ce que tu as dit. Ils sont
+  # remplacés avant tout le reste. La notification de chaque phrase montre ce
+  # que Vosk a entendu : ajoute ici chaque erreur qui revient.
+  corrections:
+    matcha: mode chat
+    leçon: le son
+    # « mais » seul ne se corrige pas : « mais pourquoi… » irait mal au LLM.
+    mais en pause: mets en pause
 
 apply:
   # Applique ce fichier dès que tu l'enregistres, tant que l'assistant tourne :
@@ -75,18 +83,26 @@ apply:
   automatic: true
 
 # name          nom unique de la commande
-# phrases       ce que tu diras ; une petite erreur d'écoute est tolérée
+# phrases       ce que tu diras ; une petite erreur d'écoute est tolérée. Une *
+#               tient la place d'une partie variable : « va sur le workspace * ».
+#               Ce qu'elle prend arrive au script dans $VOCAL_ASSISTANT_ARGUMENT.
+#               Une phrase sans * passe avant une phrase à trou.
 # description   sert au LLM à reconnaître une demande formulée autrement
 # script        facultatif : commande shell lancée avec ton compte. Un script à
 #               toi doit être exécutable : chmod +x ~/scripts/mon-script.sh
 #               La phrase entendue lui arrive dans $VOCAL_ASSISTANT_PHRASE.
-# response      phrase prononcée ensuite ; "" pour n'en dire aucune
+# response      phrase prononcée ensuite ; "" pour n'en dire aucune. Sans
+#               script et avec "", la commande annule l'échange : voir annuler.
 # sound         facultatif : son joué avant la réponse, accept (par défaut),
 #               failure ou none
 # speak_output  facultatif : true pour attendre la fin du script et lire à voix
 #               haute ce qu'il affiche, à la place de response
-# timeout       facultatif, avec speak_output : attente maximale du script, en
-#               secondes (15 par défaut)
+# interpret_output
+#               facultatif, à la place de speak_output : attend la fin du
+#               script, et le LLM reformule ce qu'il affiche pour répondre. Ce
+#               texte lui explique ce qu'affiche le script.
+# timeout       facultatif, avec speak_output ou interpret_output : attente
+#               maximale du script, en secondes (15 par défaut)
 #
 # Le LLM peut choisir n'importe quelle commande de cette liste : n'y mets rien
 # de destructif.
@@ -95,32 +111,376 @@ commands:
     phrases:
       - lance le test
       - fais un test
-    description: Affiche une notification de test
-    script: notify-send "Assistant vocal" "Ça marche"
-    response: Test lancé.
+      - test
+    description: Vérifie que l'assistant entend et répond
+    response: Ça marche, je t'entends.
 
-  # Sans script ni réponse : l'assistant joue failure et arrête de t'écouter.
+  # Sans script, avec une réponse vide : l'échange est annulé. L'assistant joue
+  # failure, sans rien dire ni afficher, et son état passe à cancelled. Même
+  # choisie par le LLM, cette commande reste silencieuse.
   - name: annuler
     phrases:
       - annule
       - annuler
       - laisse tomber
       - oublie
-    description: Annule la demande, quand la personne change d'avis
+      - non
+      - non rien
+      - rien
+      - non merci
+      - tais-toi
+      - ta gueule
+    description: Annule la demande, quand la personne change d'avis ou veut que l'assistant se taise
     response: ""
     sound: failure
 
-  # --- Exemples : enlève les # d'un bloc pour l'activer ----------------------
-
-  # Lance ton script. Crée-le, puis rends-le exécutable :
-  #   chmod +x ~/scripts/mode-chat.sh
-  - name: mode_chat
+  # --- Mode chat : bloque le clavier et les clics quand le chat marche dessus.
+  # Vosk écrit souvent « matcha » : matching.corrections le remplace.
+  - name: mode_chat_active
     phrases:
       - active le mode chat
       - lance le mode chat
-    description: Active le mode chat
-    script: ~/scripts/mode-chat.sh
+    description: Active le mode chat, qui bloque le clavier et les clics contre le chat
+    script: ~/.config/waybar/scripts/cat.py turn_on
     response: Mode chat activé.
+
+  - name: mode_chat_desactive
+    phrases:
+      - désactive le mode chat
+      - arrête le mode chat
+    description: Désactive le mode chat, qui rend le clavier et les clics
+    script: ~/.config/waybar/scripts/cat.py turn_off
+    response: Mode chat désactivé.
+
+  - name: mode_chat_bascule
+    phrases:
+      - toggle le mode chat
+      - bascule le mode chat
+    description: Active le mode chat s'il est coupé, le coupe sinon
+    script: ~/.config/waybar/scripts/cat.py toggle
+    response: C'est fait.
+
+  # --- Bureaux de Hyprland. L'étoile prend le numéro, de un à dix.
+  - name: bureau
+    phrases:
+      - va sur le workspace *
+      - vas sur le workspace *
+      - va sur le bureau *
+    description: Va sur un bureau (workspace) de Hyprland, par son numéro
+    script: ~/.config/vocal-assistant/scripts/bureau.sh
+    speak_output: true
+
+  # --- Heure, date, lieu et météo : les scripts de ~/.config/vocal-assistant/scripts.
+  # La ville vient du module météo de Waybar : ajoute tes Wi-Fi habituels à la
+  # table de ~/.config/waybar/scripts/weather.sh.
+  - name: heure
+    phrases:
+      - quelle heure est-il
+      - il est quelle heure
+      - quelle heure il est
+    description: Dit l'heure
+    script: ~/.config/vocal-assistant/scripts/heure.sh
+    speak_output: true
+
+  - name: date
+    phrases:
+      - quel jour sommes-nous
+      - on est quel jour
+      - quelle date sommes-nous
+    description: Dit la date du jour
+    script: ~/.config/vocal-assistant/scripts/date.sh
+    speak_output: true
+
+  - name: ou_suis_je
+    phrases:
+      - où suis-je
+      - où est-ce que je suis
+      - dans quelle ville je suis
+    description: Dit dans quelle ville se trouve l'ordinateur
+    script: ~/.config/vocal-assistant/scripts/ou-suis-je.sh
+    speak_output: true
+
+  # « quel temps fera-t-il demain », « météo à Lyon », « quelle est la météo
+  # d'après-demain à Brest ». Le script lit la phrase entière : le jour, puis la
+  # ville qui suit « à », « au », « dans », « sur » ou « pour ». Sans ville,
+  # c'est celle du module météo de Waybar.
+  - name: meteo
+    phrases:
+      - quelle est la météo
+      - quel temps fait-il
+      - donne-moi la météo
+      - météo
+      - quelle est la météo *
+      - quel temps fait-il *
+      - quel temps il fait *
+      - quel temps fera-t-il *
+      - quel temps va-t-il faire *
+      - il va faire quel temps *
+      - il fera quel temps *
+      - quelle météo *
+      - la météo *
+      - météo *
+      - donne-moi la météo *
+    description: Donne la météo, maintenant, demain ou après-demain, ici ou dans une autre ville
+    script: ~/.config/vocal-assistant/scripts/meteo.py
+    speak_output: true
+    timeout: 20
+
+  # --- Wikipédia. L'étoile prend le sujet. « qui est… » et « c'est quoi… » y
+  # vont aussi : qwen3.5:2b ne pense pas à chercher sur Wikipédia de lui-même.
+  - name: wikipedia
+    phrases:
+      - cherche sur wikipédia *
+      - cherche * sur wikipédia
+      - recherche sur wikipédia *
+      - recherche * sur wikipédia
+      - qui est *
+      - qui était *
+      - c'est quoi *
+    description: Cherche un sujet sur Wikipédia et lit le début de son article
+    script: ~/.config/vocal-assistant/scripts/wikipedia.sh
+    speak_output: true
+    timeout: 20
+
+  # --- Mails : comme un clic sur le module mail de Waybar. Va sur la fenêtre de
+  # Thunderbird, ou l'ouvre sur le bureau 10.
+  - name: mails
+    phrases:
+      - ouvre mes mails
+      - va sur mes mails
+      - vas sur mes mails
+      - va dans mes mails
+      - vas dans mes mails
+      - ouvre ma messagerie
+    description: Ouvre les mails dans Thunderbird
+    script: ~/.config/waybar/scripts/mail.py open
+    response: J'ouvre tes mails.
+
+  # --- Musique et vidéo : le lecteur que montre le module « now playing » de
+  # Waybar, onglets de Firefox compris. Pas de « musique play » : trop proche de
+  # « musique pause ». Dis plutôt « musique lecture » ou « reprends la musique ».
+  - name: musique_pause
+    phrases:
+      - mets en pause
+      - mets la musique en pause
+      - mets la vidéo en pause
+      - pause
+      - musique pause
+      - musique stop
+      - vidéo pause
+      - vidéo stop
+      - arrête la musique
+      - arrête la vidéo
+    description: Met la musique ou la vidéo en pause
+    script: ~/.config/vocal-assistant/scripts/musique.sh pause
+    speak_output: true
+
+  - name: musique_reprise
+    phrases:
+      - reprends la musique
+      - relance la musique
+      - remets la musique
+      - reprends la lecture
+      - reprends la vidéo
+      - relance la vidéo
+      - musique lecture
+      - vidéo lecture
+    description: Reprend la musique ou la vidéo en pause
+    script: ~/.config/vocal-assistant/scripts/musique.sh play
+    speak_output: true
+
+  - name: musique_suivante
+    phrases:
+      - chanson suivante
+      - musique suivante
+      - morceau suivant
+      - piste suivante
+      - vidéo suivante
+    description: Passe à la chanson ou à la vidéo suivante
+    script: ~/.config/vocal-assistant/scripts/musique.sh next
+    speak_output: true
+
+  - name: musique_precedente
+    phrases:
+      - chanson précédente
+      - musique précédente
+      - morceau précédent
+      - piste précédente
+      - vidéo précédente
+    description: Revient à la chanson ou à la vidéo précédente
+    script: ~/.config/vocal-assistant/scripts/musique.sh previous
+    speak_output: true
+
+  # Ce qui joue, d'après le module « now playing » de Waybar : le script donne
+  # les informations brutes, le LLM répond à la question avec. Les durées ne
+  # sont données que pour une question sur le temps.
+  - name: now_playing
+    phrases:
+      - qu'est-ce qui joue
+      - qu'est-ce qui passe
+      - qu'est-ce que j'écoute
+      - qu'est-ce qu'on écoute
+      - c'est quoi cette musique
+      - c'est quoi cette chanson
+      - c'est quoi cette vidéo
+      - c'est quoi ce morceau
+      - quelle est cette musique
+      - quel est ce morceau
+      - qui chante
+      - il reste combien de temps
+    description: Dit quelle musique ou quelle vidéo joue en ce moment, et le temps qui reste
+    script: ~/.config/vocal-assistant/scripts/now-playing.sh
+    interpret_output: >-
+      Le texte décrit la musique ou la vidéo qui joue sur l'ordinateur. Pour une
+      vidéo, l'artiste est souvent le nom de la chaîne. Réponds à la question en
+      une phrase : le plus souvent, le titre et l'artiste. Dis « en pause »
+      seulement si l'état est « en pause ». Recopie les durées telles qu'elles
+      sont écrites.
+
+  # --- Volume : 10 % par phrase, 150 % au plus, comme les touches du clavier.
+  # Vosk reconnaît mieux « volume » que « son » : chaque commande accepte les deux.
+  - name: volume_plus
+    phrases:
+      - monte le son
+      - monte le volume
+      - augmente le son
+      - augmente le volume
+      - plus fort
+    description: Monte le volume
+    script: ~/.config/vocal-assistant/scripts/volume.sh up
+    speak_output: true
+
+  - name: volume_moins
+    phrases:
+      - baisse le son
+      - baisse le volume
+      - diminue le volume
+      - moins fort
+    description: Baisse le volume
+    script: ~/.config/vocal-assistant/scripts/volume.sh down
+    speak_output: true
+
+  - name: volume_coupe
+    phrases:
+      - coupe le son
+      - coupe le volume
+      - mets en sourdine
+      - sourdine
+    description: Coupe le son
+    script: ~/.config/vocal-assistant/scripts/volume.sh mute
+    speak_output: true
+
+  - name: volume_remis
+    phrases:
+      - remets le son
+      - remets le volume
+      - rallume le son
+      - enlève la sourdine
+    description: Remet le son après une coupure
+    script: ~/.config/vocal-assistant/scripts/volume.sh unmute
+    speak_output: true
+
+  # « mets le volume à cinquante », « volume à fond » (100 %). De 0 à 150 %.
+  - name: volume_precis
+    phrases:
+      - mets le volume à *
+      - mets le son à *
+      - règle le volume à *
+      - monte le volume à *
+      - monte le son à *
+      - baisse le volume à *
+      - baisse le son à *
+      - le volume à *
+      - volume à *
+    description: Règle le volume à un pourcentage précis
+    script: ~/.config/vocal-assistant/scripts/volume.sh set
+    speak_output: true
+
+  # --- Verrouillage, comme le menu d'alimentation de Waybar. Rien n'est lancé
+  # si l'écran est déjà verrouillé.
+  - name: verrouille
+    phrases:
+      - verrouille l'écran
+      - verrouille la session
+      - verrouille le pc
+      - verrouille
+    description: Verrouille l'écran
+    script: pidof -q hyprlock || hyprlock
+    response: Je verrouille.
+
+  - name: batterie
+    phrases:
+      - niveau de batterie
+      - état de la batterie
+      - combien de batterie
+      - il reste combien de batterie
+    description: Dit le niveau de la batterie et le temps qui lui reste
+    script: ~/.config/vocal-assistant/scripts/batterie.sh
+    speak_output: true
+
+  # Les captures vont dans ~/pictures/screenshots.
+  - name: capture
+    phrases:
+      - fais une capture d'écran
+      - prends une capture d'écran
+      - capture d'écran
+      - screenshot
+      - fais un screenshot
+    description: Fait une capture de tout l'écran
+    script: ~/.config/vocal-assistant/scripts/capture.sh
+    speak_output: true
+
+  # --- Désactivé : enlève les # du bloc pour l'activer ----------------------
+
+  # Minuteurs, alarmes et rappels, qui sonnent avec AlarmClock (alarm_clock
+  # ring) : « mets un minuteur de deux heures, dix minutes et trente secondes »,
+  # « mets une alarme d'une heure et demie », « minuteur de cinq » (minutes),
+  # « rappelle-moi dans dix minutes de sortir le linge », « rappelle-moi
+  # d'appeler maman dans un quart d'heure ». À l'heure dite, une notification
+  # reste affichée et AlarmClock sonne une minute au plus, même si ses réveils
+  # sont en pause. Fermer la notification arrête la sonnerie.
+  # Vosk écrit parfois « militaire » ou « moniteur » pour « minuteur » : si cela
+  # t'arrive, ajoute « militaire: minuteur » à matching.corrections.
+  # Voir ceux en attente : systemctl --user list-timers 'minuteur-*'
+  # Détails : l'en-tête de ~/.config/vocal-assistant/scripts/minuteur.py
+  # - name: minuteur
+  #   phrases:
+  #     - minuteur de *
+  #     - minuteur d'une *
+  #     - mets un minuteur de *
+  #     - mets un minuteur d'une *
+  #     - lance un minuteur de *
+  #     - mets une alarme de *
+  #     - mets une alarme d'une *
+  #     - alarme de *
+  #     - rappelle-moi *
+  #     - rappelle moi *
+  #   description: Lance un minuteur, une alarme ou un rappel d'une durée donnée
+  #   script: ~/.config/vocal-assistant/scripts/minuteur.py
+  #   speak_output: true
+  #
+  # - name: minuteur_annule
+  #   phrases:
+  #     - annule le minuteur
+  #     - annule les minuteurs
+  #     - annule le rappel
+  #     - annule les rappels
+  #     - annule l'alarme
+  #   description: Annule les minuteurs, alarmes et rappels qui n'ont pas encore sonné
+  #   script: ~/.config/vocal-assistant/scripts/minuteur.py annuler
+  #   speak_output: true
+  #
+  # Pendant qu'une alarme sonne fort, il est possible que l'assistant ne
+  # t'entende pas : la notification reste le moyen sûr de l'arrêter.
+  # - name: sonnerie_stop
+  #   phrases:
+  #     - arrête l'alarme
+  #     - arrête la sonnerie
+  #     - coupe l'alarme
+  #     - stop l'alarme
+  #   description: Arrête l'alarme ou la sonnerie qui sonne en ce moment
+  #   script: ~/.config/vocal-assistant/scripts/minuteur.py arreter
+  #   speak_output: true
 
   # Ouvrir un site dans le navigateur.
   # - name: youtube
@@ -129,33 +489,3 @@ commands:
   #   description: Ouvre YouTube dans le navigateur
   #   script: xdg-open https://www.youtube.com
   #   response: J'ouvre YouTube.
-
-  # Lire une information prise sur internet : la météo, avec wttr.in.
-  # Le site renvoie « Bruine légère, +10°C ». Piper lirait « plus dix degrés C »,
-  # et ignorerait le signe moins : sed écrit la température en mots.
-  # - name: meteo
-  #   phrases:
-  #     - quel temps fait-il
-  #     - donne-moi la météo
-  #   description: Donne la météo actuelle
-  #   script: >-
-  #     curl -sf --max-time 8 "https://wttr.in/Paris?format=%C,+%t&lang=fr&m"
-  #     | sed 's/+\([0-9]*\)°C/\1 degrés/; s/-\([0-9]*\)°C/moins \1 degrés/'
-  #   speak_output: true
-  #   timeout: 10
-
-  # Chercher un sujet dit à voix haute : « cherche ordinateur sur wikipédia ».
-  # Une phrase avec un sujet ne ressemble à aucun exemple : c'est le LLM qui
-  # choisit la commande, grâce à sa description. Le script tire le sujet de la
-  # phrase entendue, puis lit la première phrase du résumé de Wikipédia.
-  # - name: wikipedia
-  #   phrases:
-  #     - cherche sur wikipédia
-  #   description: Cherche un sujet sur Wikipédia et lit le début de son résumé
-  #   script: |
-  #     sujet=$(printf '%s' "$VOCAL_ASSISTANT_PHRASE" \
-  #       | sed -E 's/^(cherche|recherche) //; s/ (sur|dans) wikip[ée]dia$//')
-  #     curl -sfL --max-time 8 \
-  #       "https://fr.wikipedia.org/api/rest_v1/page/summary/$(printf '%s' "$sujet" | jq -sRr @uri)" \
-  #       | jq -r .extract | cut -d. -f1 | sed 's/$/./'
-  #   speak_output: true

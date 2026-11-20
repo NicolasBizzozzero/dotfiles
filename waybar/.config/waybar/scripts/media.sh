@@ -5,8 +5,11 @@
 # Usage:
 #   media.sh follow     print a JSON line for waybar at every player change (continuous)
 #   media.sh toggle     play/pause the shown player
+#   media.sh pause      pause the shown player (does nothing if already paused)
+#   media.sh play       play the shown player (does nothing if already playing)
 #   media.sh next       next track on the shown player
 #   media.sh previous   previous track on the shown player
+#   media.sh player     print the name of the shown player (nothing if none)
 
 # The shown player is the one playing (the most recently started if several),
 # else the most recent paused one. Nothing running: empty output, module hidden.
@@ -114,7 +117,10 @@ control() {
 case ${1:-} in
     follow)   follow ;;
     toggle)   control play-pause ;;
+    pause)    control pause ;;
+    play)     control play ;;
     next)     control next ;;
     previous) control previous ;;
+    player)   shown_player ;;
     *)        usage; exit 1 ;;
 esac

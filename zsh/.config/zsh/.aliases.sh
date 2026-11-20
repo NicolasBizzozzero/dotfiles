@@ -14,6 +14,17 @@ alias neofetch='fastfetch'
 alias fuck='sudo !!'
 alias please='sudo'
 
+# --- One-liners that were scripts in ~/scripts ---
+alias yay_clean='yay -Sc'
+alias list_packages='yay -Ps'  # Statistics about the installed packages
+alias yay_lspkg='yay -Qqe'     # The explicitly installed packages
+alias grep_last_updated_packages="grep -iE 'installed|upgraded' /var/log/pacman.log"
+alias ls_disks_usage='df -H'
+alias git_version_number='git describe --always --dirty'
+alias docker_clean_system='docker system prune --volumes'
+alias docker_run='docker run -d -p 80:80'  # docker_run IMAGE: in the background, port 80 forwarded
+docker_build() { docker build -t "$1" "${2:-.}"; }  # docker_build NAME [DIR]: DIR holds the Dockerfile (default: .)
+
 # --- CLI Tools ---
 alias mkdir='mkdir -p'
 alias mount='mount | column -t'

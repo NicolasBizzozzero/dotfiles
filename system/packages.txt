@@ -1,6 +1,7 @@
 7zip
 acpi
 alsa-utils
+arch-audit
 base
 base-devel
 bat
@@ -111,6 +112,7 @@ python-pipx
 python-poetry
 qt6-wayland
 rclone
+rebuild-detector
 resvg
 ripgrep
 rofi
