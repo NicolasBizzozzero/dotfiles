@@ -85,6 +85,8 @@ Waybar's weather module (also used by the voice assistant) finds the city from t
 
 Call one by name in any session, e.g. `@agent-reviewer`, or let Claude pick it from its description.
 
+`claude` also places `~/work/projects/CLAUDE.md`: the engineering rules all my projects follow (plan, verify, small commits, the `Assisted-by` trailer...). Claude Code reads the `CLAUDE.md` of every parent folder, so each project under `~/work/projects` inherits it and no repository carries a copy. Sessions in `~/.dotfiles` or `~/scripts` are outside that folder and don't load it.
+
 ### Media
 `mpd` runs as a background music daemon, and `vlc` handles video and other media playback.
 
