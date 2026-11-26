@@ -520,6 +520,25 @@ commands:
     script: ~/.config/vocal-assistant/scripts/capture.sh
     speak_output: true
 
+  # Une autre image du dossier ~/pictures/wallpapers/desktop, comme chaque heure.
+  - name: papier_peint
+    phrases:
+      - change le papier peint
+      - change de papier peint
+      - change le wallpaper
+      - change de wallpaper
+      - change le fond d'écran
+      - change de fond d'écran
+      - mets un autre papier peint
+      - mets un autre fond d'écran
+      - un autre papier peint
+      - un autre fond d'écran
+      - nouveau papier peint
+      - nouveau fond d'écran
+    description: Change le papier peint (fond d'écran) pour une autre image au hasard
+    script: ~/.config/vocal-assistant/scripts/papier-peint.sh
+    speak_output: true
+
   - name: temperature
     phrases:
       - quelle est la température de l'ordi

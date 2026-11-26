@@ -12,6 +12,11 @@
 # systemd-rfkill saves and restores at boot. On needs `restore` at login
 # (Hyprland's autostart): BlueZ is meant to power the adapter on at boot, but
 # on this laptop that fails every time ("Failed to set mode: Failed (0x03)").
+#
+# A device disconnected from the menu is also blocked in BlueZ, so that it stays
+# disconnected: a trusted device is let back in without a prompt, and a headset
+# reconnects by itself within seconds. Connecting it from the menu, or with the
+# voice assistant, unblocks it first. The pairing is kept either way.
 
 SCAN_SECONDS=8
 
@@ -76,14 +81,22 @@ device_action() {
     local mac=$1 name=$2 state=$3
     case $state in
         connected)
-            bluetoothctl disconnect "$mac" >/dev/null \
-                && notify "Disconnected from $name" \
-                || notify "Failed to disconnect from $name"
+            # Blocked first: the device's own reconnection follows the
+            # disconnection at once. Blocking may disconnect it already
+            bluetoothctl block "$mac" >/dev/null 2>&1
+            if bluetoothctl info "$mac" | grep -q "Connected: yes"; then
+                bluetoothctl disconnect "$mac" >/dev/null 2>&1
+            fi
+            if bluetoothctl info "$mac" | grep -q "Connected: yes"; then
+                notify "Failed to disconnect from $name"
+            else
+                notify "Disconnected from $name"
+            fi
             ;;
         paired)
             notify "Connecting to $name…"
-            # The voice assistant blocks a headset it disconnects, so that it
-            # does not reconnect by itself: a blocked device refuses to connect
+            # A device disconnected from here or by the voice assistant is
+            # blocked, and a blocked device refuses to connect
             bluetoothctl unblock "$mac" >/dev/null 2>&1
             bluetoothctl connect "$mac" >/dev/null \
                 && notify "Connected to $name" \
