@@ -25,7 +25,6 @@ ttf-weather-icons
 tuxedo-control-center-bin
 tuxedo-drivers-dkms
 vocal-assistant
-waybar-git
 webstorm
 wlogout
 yay

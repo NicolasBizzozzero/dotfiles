@@ -139,6 +139,7 @@ vim
 vlc
 vlc-plugin-ffmpeg
 vulkan-nouveau
+waybar
 wget
 wireless-regdb
 wireless_tools
