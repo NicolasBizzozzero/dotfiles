@@ -13,12 +13,17 @@
         "custom/media",
         "tray"
     ],
+    // weather-pad and date-pad: blank room at both ends, so that the date starts
+    // at the center of the screen whatever the weather and the day (style.css)
     "modules-center": [
+        "custom/weather-pad",
         "custom/vocal-assistant",
         "custom/weather",
         "custom/mail",
-        "custom/clock",
-        "custom/cat"
+        "custom/date",
+        "custom/time",
+        "custom/cat",
+        "custom/date-pad"
     ],
     "modules-right": [
         "custom/claude",
@@ -87,13 +92,37 @@
     },
 
     // Click: calendar popup
-    "custom/clock": {
+    "custom/date": {
         "format": "{}",
         "return-type": "json",
-        "exec": "~/.config/waybar/scripts/clock.sh status",
+        "exec": "~/.config/waybar/scripts/clock.sh date",
+        "interval": 60,
+        "tooltip": false,
+        "on-click": "~/.config/waybar/scripts/clock.sh calendar"
+    },
+    "custom/time": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/clock.sh time",
         "interval": 1,
         "tooltip": false,
         "on-click": "~/.config/waybar/scripts/clock.sh calendar"
+    },
+    "custom/date-pad": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/clock.sh pad",
+        "interval": 60,
+        "tooltip": false
+    },
+    "custom/weather-pad": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/weather.sh pad",
+        // weather.sh status sends it after each update
+        "signal": 13,
+        "interval": 600,
+        "tooltip": false
     },
 
     // Cat mode: click to disable/enable every keyboard (the touchpad keeps working)

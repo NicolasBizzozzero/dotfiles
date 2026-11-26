@@ -4,6 +4,7 @@
 #
 # Usage:
 #   weather.sh status   JSON for waybar: weather icon, temperature and city
+#   weather.sh pad      JSON for waybar's custom/weather-pad: blank room before the center group
 #   weather.sh city     the city, then on a second line how it was found: wifi, ip or default
 
 # Known Wi-Fi networks (SSID) and their city. They come first: on one of them,
@@ -19,6 +20,10 @@ declare -A CITIES=()
 [[ -r $CITIES_FILE ]] && source "$CITIES_FILE"
 # Used when the Wi-Fi is unknown and ipinfo.io does not answer
 DEFAULT_CITY="Chelles"
+# The last text shown, and the characters after its icon in the longest one at
+# home: "-12°C Vaires-sur-Marne". A longer city moves the date a little
+LAST_TEXT="${XDG_RUNTIME_DIR:-/tmp}/waybar-weather"
+WEATHER_WIDTH=22
 
 usage() { sed -n 's/^#   /  /p' "$0" >&2; }
 
@@ -64,19 +69,34 @@ status() {
     if [[ -z "$weather" ]] || [[ "$weather" == *"Unknown"* ]]; then
         text="󰖐 N/A"
     else
-        # The temperature is padded with spaces to 5 characters (-12°C): the
-        # text keeps one width (the bar's font is monospaced), so the clock
-        # does not move when it changes (style.css, .modules-center)
-        local icon="${weather% *}" temperature="${weather##* }"
-        printf -v temperature '%s%*s' "$temperature" $((5 - ${#temperature})) ''
         # Stitch the weather and our perfectly capitalized city variable together
-        text="$icon $temperature $city"
+        text="$weather $city"
     fi
     jq -c -n --arg text "$text" '{text: $text}'
+    # For custom/weather-pad, which then reads it again (signal 13)
+    printf '%s\n' "$text" > "$LAST_TEXT"
+    pkill -RTMIN+13 -x waybar
+}
+
+# The date starts at the center of the screen, and GTK centers the whole group:
+# a shorter weather text would move that start. custom/weather-pad, at the far
+# left of the group, adds the missing characters as spaces (the bar's font is
+# monospaced, so a space is as wide as a letter). Blank and out of the way, it
+# keeps every visible gap the same. Counted after the icon: the icon is an
+# emoji, as wide whichever it is.
+pad() {
+    local text rest
+    text=$(cat "$LAST_TEXT" 2>/dev/null)
+    rest=${text#* }
+    local missing=$((WEATHER_WIDTH - ${#rest}))
+    ((missing < 0)) && missing=0
+    printf -v rest '%*s' "$missing" ''
+    jq -c -n --arg text "$rest" '{text: $text}'
 }
 
 case ${1:-} in
     status) status ;;
+    pad)    pad ;;
     city)   find_city ;;
     *)      usage; exit 1 ;;
 esac
