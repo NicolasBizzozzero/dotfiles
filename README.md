@@ -56,7 +56,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Terminal file manager | Yazi | `yazi` |
 | Process monitor | htop | `htop` |
 | System summary | fastfetch | `fastfetch` |
-| Printing | CUPS, Brother HL-L1240W | - (queue created by `install.sh`; mDNS left to avahi by `system/etc`) |
+| Printing | CUPS, Brother HL-L1240W | - (queue created by `install.sh`; mDNS left to avahi by `system/etc`, Docker's bridges included) |
 | Python tooling | Python, IPython/Jupyter | `python`, `jupyter` |
 | AI coding assistant | Claude Code | `claude` (settings, and the subagents every session can call: `reviewer`, `tester`, `sysadmin`) |
 | Voice assistant | vocal-assistant | `vocal-assistant` (its config and the scripts its commands run: time, date, weather, timers, music, volume, Wikipedia...; the wake word model is trained locally and not tracked), and a `waybar` module: its state and LLM, a right click to turn it on/off |
@@ -69,10 +69,12 @@ A quick tour of the software behind each package, grouped by what it's used for.
 ### Desktop
 The system runs Hyprland (`hypr`) as the window manager, with `waybar` as the status bar, `mako` for notifications, and `rofi` as the application launcher. `gtk` holds the GTK toolkit theming, and `xdg` carries desktop-wide defaults such as default applications and user directories.
 
+Waybar's Bluetooth module (right click: on/off, also used by the voice assistant) keeps its state across reboots. Off is an rfkill block, which systemd-rfkill restores at boot. On is restored at login by `bluetooth.sh restore`, from Hyprland's autostart: BlueZ is meant to power the adapter on at boot, but on this laptop that fails every time.
+
 Waybar's weather module (also used by the voice assistant) finds the city from the Wi-Fi name, through a table of known networks, else from the IP address. That table is kept out of this public repository, in `~/.config/waybar/weather_cities.sh`, as `CITIES=(["Wi-Fi name"]="City")`.
 
 ### Shell
-`zsh` is the shell, with `starship` for the prompt. Its aliases include the one-line commands that used to be scripts in `~/scripts` (`yay_clean`, `git_version_number`, `docker_build`...).
+`zsh` is the shell, with `starship` for the prompt. Its aliases include the one-line commands that used to be scripts in `~/scripts` (`yay_clean`, `git_version_number`, `docker_build`, `screenshot`, `random_file`...).
 
 ### Terminal and editors
 `kitty` is the terminal emulator. `neovim` is the main text editor, with `nano` kept around for quick edits.

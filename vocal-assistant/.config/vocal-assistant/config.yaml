@@ -129,6 +129,8 @@ commands:
       - rien
       - non merci
       - tais-toi
+      # Ce que Vosk entend souvent pour « tais-toi »
+      - c'est toi
       - ta gueule
     description: Annule la demande, quand la personne change d'avis ou veut que l'assistant se taise
     response: ""
@@ -360,10 +362,15 @@ commands:
     script: ~/.config/vocal-assistant/scripts/volume.sh down
     speak_output: true
 
+  # « mute le son » doit être là : sans elle, la phrase ressemble assez à
+  # « monte le son » pour monter le volume.
   - name: volume_coupe
     phrases:
       - coupe le son
       - coupe le volume
+      - mute le son
+      - mute le volume
+      - mute
       - mets en sourdine
       - sourdine
     description: Coupe le son
@@ -394,6 +401,27 @@ commands:
       - volume à *
     description: Règle le volume à un pourcentage précis
     script: ~/.config/vocal-assistant/scripts/volume.sh set
+    speak_output: true
+
+  # --- Bluetooth, comme le clic droit sur son module de Waybar : allumé ou
+  # éteint, il le reste après un redémarrage. Pas de « coupe le bluetooth » :
+  # Vosk l'entend mal (« couple blot tube »).
+  - name: bluetooth_active
+    phrases:
+      - active le bluetooth
+      - allume le bluetooth
+      - rallume le bluetooth
+    description: Allume le Bluetooth
+    script: ~/.config/vocal-assistant/scripts/bluetooth.sh on
+    speak_output: true
+
+  - name: bluetooth_desactive
+    phrases:
+      - désactive le bluetooth
+      - éteins le bluetooth
+      - arrête le bluetooth
+    description: Éteint le Bluetooth
+    script: ~/.config/vocal-assistant/scripts/bluetooth.sh off
     speak_output: true
 
   # --- Verrouillage, comme le menu d'alimentation de Waybar. Rien n'est lancé

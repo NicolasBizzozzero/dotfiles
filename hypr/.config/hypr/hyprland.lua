@@ -225,6 +225,8 @@ end
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
     hl.exec_cmd("mako")
+    -- Bluetooth back on if it was on: BlueZ fails to do it at boot
+    hl.exec_cmd("/home/johnlocke/.config/waybar/scripts/bluetooth.sh restore")
     hl.exec_cmd("/home/johnlocke/scripts/ricing/change_wallpaper.sh")
     hl.exec_cmd("[workspace 1 silent] " .. terminal)
     hl.exec_cmd("[workspace 2 silent] " .. browser)
