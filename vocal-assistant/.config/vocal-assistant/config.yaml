@@ -76,6 +76,13 @@ matching:
     leçon: le son
     # « mais » seul ne se corrige pas : « mais pourquoi… » irait mal au LLM.
     mais en pause: mets en pause
+    mais on pose: mets en pause
+    né en pause: mets en pause
+    # « coupe le son », entendu ainsi le 26 novembre 2026
+    couple sont: coupe le son
+    couple sion: coupe le son
+    # « active le mode charte »
+    charte: chat
 
 apply:
   # Applique ce fichier dès que tu l'enregistres, tant que l'assistant tourne :
@@ -136,23 +143,37 @@ commands:
     response: ""
     sound: failure
 
+  # Toujours la même réponse, avec le nom du LLM que le service emploie.
+  - name: presentation
+    phrases:
+      - qui es-tu
+      - tu es qui
+      - qui êtes-vous
+      - présente-toi
+      - comment tu t'appelles
+      - c'est quoi ton nom
+    description: Dit qui est l'assistant et quel modèle de langage il emploie
+    script: ~/.config/vocal-assistant/scripts/presentation.py
+    speak_output: true
+
   # --- Mode chat : bloque le clavier et les clics quand le chat marche dessus.
-  # Vosk écrit souvent « matcha » : matching.corrections le remplace.
+  # Vosk écrit souvent « matcha » : matching.corrections le remplace. Déjà
+  # activé ou déjà désactivé, il le dit.
   - name: mode_chat_active
     phrases:
       - active le mode chat
       - lance le mode chat
     description: Active le mode chat, qui bloque le clavier et les clics contre le chat
-    script: ~/.config/waybar/scripts/cat.py turn_on
-    response: Mode chat activé.
+    script: ~/.config/vocal-assistant/scripts/mode-chat.sh on
+    speak_output: true
 
   - name: mode_chat_desactive
     phrases:
       - désactive le mode chat
       - arrête le mode chat
     description: Désactive le mode chat, qui rend le clavier et les clics
-    script: ~/.config/waybar/scripts/cat.py turn_off
-    response: Mode chat désactivé.
+    script: ~/.config/vocal-assistant/scripts/mode-chat.sh off
+    speak_output: true
 
   - name: mode_chat_bascule
     phrases:
@@ -189,6 +210,8 @@ commands:
       - quel jour sommes-nous
       - on est quel jour
       - quelle date sommes-nous
+      - on est le combien
+      - c'est quoi la date
     description: Dit la date du jour
     script: ~/.config/vocal-assistant/scripts/date.sh
     speak_output: true
@@ -298,6 +321,8 @@ commands:
       - morceau suivant
       - piste suivante
       - vidéo suivante
+      - suivant
+      - passe
     description: Passe à la chanson ou à la vidéo suivante
     script: ~/.config/vocal-assistant/scripts/musique.sh next
     speak_output: true
@@ -341,6 +366,7 @@ commands:
 
   # --- Volume : 10 % par phrase, 150 % au plus, comme les touches du clavier.
   # Vosk reconnaît mieux « volume » que « son » : chaque commande accepte les deux.
+  # Ce qui est déjà fait (son déjà coupé, volume déjà au maximum…) est dit.
   - name: volume_plus
     phrases:
       - monte le son
@@ -363,7 +389,8 @@ commands:
     speak_output: true
 
   # « mute le son » doit être là : sans elle, la phrase ressemble assez à
-  # « monte le son » pour monter le volume.
+  # « monte le son » pour monter le volume. Pas de « désactive le son » : trop
+  # proche de « active le son », il couperait le son demandé.
   - name: volume_coupe
     phrases:
       - coupe le son
@@ -373,6 +400,7 @@ commands:
       - mute
       - mets en sourdine
       - sourdine
+      - éteins le son
     description: Coupe le son
     script: ~/.config/vocal-assistant/scripts/volume.sh mute
     speak_output: true
@@ -383,10 +411,20 @@ commands:
       - remets le volume
       - allume le son
       - rallume le son
+      - active le son
+      - rétablis le son
       - enlève la sourdine
-    # Si le son n'est pas coupé, le script répond « Le son est déjà activé. »
     description: Remet le son après une coupure
     script: ~/.config/vocal-assistant/scripts/volume.sh unmute
+    speak_output: true
+
+  - name: volume_niveau
+    phrases:
+      - quel est le volume
+      - à combien est le volume
+      - c'est quoi le volume
+    description: Dit le volume actuel, et si le son est coupé
+    script: ~/.config/vocal-assistant/scripts/volume.sh get
     speak_output: true
 
   # « mets le volume à cinquante », « volume à fond » (100 %). De 0 à 150 %.
@@ -426,6 +464,25 @@ commands:
     script: ~/.config/vocal-assistant/scripts/bluetooth.sh off
     speak_output: true
 
+  # Ton casque, dont l'adresse est dans ~/.config/vocal-assistant/casque (hors
+  # du dépôt public). Connecter allume d'abord le Bluetooth s'il le faut.
+  - name: casque_connecte
+    phrases:
+      - connecte mon casque
+      - connecte le casque
+    description: Connecte le casque Bluetooth
+    script: ~/.config/vocal-assistant/scripts/casque.sh connect
+    speak_output: true
+    timeout: 30
+
+  - name: casque_deconnecte
+    phrases:
+      - déconnecte mon casque
+      - déconnecte le casque
+    description: Déconnecte le casque Bluetooth
+    script: ~/.config/vocal-assistant/scripts/casque.sh disconnect
+    speak_output: true
+
   # --- Verrouillage, comme le menu d'alimentation de Waybar. Rien n'est lancé
   # si l'écran est déjà verrouillé.
   - name: verrouille
@@ -460,35 +517,84 @@ commands:
     script: ~/.config/vocal-assistant/scripts/capture.sh
     speak_output: true
 
-  # --- Désactivé : enlève les # du bloc pour l'activer ----------------------
+  - name: temperature
+    phrases:
+      - quelle est la température de l'ordi
+      - quelle est la température du pc
+      - quelle est la température de l'ordinateur
+      - quelle est la température du processeur
+      - est-ce que l'ordi chauffe
+    description: Dit la température du processeur, et si elle est normale
+    script: ~/.config/vocal-assistant/scripts/temperature.sh
+    speak_output: true
+
+  # --- Réveils d'AlarmClock. Aucune commande ne les met en pause ni ne les
+  # coupe : c'est voulu, ça se fait à la main.
+  - name: reveils_liste
+    phrases:
+      - quels sont mes réveils
+      - c'est quand mon prochain réveil
+      - à quelle heure sonne mon réveil
+      - liste mes réveils
+    description: Dit les prochains réveils, et s'ils sont en pause
+    script: ~/.config/vocal-assistant/scripts/reveils.py liste
+    speak_output: true
+
+  # Sans script : rien n'est touché, l'assistant le dit. Sans cette commande, le
+  # LLM enverrait ces phrases à une autre commande de réveil.
+  - name: reveils_a_la_main
+    phrases:
+      - coupe les réveils
+      - éteins les réveils
+      - arrête les réveils
+      - désactive les réveils
+      - mets les réveils en pause
+    description: Refuse de couper ou de mettre en pause les réveils, qui se coupent à la main
+    response: Les réveils ne se coupent qu'à la main.
+    sound: failure
+
+  # « réveille-moi à sept heures et demie », « réveille-moi demain à six heures »
+  - name: reveil_pose
+    phrases:
+      - réveille-moi à *
+      - réveille moi à *
+      - réveille-moi demain à *
+      - mets un réveil à *
+      - mets un réveil demain à *
+    description: Pose un réveil à une heure donnée
+    script: ~/.config/vocal-assistant/scripts/reveils.py poser
+    speak_output: true
 
   # Minuteurs, alarmes et rappels, qui sonnent avec AlarmClock (alarm_clock
-  # ring) : « mets un minuteur de deux heures, dix minutes et trente secondes »,
-  # « mets une alarme d'une heure et demie », « minuteur de cinq » (minutes),
-  # « rappelle-moi dans dix minutes de sortir le linge », « rappelle-moi
-  # d'appeler maman dans un quart d'heure ». À l'heure dite, une notification
-  # reste affichée et AlarmClock sonne une minute au plus, même si ses réveils
-  # sont en pause. Fermer la notification arrête la sonnerie.
+  # ring) : « mets un minuteur de vingt minutes », « mets un minuteur de cinq
+  # minutes et trente secondes », « mets un minuteur de deux heures, dix
+  # minutes et trente secondes », « mets une alarme d'une heure et demie »,
+  # « minuteur de cinq » (minutes), « rappelle-moi dans dix minutes de sortir le
+  # linge ». À l'heure dite, une notification reste affichée et AlarmClock sonne
+  # une minute au plus, même si ses réveils sont en pause. Fermer la
+  # notification arrête la sonnerie : pas de commande vocale pour ça.
   # Vosk écrit parfois « militaire » ou « moniteur » pour « minuteur » : si cela
   # t'arrive, ajoute « militaire: minuteur » à matching.corrections.
   # Voir ceux en attente : systemctl --user list-timers 'minuteur-*'
   # Détails : l'en-tête de ~/.config/vocal-assistant/scripts/minuteur.py
-  # - name: minuteur
-  #   phrases:
-  #     - minuteur de *
-  #     - minuteur d'une *
-  #     - mets un minuteur de *
-  #     - mets un minuteur d'une *
-  #     - lance un minuteur de *
-  #     - mets une alarme de *
-  #     - mets une alarme d'une *
-  #     - alarme de *
-  #     - rappelle-moi *
-  #     - rappelle moi *
-  #   description: Lance un minuteur, une alarme ou un rappel d'une durée donnée
-  #   script: ~/.config/vocal-assistant/scripts/minuteur.py
-  #   speak_output: true
-  #
+  - name: minuteur
+    phrases:
+      - minuteur de *
+      - minuteur d'une *
+      - mets un minuteur de *
+      - mets un minuteur d'une *
+      - lance un minuteur de *
+      - mets une alarme de *
+      - mets une alarme d'une *
+      - alarme de *
+      - rappelle-moi *
+      - rappelle moi *
+    description: Lance un minuteur, une alarme ou un rappel d'une durée donnée
+    script: ~/.config/vocal-assistant/scripts/minuteur.py
+    speak_output: true
+
+  # --- Désactivé : enlève les # du bloc pour l'activer ----------------------
+
   # - name: minuteur_annule
   #   phrases:
   #     - annule le minuteur

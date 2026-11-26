@@ -59,7 +59,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Printing | CUPS, Brother HL-L1240W | - (queue created by `install.sh`; mDNS left to avahi by `system/etc`, Docker's bridges included) |
 | Python tooling | Python, IPython/Jupyter | `python`, `jupyter` |
 | AI coding assistant | Claude Code | `claude` (settings, and the subagents every session can call: `reviewer`, `tester`, `sysadmin`) |
-| Voice assistant | vocal-assistant | `vocal-assistant` (its config and the scripts its commands run: time, date, weather, timers, music, volume, Wikipedia...; the wake word model is trained locally and not tracked), and a `waybar` module: its state and LLM, a right click to turn it on/off |
+| Voice assistant | vocal-assistant | `vocal-assistant` (its config and the scripts its commands run: time, date, weather, timers, AlarmClock alarms, music, volume, Bluetooth and headset, cat mode, CPU temperature, Wikipedia...; asked for something already done, such as muting a muted sound, they say so; the wake word model is trained locally and not tracked), and a `waybar` module: its state and LLM, a right click to turn it on/off |
 
 Entries with no package are either system-level (not something a home directory dotfile controls) or run fine on their defaults without any tracked configuration.
 
@@ -71,7 +71,7 @@ The system runs Hyprland (`hypr`) as the window manager, with `waybar` as the st
 
 Waybar's Bluetooth module (right click: on/off, also used by the voice assistant) keeps its state across reboots. Off is an rfkill block, which systemd-rfkill restores at boot. On is restored at login by `bluetooth.sh restore`, from Hyprland's autostart: BlueZ is meant to power the adapter on at boot, but on this laptop that fails every time.
 
-Waybar's weather module (also used by the voice assistant) finds the city from the Wi-Fi name, through a table of known networks, else from the IP address. That table is kept out of this public repository, in `~/.config/waybar/weather_cities.sh`, as `CITIES=(["Wi-Fi name"]="City")`.
+Waybar's weather module (also used by the voice assistant) finds the city from the Wi-Fi name, through a table of known networks, else from the IP address. That table is kept out of this public repository, in `~/.config/waybar/weather_cities.sh`, as `CITIES=(["Wi-Fi name"]="City")`. So is the Bluetooth address of the headset the voice assistant connects ("connecte mon casque"): one line in `~/.config/vocal-assistant/casque`, as printed by `bluetoothctl devices`.
 
 ### Shell
 `zsh` is the shell, with `starship` for the prompt. Its aliases include the one-line commands that used to be scripts in `~/scripts` (`yay_clean`, `git_version_number`, `docker_build`, `screenshot`, `random_file`...).
