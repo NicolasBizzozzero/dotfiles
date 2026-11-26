@@ -381,8 +381,10 @@ commands:
     phrases:
       - remets le son
       - remets le volume
+      - allume le son
       - rallume le son
       - enlève la sourdine
+    # Si le son n'est pas coupé, le script répond « Le son est déjà activé. »
     description: Remet le son après une coupure
     script: ~/.config/vocal-assistant/scripts/volume.sh unmute
     speak_output: true

@@ -6,6 +6,8 @@
 # pamixer, 150 % au plus, et monter ou baisser le son quand il est coupé le
 # remet d'abord. Le pas est plus grand qu'au clavier : une phrase vaut deux appuis.
 #
+# unmute sur un son qui n'est pas coupé ne change rien, et le dit.
+#
 # set règle le volume au nombre dit : « mets le volume à cinquante ». Il le lit
 # dans $VOCAL_ASSISTANT_ARGUMENT, ou après le dernier « à » de la phrase quand
 # c'est le LLM qui a choisi la commande. « à fond » vaut 100 %.
@@ -40,6 +42,10 @@ case ${1:-} in
         echo "Son coupé."
         ;;
     unmute)
+        if [ "$coupe" != "true" ]; then
+            echo "Le son est déjà activé."
+            exit 0
+        fi
         pamixer -u
         echo "Son remis, à $(volume_dit)."
         ;;
