@@ -55,6 +55,8 @@ DUREE_MAXIMALE = 24 * 3600
 DUREE_DE_SONNERIE = 60
 # Code de sortie d'alarm_clock quand son service ne tourne pas.
 SANS_SERVICE = 3
+# Code de sortie d'argparse pour une option inconnue.
+OPTION_REFUSEE = 2
 # Sans AlarmClock, ce son sonne trois fois.
 ALARME = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"
 
@@ -359,17 +361,34 @@ def arreter():
     return 0
 
 
-def lancer_la_sonnerie():
+def nom_de_sonnerie(titre, texte):
+    """Ce qu'alarm_clock status et stop montrent : « Minuteur de 5 minutes »."""
+    if titre == "Rappel":
+        return f"Rappel : {texte.rstrip('.')}"
+    return texte.removesuffix(" terminé.").removesuffix(" terminée.")
+
+
+def lancer_la_sonnerie(nom):
     """Fait sonner AlarmClock. Renvoie de quoi arrêter la sonnerie, ou None.
 
     None si une autre alarme sonne déjà : elle suffit, et elle ne doit pas être
     arrêtée à la fermeture de cette notification-ci.
+
+    nom est ce que montre alarm_clock stop : « dismissed 'Minuteur de 5
+    minutes' » plutôt que « 'test ring' ». Un AlarmClock d'avant --name refuse
+    l'option (code 2, celui d'argparse) : la sonnerie part alors sans nom.
     """
     duree_option = ["--duration", str(DUREE_DE_SONNERIE)]
     try:
         resultat = subprocess.run(
-            ["alarm_clock", "ring", *duree_option], capture_output=True, timeout=10
+            ["alarm_clock", "ring", *duree_option, "--name", nom],
+            capture_output=True,
+            timeout=10,
         )
+        if resultat.returncode == OPTION_REFUSEE:
+            resultat = subprocess.run(
+                ["alarm_clock", "ring", *duree_option], capture_output=True, timeout=10
+            )
     except FileNotFoundError:
         # AlarmClock absent : le son de secours.
         boucle = f"for i in 1 2 3; do pw-play {ALARME}; done"
@@ -393,7 +412,7 @@ def arreter_la_sonnerie(sonnerie):
 
 def sonner(titre, texte):
     """Sonne, et affiche une notification qui reste jusqu'à ce que tu la fermes."""
-    sonnerie = lancer_la_sonnerie()
+    sonnerie = lancer_la_sonnerie(nom_de_sonnerie(titre, texte))
     debut = time.monotonic()
     # --action fait attendre notify-send jusqu'à la fermeture de la notification.
     affichee = subprocess.run(
