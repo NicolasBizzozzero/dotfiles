@@ -199,7 +199,7 @@ label:focus {
 #custom-mail,
 #custom-date,
 #custom-time {
-    padding: 0 6px;
+    padding: 0 3px;
 }
 
 /* Blank room at both ends of the center group (clock.sh pad, weather.sh pad):
@@ -219,20 +219,20 @@ label:focus {
      left of the group, moves the date's start to the center. GTK counts it, so
      nothing can overlap the group, and the left side has room to spare.
    Measured on screenshots, 2026-11-26: the date's first pixel is the 960th;
-   14-15 px between the center modules, 19-20 px to the ring and the cat. Change
+   8 px between the center modules, 12 px to the ring and the cat. Change
    a module there, and measure again.
    The right modules end a few px before the date-pad: past that, GTK pushes the
    whole group left. The left ones are far: custom/media is cut at 30
    characters (media.sh) */
 .modules-center {
-    padding-left: 9px;
+    padding-left: 14px;
 }
 
 
 
 #custom-cat {
     /* The same gap to the time as the assistant's to the weather */
-    padding-left: 10px;
+    padding-left: 7px;
     padding-right: 6px;
     color: #606060;
 }
@@ -267,7 +267,7 @@ label:focus {
     min-height: 16px;
     /* The same gap to the weather as the cat's to the time, a little wider
        than between the other center modules: measured on screenshots */
-    margin: 3px 9px 3px 0;
+    margin: 3px 6px 3px 0;
     padding: 0;
     border: 1px solid @assistant-dim;
     border-radius: 9px;
