@@ -1,53 +1,51 @@
 #!/usr/bin/env python3
-"""Répond à « qui es-tu » : toujours la même phrase, avec le nom du LLM.
+"""Répond à « qui es-tu » : toujours la même phrase, avec le système et le LLM.
 
-Le nom vient de la configuration que le service emploie, la copie adoptée par
-vocal-assistant apply : changer de modèle change donc la réponse, sans rien
-toucher ici.
+« Je suis l'assistant vocal tournant sur Arch Linux, kernel 7.2.14-arch1-1,
+basé sur le modèle qwen3.5:2b. » Les trois noms sont lus à chaque fois :
 
-Le nom s'écrit pour être lu par Piper : « qwen3.5:2b » devient « Qwen 3 point
-5, en version 2 milliards de paramètres ».
+- le système dans /etc/os-release, le noyau avec uname ;
+- le modèle dans la configuration que le service emploie, la copie adoptée par
+  vocal-assistant apply. Changer de modèle change donc la réponse, sans rien
+  toucher ici.
+
+Le nom du modèle est écrit tel quel : « qwen3.5:2b », dit « 2b ».
 """
 
-import re
+import os
 import sys
 from pathlib import Path
 
 import yaml
 
 CONFIG_ADOPTEE = Path.home() / ".local/share/vocal-assistant/actif/config.yaml"
+OS_RELEASE = Path("/etc/os-release")
 
 
-def nom_dit(modele):
-    """« qwen3.5:2b » → « Qwen 3 point 5, en version 2 milliards de paramètres »."""
-    nom, _, version = modele.partition(":")
-    # « qwen3.5 » → « qwen 3.5 », « llama3.2 » → « llama 3.2 »
-    nom = re.sub(r"(?<=[a-zA-Z])(?=\d)", " ", nom)
-    nom = re.sub(r"(\d)\.(\d)", r"\1 point \2", nom)
-    nom = nom[:1].upper() + nom[1:]
-    taille = re.fullmatch(r"(\d+(?:\.\d+)?)b", version)
-    if taille:
-        milliards = taille.group(1).replace(".", ",")
-        pluriel = "s" if float(taille.group(1)) >= 2 else ""
-        return f"{nom}, en version {milliards} milliard{pluriel} de paramètres"
-    if version and version != "latest":
-        return f"{nom}, en version {version}"
-    return nom
+def systeme():
+    """« Arch Linux » : le NAME de /etc/os-release, sinon le nom du noyau (Linux)."""
+    try:
+        for ligne in OS_RELEASE.read_text(encoding="utf-8").splitlines():
+            cle, _, valeur = ligne.partition("=")
+            if cle == "NAME":
+                return valeur.strip().strip('"')
+    except OSError:
+        pass
+    return os.uname().sysname
+
+
+def modele():
+    try:
+        config = yaml.safe_load(CONFIG_ADOPTEE.read_text(encoding="utf-8"))
+        return config["llm"]["model"]
+    except (OSError, KeyError, TypeError, yaml.YAMLError):
+        return None
 
 
 def main():
-    try:
-        modele = yaml.safe_load(CONFIG_ADOPTEE.read_text(encoding="utf-8"))["llm"][
-            "model"
-        ]
-    except (OSError, KeyError, TypeError, yaml.YAMLError):
-        modele = None
-    phrase = (
-        "Je suis ton assistant vocal. Tout tourne sur ton ordinateur, sans internet."
-    )
-    if modele:
-        phrase += f" Mon modèle de langage est {nom_dit(modele)}."
-    print(phrase)
+    phrase = f"Je suis l'assistant vocal tournant sur {systeme()}, kernel {os.uname().release}"
+    nom = modele()
+    print(f"{phrase}, basé sur le modèle {nom}." if nom else f"{phrase}.")
     return 0
 
 

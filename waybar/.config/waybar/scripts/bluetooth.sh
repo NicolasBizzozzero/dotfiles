@@ -82,6 +82,9 @@ device_action() {
             ;;
         paired)
             notify "Connecting to $name…"
+            # The voice assistant blocks a headset it disconnects, so that it
+            # does not reconnect by itself: a blocked device refuses to connect
+            bluetoothctl unblock "$mac" >/dev/null 2>&1
             bluetoothctl connect "$mac" >/dev/null \
                 && notify "Connected to $name" \
                 || notify "Failed to connect to $name"

@@ -143,7 +143,7 @@ commands:
     response: ""
     sound: failure
 
-  # Toujours la même réponse, avec le nom du LLM que le service emploie.
+  # Toujours la même réponse : le système, le noyau et le LLM, lus à chaque fois.
   - name: presentation
     phrases:
       - qui es-tu
@@ -211,6 +211,7 @@ commands:
       - on est quel jour
       - quelle date sommes-nous
       - on est le combien
+      - quelle est la date
       - c'est quoi la date
     description: Dit la date du jour
     script: ~/.config/vocal-assistant/scripts/date.sh
@@ -389,8 +390,7 @@ commands:
     speak_output: true
 
   # « mute le son » doit être là : sans elle, la phrase ressemble assez à
-  # « monte le son » pour monter le volume. Pas de « désactive le son » : trop
-  # proche de « active le son », il couperait le son demandé.
+  # « monte le son » pour monter le volume.
   - name: volume_coupe
     phrases:
       - coupe le son
@@ -401,6 +401,7 @@ commands:
       - mets en sourdine
       - sourdine
       - éteins le son
+      - désactive le son
     description: Coupe le son
     script: ~/.config/vocal-assistant/scripts/volume.sh mute
     speak_output: true
@@ -466,6 +467,8 @@ commands:
 
   # Ton casque, dont l'adresse est dans ~/.config/vocal-assistant/casque (hors
   # du dépôt public). Connecter allume d'abord le Bluetooth s'il le faut.
+  # Déconnecté, il est bloqué pour ne pas se reconnecter tout seul : seuls
+  # « connecte mon casque » ou le menu Bluetooth de Waybar le reconnectent.
   - name: casque_connecte
     phrases:
       - connecte mon casque
