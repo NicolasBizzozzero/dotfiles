@@ -17,7 +17,10 @@
 # YouTube outside a playlist has no next/previous over MPRIS: the userscript
 # userscripts/youtube-media-keys.user.js (Violentmonkey) adds them.
 
-MAX_LENGTH=40
+# 30 keeps the title clear of the center modules, which are drawn shifted left
+# so that the clock sits at the center (style.css, .modules-center): room left
+# for ten workspaces and a couple of tray icons
+MAX_LENGTH=30
 # Players never shown (comma-separated MPRIS names, as listed by `playerctl -l`)
 IGNORED_PLAYERS="vlc"
 LAST_ACTIVE="${XDG_RUNTIME_DIR:-/tmp}/waybar-media-player"

@@ -57,6 +57,8 @@ status() {
     weather=$(curl -s -f -m 5 -H 'Accept-Language: fr' "https://wttr.in/${formatted_city}?format=%c+%t" 2>/dev/null)
     # wttr pads the icon with trailing spaces: keep a single one
     weather=$(echo "$weather" | tr -s ' ')
+    # Zero has no sign: wttr writes +0°C (and sometimes -0°C)
+    weather=$(echo "$weather" | sed -E 's/[+-]0°/0°/')
 
     # Output validation and manual string assembly
     if [[ -z "$weather" ]] || [[ "$weather" == *"Unknown"* ]]; then

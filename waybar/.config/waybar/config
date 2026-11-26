@@ -70,7 +70,10 @@
         "return-type": "json",
         "exec": "~/.config/waybar/scripts/weather.sh status",
         "interval": 1800,
-        "tooltip": false
+        "tooltip": false,
+        // Right-aligned in a fixed width (style.css): the clock stays centered
+        // whatever the temperature
+        "align": 1
     },
 
     // Icon with a blue dot when there is unread mail, counts in the tooltip
