@@ -22,8 +22,11 @@ voice:
   # Reconnaissance vocale (Vosk). Le paquet fournit vosk-model-small-fr-0.22.
   # Pour en changer, écris le nom d'un modèle de https://alphacephei.com/vosk/models
   # puis lance vocal-assistant apply : il est téléchargé une fois, à côté du service.
-  # Plus précis, mais 1,4 Go et bien plus de mémoire : vosk-model-fr-0.22
-  recognition: vosk-model-small-fr-0.22
+  # Le grand modèle : deux fois moins de mots faux que le petit sur une lecture
+  # de 20 s (26 novembre 2026). Son dossier rnnlm est renommé rnnlm.off dans
+  # ~/.local/share/vocal-assistant/vosk/vosk-model-fr-0.22 : même transcription,
+  # 2,3 Go de mémoire au lieu de 3,8. Revenir au petit : vosk-model-small-fr-0.22
+  recognition: vosk-model-fr-0.22
   # Synthèse vocale (Piper). Le paquet fournit fr_FR-siwis-medium. Les autres voix
   # de https://huggingface.co/rhasspy/piper-voices se changent de la même façon.
   synthesis: fr_FR-siwis-medium
