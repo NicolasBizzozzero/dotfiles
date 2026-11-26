@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         X: archives of deleted posts
 // @namespace    https://github.com/NicolasBizzozzero/dotfiles
-// @version      1.0
-// @description  When X says a post no longer exists, look for archived copies on the Wayback Machine and show their text. Also on demand, from the Violentmonkey menu.
+// @version      1.1
+// @description  When X says a post no longer exists or its author hid it, look for archived copies on the Wayback Machine and show their text. Also on demand, from the Violentmonkey menu.
 // @match        https://x.com/*
 // @match        https://twitter.com/*
 // @match        https://mobile.twitter.com/*
@@ -19,7 +19,8 @@
 // Requires the Violentmonkey extension in Firefox.
 //
 // On a post's page (/USER/status/ID), once X has shown that the post doesn't
-// exist any more (deleted, account suspended...), this asks the Wayback
+// exist any more (deleted, account suspended...) or that its author limits who
+// can see it (protected account), this asks the Wayback
 // Machine's CDX API for captures of it, under twitter.com, mobile.twitter.com
 // and x.com: most captures of X are filed under twitter.com, and archive.org's
 // simpler "available" API misses the ones that aren't HTML pages (X's are often
@@ -43,8 +44,17 @@ const LISTED = 10;
 const READ = 5;
 // How long to wait for X to show either the post or its "doesn't exist" page
 const WAIT_SECONDS = 10;
-// What X writes instead of a post that is gone, in English and French
+// What X writes instead of a post that is gone or hidden, in English and French
 const MISSING = [
+    // Protected account: only its approved followers see its posts
+    /posts are protected/i,
+    /posts sont protégés/i,
+    /limits who can view/i,
+    /limite (les personnes|qui peut)/i,
+    /unable to view this post/i,
+    /ne pouvez pas (voir|afficher) ce post/i,
+    /only approved followers/i,
+    /seul(e)?s les abonné(e)?s/i,
     /this page doesn.t exist/i,
     /cette page n.existe pas/i,
     /post (was|has been) deleted/i,
@@ -112,8 +122,9 @@ function decodeEntities(text) {
     });
 }
 
-// {text, posted, author} from a capture's raw content (X's JSON, or an old
-// HTML page), or null
+// {text, posted, author, protected} from a capture's raw content (X's JSON, or
+// an old HTML page), {refusal} for a capture of X refusing to show the post,
+// or null
 function textOf(content) {
     let data;
     try {
@@ -124,9 +135,13 @@ function textOf(content) {
     if (data !== undefined) {
         const post = data && typeof data === 'object' ? data.data ?? data : {};
         const text = post.note_tweet?.text || post.text || post.full_text || findStrings(data, 'full_text')[0];
-        if (!text) return null;
+        if (!text) {
+            const error = Array.isArray(data?.errors) ? data.errors[0] : null;
+            return error ? { refusal: error.message || error.detail || 'error' } : null;
+        }
+        const user = data.includes?.users?.[0] ?? {};
         // X marks where a picture sits with U+FFFC
-        return { text: text.replace(/￼/g, ' ').trim(), posted: post.created_at ?? null, author: data.includes?.users?.[0]?.username ?? null };
+        return { text: text.replace(/\ufffc/g, ' ').trim(), posted: post.created_at ?? null, author: user.username ?? null, protected: user.protected ?? null };
     }
     const patterns = [
         /<meta\s+property="og:description"\s+content="([^"]*)"/,
@@ -137,7 +152,7 @@ function textOf(content) {
         const match = pattern.exec(content);
         if (match) {
             const text = decodeEntities(match[1].replace(/<[^>]+>/g, '')).trim().replace(/^[“"]|[”"]$/g, '');
-            if (text) return { text, posted: null, author: null };
+            if (text) return { text, posted: null, author: null, protected: null };
         }
     }
     return null;
@@ -155,6 +170,16 @@ function request(url) {
             ontimeout: () => reject(new Error('timeout')),
         });
     });
+}
+
+// The raw form (id_) sometimes answers 404 where the normal replay works: for
+// JSON, the replay is the JSON itself
+async function readCapture(capture) {
+    try {
+        return await request(waybackUrl(capture, true));
+    } catch {
+        return request(waybackUrl(capture));
+    }
 }
 
 async function searchArchives(post) {
@@ -184,10 +209,12 @@ async function searchArchives(post) {
     let content = null;
     for (const capture of captures.slice(0, READ)) {
         try {
-            content = textOf(await request(waybackUrl(capture, true)));
+            content = textOf(await readCapture(capture));
         } catch {
             content = null;
         }
+        // A capture of X's refusal: an older capture may have the text
+        if (content?.refusal) content = null;
         if (content) {
             content.capture = capture;
             break;
@@ -277,6 +304,7 @@ async function showArchives(post) {
             let meta = `Capture du ${captureDate(content.capture.timestamp)}`;
             if (content.author) meta += `, par @${content.author}`;
             if (content.posted) meta += `, publié le ${new Date(content.posted).toLocaleString()}`;
+            if (content.protected !== null) meta += content.protected ? ', compte alors protégé' : ', compte alors public';
             body.append(element('div', meta, { class: 'meta' }), element('div', content.text, { class: 'text' }));
         } else {
             body.append(element('div', "Aucune capture ne contient le texte : seulement la page vide de X.", { class: 'status' }));
