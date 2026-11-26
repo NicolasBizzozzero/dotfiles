@@ -6,7 +6,8 @@
 # pamixer, 150 % au plus, et monter ou baisser le son quand il est coupé le
 # remet d'abord. Le pas est plus grand qu'au clavier : une phrase vaut deux appuis.
 #
-# unmute sur un son qui n'est pas coupé ne change rien, et le dit.
+# mute sur un son déjà coupé, ou unmute sur un son qui ne l'est pas, ne change
+# rien, et le dit.
 #
 # set règle le volume au nombre dit : « mets le volume à cinquante ». Il le lit
 # dans $VOCAL_ASSISTANT_ARGUMENT, ou après le dernier « à » de la phrase quand
@@ -38,6 +39,10 @@ case ${1:-} in
         ;;
     mute)
         # La réponse est lue après la coupure : seule la notification la montre.
+        if [ "$coupe" = "true" ]; then
+            echo "Le son est déjà coupé."
+            exit 0
+        fi
         pamixer -m
         echo "Son coupé."
         ;;
