@@ -58,7 +58,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | System summary | fastfetch | `fastfetch` |
 | Printing | CUPS, Brother HL-L1240W | - (queue created by `install.sh`; mDNS left to avahi by `system/etc`) |
 | Python tooling | Python, IPython/Jupyter | `python`, `jupyter` |
-| AI coding assistant | Claude Code | `claude` |
+| AI coding assistant | Claude Code | `claude` (settings, and the subagents every session can call: `reviewer`, `tester`, `sysadmin`) |
 | Voice assistant | vocal-assistant | `vocal-assistant` (its config and the scripts its commands run: time, date, weather, timers, music, volume, Wikipedia...; the wake word model is trained locally and not tracked), and a `waybar` module: its state and LLM, a right click to turn it on/off |
 
 Entries with no package are either system-level (not something a home directory dotfile controls) or run fine on their defaults without any tracked configuration.
@@ -78,7 +78,12 @@ Waybar's weather module (also used by the voice assistant) finds the city from t
 `kitty` is the terminal emulator. `neovim` is the main text editor, with `nano` kept around for quick edits.
 
 ### Development
-`git` and `ssh` cover version control and remote access. `python` holds general Python configuration, and `jupyter` configures Jupyter and IPython for notebook work. `claude` holds the settings for Claude Code.
+`git` and `ssh` cover version control and remote access. `python` holds general Python configuration, and `jupyter` configures Jupyter and IPython for notebook work. `claude` holds the settings for Claude Code, and three subagents shared by every project (`.config/claude/agents/`). Each has one task, returns a short report in a fixed format, and never fixes anything itself:
+- `reviewer` reads a change before a commit and gives a verdict with its findings. Read-only, on Opus.
+- `tester` runs a project's tests, linter and formatter check, or tries a script in a throwaway folder. On Sonnet.
+- `sysadmin` diagnoses the computer from its logs and gives the commands to paste. Read-only, on Sonnet.
+
+Call one by name in any session, e.g. `@agent-reviewer`, or let Claude pick it from its description.
 
 ### Media
 `mpd` runs as a background music daemon, and `vlc` handles video and other media playback.
