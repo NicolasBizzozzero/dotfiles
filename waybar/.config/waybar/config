@@ -95,6 +95,9 @@
         "return-type": "json",
         "exec": "~/.config/waybar/scripts/clock.sh status",
         "interval": 1,
+        // Left-aligned in a fixed width (style.css): the date starts at the
+        // center of the screen, whatever the weekday and month
+        "align": 0,
         "tooltip": false,
         "on-click": "~/.config/waybar/scripts/clock.sh calendar"
     },

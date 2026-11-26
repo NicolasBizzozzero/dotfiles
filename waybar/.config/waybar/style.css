@@ -194,21 +194,22 @@ label:focus {
 }
 
 #custom-weather {
+    padding-left: 4px;
     padding-right: 6px;
 }
 
-/* The clock sits at the exact center of the screen. GTK centers the whole
-   center group, and the clock has more of it on its left (assistant, weather,
-   mail) than on its right (cat): the group is drawn shifted left by half that
-   difference. A negative margin moves the drawing without changing the room
-   the group takes, so the right modules keep their place. Measured on
-   screenshots, 2026-11-26: every module in the group has a fixed width, so the
-   shift holds. Change a module there, and measure again.
-   The left modules end well before it: custom/media is cut at 30 characters
-   (media.sh) */
+/* The date starts at the exact center of the screen. GTK centers the whole
+   center group, around the middle of the clock rather than the start of its
+   date. Empty room on the left of the group moves it right by half that
+   room: GTK counts it, so nothing can overlap the group, and the left side
+   has plenty to spare. Measured on screenshots, 2026-11-26: every module in
+   the group has a fixed width, so the date's start holds. Change a module
+   there, and measure again.
+   The right modules end about 20px before the cat: past that, GTK pushes the
+   whole group left. The left ones are far: custom/media is cut at 30
+   characters (media.sh) */
 .modules-center {
-    margin-left: -95px;
-    margin-right: 95px;
+    padding-left: 8px;
 }
 
 /* A fixed width, so the center group keeps the same width whatever the
@@ -218,13 +219,21 @@ label:focus {
     min-width: 150px;
 }
 
+/* A fixed width too, for the longest date: "mercredi 30 septembre". The date
+   is left-aligned in it, so it always starts at the same place */
+#custom-clock label {
+    min-width: 200px;
+}
+
 #custom-mail {
     padding-left: 6px;
     padding-right: 12px;
 }
 
 #custom-cat {
-    padding-left: 12px;
+    /* Close to the time: the clock's fixed width already leaves room after it,
+       except on the longest dates */
+    padding-left: 4px;
     padding-right: 6px;
     color: #606060;
 }
@@ -257,8 +266,9 @@ label:focus {
     /* An 18px ring, thin, centered in the 24px bar with 3px above and below */
     min-width: 16px;
     min-height: 16px;
-    /* 15 physical px to the weather, like the gaps between the other center modules */
-    margin: 3px 5px 3px 0;
+    /* Close to the weather: 2px here and the weather's 4px of padding, plus
+       the room its fixed width leaves at short temperatures (0°C) */
+    margin: 3px 2px 3px 0;
     padding: 0;
     border: 1px solid @assistant-dim;
     border-radius: 9px;
