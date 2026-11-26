@@ -64,8 +64,13 @@ status() {
     if [[ -z "$weather" ]] || [[ "$weather" == *"Unknown"* ]]; then
         text="󰖐 N/A"
     else
+        # The temperature is padded with spaces to 5 characters (-12°C): the
+        # text keeps one width (the bar's font is monospaced), so the clock
+        # does not move when it changes (style.css, .modules-center)
+        local icon="${weather% *}" temperature="${weather##* }"
+        printf -v temperature '%s%*s' "$temperature" $((5 - ${#temperature})) ''
         # Stitch the weather and our perfectly capitalized city variable together
-        text="$weather $city"
+        text="$icon $temperature $city"
     fi
     jq -c -n --arg text "$text" '{text: $text}'
 }

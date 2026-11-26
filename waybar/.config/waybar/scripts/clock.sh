@@ -9,11 +9,20 @@
 # Not waybar's `clock` module: the fmt library it uses ignores the system locale
 # on Arch, so the date would not be in French.
 
+# Characters in "mercredi 30 septembre", the longest date
+DATE_WIDTH=21
+
 usage() { sed -n 's/^#   /  /p' "$0" >&2; }
 
 case ${1:-} in
     status)
-        jq -c -n --arg text "$(date +'%A %d %B   %H:%M:%S')" '{text: $text}'
+        # The date is padded with spaces to its longest form, "mercredi 30
+        # septembre": the text keeps one width (the bar's font is monospaced),
+        # so the date starts at the center of the screen whatever the day, and
+        # the time and the cat after it never move (style.css)
+        IFS='|' read -r day time < <(date +'%A %d %B| %H:%M:%S')
+        printf -v day '%s%*s' "$day" $((DATE_WIDTH - ${#day})) ''
+        jq -c -n --arg text "$day $time" '{text: $text}'
         ;;
     calendar)
         GDK_BACKEND=x11 yad --calendar --undecorated --fixed --close-on-unfocus \

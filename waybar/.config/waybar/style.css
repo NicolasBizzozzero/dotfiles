@@ -202,28 +202,17 @@ label:focus {
    center group, around the middle of the clock rather than the start of its
    date. Empty room on the left of the group moves it right by half that
    room: GTK counts it, so nothing can overlap the group, and the left side
-   has plenty to spare. Measured on screenshots, 2026-11-26: every module in
-   the group has a fixed width, so the date's start holds. Change a module
-   there, and measure again.
+   has plenty to spare. Measured on screenshots, 2026-11-26. The date and the
+   temperature are padded with spaces to their longest form (clock.sh,
+   weather.sh), so every module in the group keeps its width and the date's
+   start holds. Change a module there, and measure again.
    The right modules end about 20px before the cat: past that, GTK pushes the
    whole group left. The left ones are far: custom/media is cut at 30
    characters (media.sh) */
 .modules-center {
-    padding-left: 8px;
+    padding-left: 2px;
 }
 
-/* A fixed width, so the center group keeps the same width whatever the
-   temperature (0°C to -12°C): see .modules-center. Wide enough for
-   "🌧️ -12°C Vaires-sur-Marne"; a longer city widens it */
-#custom-weather label {
-    min-width: 150px;
-}
-
-/* A fixed width too, for the longest date: "mercredi 30 septembre". The date
-   is left-aligned in it, so it always starts at the same place */
-#custom-clock label {
-    min-width: 200px;
-}
 
 #custom-mail {
     padding-left: 6px;
@@ -231,9 +220,8 @@ label:focus {
 }
 
 #custom-cat {
-    /* Close to the time: the clock's fixed width already leaves room after it,
-       except on the longest dates */
-    padding-left: 4px;
+    /* The same gap to the time as the assistant's to the weather */
+    padding-left: 14px;
     padding-right: 6px;
     color: #606060;
 }
@@ -266,9 +254,9 @@ label:focus {
     /* An 18px ring, thin, centered in the 24px bar with 3px above and below */
     min-width: 16px;
     min-height: 16px;
-    /* Close to the weather: 2px here and the weather's 4px of padding, plus
-       the room its fixed width leaves at short temperatures (0°C) */
-    margin: 3px 2px 3px 0;
+    /* The same gap to the weather as the cat's to the time, a little wider
+       than between the other center modules: measured on screenshots */
+    margin: 3px 10px 3px 0;
     padding: 0;
     border: 1px solid @assistant-dim;
     border-radius: 9px;

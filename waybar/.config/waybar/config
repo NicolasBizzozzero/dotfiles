@@ -70,10 +70,7 @@
         "return-type": "json",
         "exec": "~/.config/waybar/scripts/weather.sh status",
         "interval": 1800,
-        "tooltip": false,
-        // Right-aligned in a fixed width (style.css): the clock stays centered
-        // whatever the temperature
-        "align": 1
+        "tooltip": false
     },
 
     // Icon with a blue dot when there is unread mail, counts in the tooltip
@@ -95,9 +92,6 @@
         "return-type": "json",
         "exec": "~/.config/waybar/scripts/clock.sh status",
         "interval": 1,
-        // Left-aligned in a fixed width (style.css): the date starts at the
-        // center of the screen, whatever the weekday and month
-        "align": 0,
         "tooltip": false,
         "on-click": "~/.config/waybar/scripts/clock.sh calendar"
     },
