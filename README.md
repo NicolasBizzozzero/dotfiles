@@ -64,6 +64,13 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 
 Entries with no package are either system-level (not something a home directory dotfile controls) or run fine on their defaults without any tracked configuration.
 
+## Temporary workarounds
+Fixes for bugs that are not mine, to remove once the bug is fixed upstream. Each says how to tell.
+
+- **NVIDIA GPU never powering off on Linux 7.3** (since 2026-11-27): the open NVIDIA driver reports runtime D3 "Not supported" because it probes the GPU from a kernel thread that can no longer open its sysfs config file. NVIDIA bug 7039712, [open-gpu-kernel-modules#1507](https://github.com/NVIDIA/open-gpu-kernel-modules/issues/1507) (a fix is proposed in [#1512](https://github.com/NVIDIA/open-gpu-kernel-modules/pull/1512)); still there in 620.73.04. Workaround: `system/usr/local/sbin/nvidia-rtd3-rebind`, run at boot by `system/etc/systemd/system/nvidia-rtd3-rebind.service`, probes the GPU again from a process.
+  - **How to tell it's fixed:** the script checks at every boot. When the driver's own probe works, it does nothing, says so in `journalctl -b -u nvidia-rtd3-rebind`, and leaves `/run/nvidia-rtd3-rebind.unneeded`, which Hyprland's autostart turns into a notification that stays until clicked.
+  - **To remove it:** `sudo systemctl disable nvidia-rtd3-rebind.service && sudo rm /etc/systemd/system/nvidia-rtd3-rebind.service /usr/local/sbin/nvidia-rtd3-rebind`, then delete both files here, the `nvidia-rtd3-rebind.unneeded` line in `hyprland.lua`, its mention in "Desktop" below and this entry. Keep `modprobe.d/nvidia.conf` and `80-nvidia-pm.rules`: runtime D3 needs them anyway.
+
 ## What's in here
 A quick tour of the software behind each package, grouped by what it's used for.
 

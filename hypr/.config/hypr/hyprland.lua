@@ -251,4 +251,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("firefox --profile /home/johnlocke/.mozilla/firefox/bar-musical --name bar-musical")
     hl.exec_cmd("[workspace 8 silent] keepassxc")
     hl.exec_cmd("[workspace 10 silent] thunderbird")
+    -- Temporary, with nvidia-rtd3-rebind (README, "Temporary workarounds"): says
+    -- when NVIDIA's fix makes it useless. Remove both together.
+    hl.exec_cmd("test -e /run/nvidia-rtd3-rebind.unneeded && notify-send -t 0 'NVIDIA workaround no longer needed' 'The driver powers the GPU off by itself now: remove nvidia-rtd3-rebind (Temporary workarounds in ~/.dotfiles/README.md)'")
 end)

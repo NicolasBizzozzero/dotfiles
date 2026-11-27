@@ -4,8 +4,8 @@
 # can no longer open the device's sysfs config file: runtime D3 reads "Not
 # supported" and the GPU never powers off. Probing it again from a process
 # (unbind, then bind) works. Run at boot by nvidia-rtd3-rebind.service, before
-# ly and Ollama, while nothing uses the GPU. Does nothing once a fixed driver
-# makes the first probe work: then remove it.
+# ly and Ollama, while nothing uses the GPU. Temporary: listed under
+# "Temporary workarounds" in ~/.dotfiles/README.md, with how to remove it.
 set -uo pipefail
 GPU=0000:01:00.0
 POWER=/proc/driver/nvidia/gpus/$GPU/power
@@ -15,7 +15,14 @@ status() { sed -n 's/^Runtime D3 status: *//p' "$POWER"; }
 # udev may still be loading the driver
 for _ in $(seq 60); do [[ -r $POWER ]] && break; sleep 0.5; done
 [[ -r $POWER ]] || { echo "no NVIDIA GPU at $GPU: nothing to do"; exit 0; }
-[[ $(status) == "Not supported" ]] || { echo "runtime D3 already: $(status)"; exit 0; }
+if [[ $(status) != "Not supported" ]]; then
+    # The driver's own probe works: the bug is fixed (driver or kernel) and this
+    # workaround can go. Hyprland's autostart turns the marker into a notification
+    echo "runtime D3 works without help ($(status)): remove this workaround," \
+        "see \"Temporary workarounds\" in ~/.dotfiles/README.md"
+    touch /run/nvidia-rtd3-rebind.unneeded
+    exit 0
+fi
 if fuser -s /dev/nvidia* /dev/dri/by-path/pci-$GPU-* 2>/dev/null; then
     echo "the GPU is in use: not probed again"
     exit 0
