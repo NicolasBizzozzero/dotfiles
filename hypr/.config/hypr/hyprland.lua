@@ -75,6 +75,13 @@ hl.config({
         },
     },
 
+    -- A new window always opens to the right of (or below) the active one. The
+    -- default (0) follows the mouse, so it opened on the left when the cursor
+    -- was on that half of the window.
+    dwindle = {
+        force_split = 2,
+    },
+
     decoration = {
         rounding = 2,
         blur = {
