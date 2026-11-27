@@ -12,7 +12,9 @@ export LIBVA_DRIVER_NAME=nvidia
 export VDPAU_DRIVER=nvidia
 
 # --- Development & Languages ---
-export JAVA_HOME="/usr/lib/jvm/java-22-openjdk"
+# The JDK `archlinux-java set` chose: a fixed version breaks when it is removed
+# (java-22 was, and JAVA_HOME pointed nowhere until 2026-11-27)
+export JAVA_HOME="/usr/lib/jvm/default"
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 export WEBIDE_JDK="/usr/lib/jvm/java-21-openjdk"
 export NODE_PATH="$XDG_DATA_HOME/node/node_modules"
