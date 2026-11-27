@@ -63,7 +63,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$HOME/scripts/media/play_sound.sh\" -v 70 dialog-warning 2>/dev/null || true"
+            "command": "\"$HOME/scripts/media/play_sound.sh\" dialog-warning 2>/dev/null || true"
           }
         ]
       }
@@ -74,7 +74,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$HOME/scripts/media/play_sound.sh\" -v 70 dialog-warning 2>/dev/null || true"
+            "command": "\"$HOME/scripts/media/play_sound.sh\" dialog-warning 2>/dev/null || true"
           }
         ]
       }
