@@ -94,7 +94,7 @@ Call one by name in any session, e.g. `@agent-reviewer`, or let Claude pick it f
 `mpd` runs as a background music daemon, and `vlc` handles video and other media playback.
 
 ### Browser
-`firefox` holds a second Firefox profile, "Bar musical", for music and ambient sounds (Qobuz, YouTube). It starts at login with `--name bar-musical`, which gives its windows their own class, and a Hyprland window rule sends them to workspace 9 without taking the focus; rofi lists it as "Bar musical". Its `user.js` reopens the last tabs at start. The profile itself (logins, extensions) lives in `~/.mozilla/firefox/bar-musical` and is not tracked.
+`firefox` holds a second Firefox profile, "Bar musical", for music and ambient sounds (Qobuz, YouTube). It starts at login with `--name bar-musical`, which gives its windows their own class, and a Hyprland window rule sends them to workspace 9 without taking the focus; rofi lists it as "Bar musical". Its `user.js` reopens the last tabs at start and names it "Bar musical" in the Firefox account's devices. It began as a copy of the main profile (extensions, theme, logins), without the account: it is signed in to Sync on its own, as its own device. The profile itself lives in `~/.mozilla/firefox/bar-musical` and is not tracked.
 
 `userscripts` holds Firefox userscripts. They are not stowed: they need the **Violentmonkey** extension, and each is installed by opening its raw GitHub URL in Firefox (Violentmonkey then keeps it up to date from this repository).
 - `youtube-media-keys.user.js`: YouTube next/previous over MPRIS (waybar `custom/media` right/middle click, media keys), in a playlist or not. Install: <https://raw.githubusercontent.com/NicolasBizzozzero/dotfiles/master/userscripts/youtube-media-keys.user.js>
