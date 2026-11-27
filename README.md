@@ -97,7 +97,7 @@ Waybar's weather module (also used by the voice assistant) finds the city from t
 
 Call one by name in any session, e.g. `@agent-reviewer`, or let Claude pick it from its description.
 
-Its hooks run `black` on the Python files Claude edits, and play a sound through `~/scripts/media/play_sound.sh` (private repo): `complete` when a session finishes its turn, `message` when it asks for permission. Not when it has been waiting a minute for a prompt (`idle_prompt`): the first sound already said so.
+Its hooks run `black` on the Python files Claude edits, and play a sound through `~/scripts/media/play_sound.sh` (private repo): `dialog-warning` when a session finishes its turn or asks for permission. Not when it has been waiting a minute for a prompt (`idle_prompt`): the first sound already said so.
 
 `claude` also places `~/work/projects/CLAUDE.md`: the engineering rules all my projects follow (plan, verify, small commits, the `Assisted-by` trailer...). Claude Code reads the `CLAUDE.md` of every parent folder, so each project under `~/work/projects` inherits it and no repository carries a copy. Sessions in `~/.dotfiles` or `~/scripts` are outside that folder and don't load it.
 
