@@ -20,6 +20,9 @@ local browser = "firefox"
 -- only here: terminals inherit it, and .variables.sh must not override it.
 hl.env("LIBVA_DRIVER_NAME", "iHD")
 hl.env("XDG_SESSION_TYPE", "wayland")
+-- Electron apps (Discord, TUXEDO Control Center) draw natively on Wayland,
+-- not through XWayland, also when started from rofi
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 -- Cursor: Catppuccin Mocha Mauve, in ~/.local/share/icons (installed by install.sh)
 hl.env("HYPRCURSOR_THEME", "catppuccin-mocha-mauve-cursors")
 hl.env("HYPRCURSOR_SIZE", "24")

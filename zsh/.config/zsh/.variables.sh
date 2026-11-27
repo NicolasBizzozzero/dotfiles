@@ -2,22 +2,12 @@
 # ZSH VARIABLES & ENVIRONMENT
 # =============================================================================
 
-# Only for shells. Where programs keep their files is set in ~/.zshenv, so that
-# the apps Hyprland launches get it too; what stays here changes how programs
-# behave, or only matters in a terminal.
-
-# --- Wayland & Display ---
-# The video decoding driver is set once, by Hyprland (iHD, on the Intel GPU
-# that runs the screen); terminals get it from kitty. nvidia was set here: its
-# VA-API driver is not installed, and VDPAU's woke the NVIDIA GPU.
-export ELECTRON_OZONE_PLATFORM_HINT=auto
+# Only what matters in a terminal. What graphical apps need too is set where
+# Hyprland gets it: ~/.zshenv (where programs keep their files, Java, the GPU)
+# and Hyprland's config (display, video decoding). Not here: terminals get all
+# of it anyway, from kitty.
 
 # --- Development & Languages ---
-# The JDK `archlinux-java set` chose: a fixed version breaks when it is removed
-# (java-22 was, and JAVA_HOME pointed nowhere until 2026-11-27)
-export JAVA_HOME="/usr/lib/jvm/default"
-export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
-export WEBIDE_JDK="/usr/lib/jvm/java-21-openjdk"
 export NODE_PATH="$XDG_DATA_HOME/node/node_modules"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 
