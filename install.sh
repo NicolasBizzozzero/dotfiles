@@ -5,6 +5,7 @@ stow alarm_clock
 stow claude
 stow environment
 stow fastfetch
+stow firefox
 stow git
 stow gtk
 stow htop

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Bar musical
+GenericName=Musique et sons d'ambiance
+Comment=Firefox dédié à la musique (Qobuz, YouTube), sur le bureau 9
+Exec=firefox --profile /home/johnlocke/.mozilla/firefox/bar-musical --name bar-musical %u
+Icon=firefox
+StartupWMClass=bar-musical
+Categories=AudioVideo;Audio;Player;
+Terminal=false

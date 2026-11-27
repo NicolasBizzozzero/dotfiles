@@ -47,6 +47,7 @@ The machine this runs on, roughly the way `fastfetch`/`neofetch` would summarize
 | Remote access | OpenSSH | `ssh` |
 | AUR helper | yay | - |
 | Web browser | Firefox (+ Violentmonkey) | `userscripts` (installed in Violentmonkey, not stowed) |
+| Music browser | Firefox profile "Bar musical", on workspace 9 | `firefox` (its preferences and launcher), `hypr` (its window rule and start at login) |
 | Music daemon | MPD | `mpd` |
 | Video / media playback | VLC | `vlc` |
 | Offline documentation | Zeal | `zeal` |
@@ -93,6 +94,8 @@ Call one by name in any session, e.g. `@agent-reviewer`, or let Claude pick it f
 `mpd` runs as a background music daemon, and `vlc` handles video and other media playback.
 
 ### Browser
+`firefox` holds a second Firefox profile, "Bar musical", for music and ambient sounds (Qobuz, YouTube). It starts at login with `--name bar-musical`, which gives its windows their own class, and a Hyprland window rule sends them to workspace 9 without taking the focus; rofi lists it as "Bar musical". Its `user.js` reopens the last tabs at start. The profile itself (logins, extensions) lives in `~/.mozilla/firefox/bar-musical` and is not tracked.
+
 `userscripts` holds Firefox userscripts. They are not stowed: they need the **Violentmonkey** extension, and each is installed by opening its raw GitHub URL in Firefox (Violentmonkey then keeps it up to date from this repository).
 - `youtube-media-keys.user.js`: YouTube next/previous over MPRIS (waybar `custom/media` right/middle click, media keys), in a playlist or not. Install: <https://raw.githubusercontent.com/NicolasBizzozzero/dotfiles/master/userscripts/youtube-media-keys.user.js>
 - `x-deleted-post-archive.user.js`: on a post that X says no longer exists or that its author hid (protected account), a panel with its archived text and captures from the Wayback Machine (searched under twitter.com and x.com), plus archive.today and Ghostarchive links. Also on any post from the Violentmonkey menu ("Chercher une archive de ce post"). The post's address only goes to archive.org in those two cases. Install: <https://raw.githubusercontent.com/NicolasBizzozzero/dotfiles/master/userscripts/x-deleted-post-archive.user.js>

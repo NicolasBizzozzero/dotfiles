@@ -132,6 +132,18 @@ hl.window_rule({
     pin = true,
 })
 
+-- "Bar musical": the Firefox profile for music and ambient sounds. Started
+-- with --name bar-musical, so its windows have their own class: they open on
+-- workspace 9 without taking the focus, at login as when started from rofi.
+-- Profile and launcher: ~/.dotfiles/firefox
+hl.window_rule({
+    name  = "bar_musical_on_workspace_9",
+    match = {
+        class = "^(bar-musical)$",
+    },
+    workspace = "9 silent",
+})
+
 -- 5. KEYBINDS (Main Modifier = SUPER)
 hl.bind("SUPER + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind("SUPER + D", hl.dsp.exec_cmd(menu))
@@ -230,6 +242,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("/home/johnlocke/scripts/ricing/change_wallpaper.sh")
     hl.exec_cmd("[workspace 1 silent] " .. terminal)
     hl.exec_cmd("[workspace 2 silent] " .. browser)
+    hl.exec_cmd("firefox --profile /home/johnlocke/.mozilla/firefox/bar-musical --name bar-musical")
     hl.exec_cmd("[workspace 8 silent] keepassxc")
     hl.exec_cmd("[workspace 10 silent] thunderbird")
 end)
