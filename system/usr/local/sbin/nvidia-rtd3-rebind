@@ -22,13 +22,21 @@ if fuser -s /dev/nvidia* /dev/dri/by-path/pci-$GPU-* 2>/dev/null; then
 fi
 exec 9>/run/nvidia-rtd3-rebind.lock
 flock 9
-# The modules above nvidia hold the GPU through it
-if ! modprobe -r nvidia_drm nvidia_modeset nvidia_uvm; then
-    echo "could not unload nvidia_drm, nvidia_modeset, nvidia_uvm: not probed again"
+# The modules above nvidia hold the GPU through it. rmmod, not modprobe -r:
+# that also unloads nvidia itself once nothing uses it, and then there is no
+# driver left to unbind from (what happened on the first try)
+for module in nvidia_drm nvidia_modeset nvidia_uvm; do
+    if [[ -d /sys/module/$module ]] && ! rmmod "$module"; then
+        echo "could not unload $module: not probed again"
+        modprobe nvidia_drm
+        exit 1
+    fi
+done
+if ! { echo "$GPU" > "$DRIVER/unbind" && echo "$GPU" > "$DRIVER/bind"; }; then
+    echo "unbind or bind failed"
     modprobe nvidia_drm
     exit 1
 fi
-echo "$GPU" > "$DRIVER/unbind"
-echo "$GPU" > "$DRIVER/bind"
 modprobe nvidia_drm
 echo "probed again: runtime D3 $(status)"
+[[ $(status) != "Not supported" ]]
