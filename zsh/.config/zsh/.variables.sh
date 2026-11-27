@@ -12,6 +12,8 @@ export JAVA_HOME="/usr/lib/jvm/java-22-openjdk"
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 export WEBIDE_JDK="/usr/lib/jvm/java-21-openjdk"
 export GOPATH="$XDG_DATA_HOME/go"
+# Downloaded modules are a cache: kept apart from GOPATH's installed binaries
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export NODE_PATH="$XDG_DATA_HOME/node/node_modules"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
@@ -23,6 +25,9 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 
 # --- Python / Data Science ---
+# Every .pyc in one tree under the cache, instead of __pycache__ folders next
+# to the code (also set in environment.d, for services and graphical apps)
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
 export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 export KAGGLE_CONFIG_DIR="${XDG_CONFIG_HOME}/kaggle"
