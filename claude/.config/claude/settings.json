@@ -57,6 +57,27 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/scripts/media/play_sound.sh\" -v 70 complete 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt|elicitation_dialog|elicitation_url_dialog",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/scripts/media/play_sound.sh\" -v 70 message 2>/dev/null || true"
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
