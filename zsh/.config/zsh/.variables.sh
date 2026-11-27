@@ -7,9 +7,10 @@
 # behave, or only matters in a terminal.
 
 # --- Wayland & Display ---
+# The video decoding driver is set once, by Hyprland (iHD, on the Intel GPU
+# that runs the screen); terminals get it from kitty. nvidia was set here: its
+# VA-API driver is not installed, and VDPAU's woke the NVIDIA GPU.
 export ELECTRON_OZONE_PLATFORM_HINT=auto
-export LIBVA_DRIVER_NAME=nvidia
-export VDPAU_DRIVER=nvidia
 
 # --- Development & Languages ---
 # The JDK `archlinux-java set` chose: a fixed version breaks when it is removed

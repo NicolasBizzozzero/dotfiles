@@ -16,7 +16,8 @@ local browser = "firefox"
 
 -- Hybrid laptop: the screen and Hyprland run on the Intel GPU (i915), the NVIDIA
 -- one sleeps unless an app is started on it (prime-run, from nvidia-prime).
--- Video decoding on the Intel GPU (intel-media-driver), not on the CPU.
+-- Video decoding on the Intel GPU (intel-media-driver), not on the CPU. Set
+-- only here: terminals inherit it, and .variables.sh must not override it.
 hl.env("LIBVA_DRIVER_NAME", "iHD")
 hl.env("XDG_SESSION_TYPE", "wayland")
 -- Cursor: Catppuccin Mocha Mauve, in ~/.local/share/icons (installed by install.sh)
