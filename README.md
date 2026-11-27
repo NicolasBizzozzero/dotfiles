@@ -74,7 +74,7 @@ Waybar's Bluetooth module (right click: on/off, also used by the voice assistant
 Waybar's weather module (also used by the voice assistant) finds the city from the Wi-Fi name, through a table of known networks, else from the IP address. That table is kept out of this public repository, in `~/.config/waybar/weather_cities.sh`, as `CITIES=(["Wi-Fi name"]="City")`. So is the Bluetooth address of the headset the voice assistant connects ("connecte mon casque"): one line in `~/.config/vocal-assistant/casque`, as printed by `bluetoothctl devices`.
 
 ### Shell
-`zsh` is the shell, with `starship` for the prompt. Its aliases include the one-line commands that used to be scripts in `~/scripts` (`yay_clean`, `git_version_number`, `docker_build`, `screenshot`, `random_file`...).
+`zsh` is the shell, with `starship` for the prompt. Its aliases include the one-line commands that used to be scripts in `~/scripts` (`git_version_number`, `docker_build`, `screenshot`, `random_file`...). Caches are emptied by `~/scripts/system/clean_caches.sh`, which replaces the old `yay_clean` alias.
 
 ### Terminal and editors
 `kitty` is the terminal emulator. `neovim` is the main text editor, with `nano` kept around for quick edits.

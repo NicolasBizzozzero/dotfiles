@@ -15,7 +15,6 @@ alias fuck='sudo !!'
 alias please='sudo'
 
 # --- One-liners that were scripts in ~/scripts ---
-alias yay_clean='yay -Sc'
 alias list_packages='yay -Ps'  # Statistics about the installed packages
 alias yay_lspkg='yay -Qqe'     # The explicitly installed packages
 alias grep_last_updated_packages="grep -iE 'installed|upgraded' /var/log/pacman.log"
