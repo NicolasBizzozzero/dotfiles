@@ -14,8 +14,10 @@ local fileManager = "yazi"
 local menu = "rofi -show drun -show-icons"
 local browser = "firefox"
 
--- Hybrid laptop: the screen and Hyprland run on the Intel GPU (i915), the NVIDIA
--- one sleeps unless an app is started on it (prime-run, from nvidia-prime).
+-- Hybrid laptop: the screen and Hyprland run on the Intel GPU (i915); every
+-- output is wired to it. The NVIDIA one powers off when idle (runtime D3:
+-- system/etc/modprobe.d/nvidia.conf and udev/rules.d/80-nvidia-pm.rules), as
+-- long as OpenGL apps don't open it (__EGL_VENDOR_LIBRARY_FILENAMES, ~/.zshenv).
 -- Video decoding on the Intel GPU (intel-media-driver), not on the CPU. Set
 -- only here: terminals inherit it, and .variables.sh must not override it.
 hl.env("LIBVA_DRIVER_NAME", "iHD")

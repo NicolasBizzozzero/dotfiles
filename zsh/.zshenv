@@ -55,3 +55,13 @@ export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 # WebStorm comes without its own Java (no webstorm-jre): it runs on this one
 export WEBIDE_JDK="/usr/lib/jvm/java-21-openjdk"
 
+# OpenGL apps (EGL) only load Mesa, the Intel GPU's driver. Otherwise every one
+# of them, Hyprland included, also loads NVIDIA's and opens the NVIDIA GPU,
+# which then never powers off, though nothing draws with it. Here because
+# Hyprland itself needs it, before its config is read. Only if Mesa's file is
+# there: with no driver at all, Hyprland would not start. Vulkan and CUDA
+# (games, Ollama) still reach the NVIDIA GPU; for an OpenGL app on it, prefix
+# it with __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/10_nvidia.json
+if [[ -r /usr/share/glvnd/egl_vendor.d/50_mesa.json ]]; then
+    export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json
+fi

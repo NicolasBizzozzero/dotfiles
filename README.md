@@ -72,6 +72,8 @@ The system runs Hyprland (`hypr`) as the window manager, with `waybar` as the st
 
 Waybar's Bluetooth module (right click: on/off, also used by the voice assistant) keeps its state across reboots. Off is an rfkill block, which systemd-rfkill restores at boot. On is restored at login by `bluetooth.sh restore`, from Hyprland's autostart: BlueZ is meant to power the adapter on at boot, but on this laptop that fails every time.
 
+The screen runs on the Intel GPU, which every output is wired to; the NVIDIA one powers off when idle. `system/etc/modprobe.d/nvidia.conf` and `udev/rules.d/80-nvidia-pm.rules` turn its runtime D3 on, and `__EGL_VENDOR_LIBRARY_FILENAMES` in `~/.zshenv` keeps OpenGL apps (Hyprland, hyprpaper, Firefox...) from opening it: without it, libglvnd loads NVIDIA's EGL library in each of them, which kept the GPU awake. Vulkan and CUDA (games, Ollama) still reach it. Hyprland's config sets video decoding to the Intel GPU (`LIBVA_DRIVER_NAME=iHD`) for the whole session.
+
 Waybar's weather module (also used by the voice assistant) finds the city from the Wi-Fi name, through a table of known networks, else from the IP address. That table is kept out of this public repository, in `~/.config/waybar/weather_cities.sh`, as `CITIES=(["Wi-Fi name"]="City")`. So is the Bluetooth address of the headset the voice assistant connects ("connecte mon casque"): one line in `~/.config/vocal-assistant/casque`, as printed by `bluetoothctl devices`.
 
 ### Shell
