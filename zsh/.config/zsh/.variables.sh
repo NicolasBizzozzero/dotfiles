@@ -42,7 +42,8 @@ export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export W3M_DIR="$XDG_DATA_HOME/w3m"
 export WINEPREFIX="$XDG_DATA_HOME/wine"
-export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+# History is state, not cache: ~/scripts/system/clean_caches.sh empties ~/.cache
+export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 
 # --- Miscellaneous ---
 export TORBROWSER_PKGLANG="fr"
