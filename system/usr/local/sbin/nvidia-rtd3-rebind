@@ -1,0 +1,34 @@
+#!/bin/bash
+# nvidia-rtd3-rebind: work around NVIDIA bug 7039712 (open-gpu-kernel-modules
+# issue 1507). On Linux 7.3, the driver probes the GPU from a kernel thread that
+# can no longer open the device's sysfs config file: runtime D3 reads "Not
+# supported" and the GPU never powers off. Probing it again from a process
+# (unbind, then bind) works. Run at boot by nvidia-rtd3-rebind.service, before
+# ly and Ollama, while nothing uses the GPU. Does nothing once a fixed driver
+# makes the first probe work: then remove it.
+set -uo pipefail
+GPU=0000:01:00.0
+POWER=/proc/driver/nvidia/gpus/$GPU/power
+DRIVER=/sys/bus/pci/drivers/nvidia
+status() { sed -n 's/^Runtime D3 status: *//p' "$POWER"; }
+
+# udev may still be loading the driver
+for _ in $(seq 60); do [[ -r $POWER ]] && break; sleep 0.5; done
+[[ -r $POWER ]] || { echo "no NVIDIA GPU at $GPU: nothing to do"; exit 0; }
+[[ $(status) == "Not supported" ]] || { echo "runtime D3 already: $(status)"; exit 0; }
+if fuser -s /dev/nvidia* /dev/dri/by-path/pci-$GPU-* 2>/dev/null; then
+    echo "the GPU is in use: not probed again"
+    exit 0
+fi
+exec 9>/run/nvidia-rtd3-rebind.lock
+flock 9
+# The modules above nvidia hold the GPU through it
+if ! modprobe -r nvidia_drm nvidia_modeset nvidia_uvm; then
+    echo "could not unload nvidia_drm, nvidia_modeset, nvidia_uvm: not probed again"
+    modprobe nvidia_drm
+    exit 1
+fi
+echo "$GPU" > "$DRIVER/unbind"
+echo "$GPU" > "$DRIVER/bind"
+modprobe nvidia_drm
+echo "probed again: runtime D3 $(status)"

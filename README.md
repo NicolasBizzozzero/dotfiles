@@ -13,7 +13,7 @@ Running `install.sh` stows everything at once and enables the services the machi
 
 ## Outside the home directory
 `system/` holds what _GNU Stow_ can't place, as reference copies for a new machine:
-- `system/etc/`: files added or edited in `/etc`, to copy back by hand with `sudo cp`. Do `pacman.conf` first: some packages come from multilib.
+- `system/etc/`: files added or edited in `/etc`, to copy back by hand with `sudo cp`. `system/usr/local/sbin/` likewise, for `/usr/local/sbin`. Do `pacman.conf` first: some packages come from multilib.
 - `system/packages.txt` and `system/packages-aur.txt`: explicitly installed packages, refreshed with `pacman -Qqen` and `pacman -Qqem`.
 - `system/crontab`: installed by `install.sh` when there is no crontab yet.
 
@@ -72,7 +72,7 @@ The system runs Hyprland (`hypr`) as the window manager, with `waybar` as the st
 
 Waybar's Bluetooth module (right click: on/off, also used by the voice assistant) keeps its state across reboots. Off is an rfkill block, which systemd-rfkill restores at boot. On is restored at login by `bluetooth.sh restore`, from Hyprland's autostart: BlueZ is meant to power the adapter on at boot, but on this laptop that fails every time.
 
-The screen runs on the Intel GPU, which every output is wired to; the NVIDIA one powers off when idle. `system/etc/modprobe.d/nvidia.conf` and `udev/rules.d/80-nvidia-pm.rules` turn its runtime D3 on, and `__EGL_VENDOR_LIBRARY_FILENAMES` in `~/.zshenv` keeps OpenGL apps (Hyprland, hyprpaper, Firefox...) from opening it: without it, libglvnd loads NVIDIA's EGL library in each of them, which kept the GPU awake. Vulkan and CUDA (games, Ollama) still reach it. Hyprland's config sets video decoding to the Intel GPU (`LIBVA_DRIVER_NAME=iHD`) for the whole session.
+The screen runs on the Intel GPU, which every output is wired to; the NVIDIA one powers off when idle. `system/etc/modprobe.d/nvidia.conf` and `udev/rules.d/80-nvidia-pm.rules` turn its runtime D3 on; on Linux 7.3 the NVIDIA driver wrongly reports it "Not supported" (NVIDIA bug 7039712), which `system/usr/local/sbin/nvidia-rtd3-rebind`, run at boot by `system/etc/systemd/system/nvidia-rtd3-rebind.service`, works around by probing the GPU again; and `__EGL_VENDOR_LIBRARY_FILENAMES` in `~/.zshenv` keeps OpenGL apps (Hyprland, hyprpaper, Firefox...) from opening it: without it, libglvnd loads NVIDIA's EGL library in each of them, which kept the GPU awake. Vulkan and CUDA (games, Ollama) still reach it. Hyprland's config sets video decoding to the Intel GPU (`LIBVA_DRIVER_NAME=iHD`) for the whole session.
 
 Waybar's weather module (also used by the voice assistant) finds the city from the Wi-Fi name, through a table of known networks, else from the IP address. That table is kept out of this public repository, in `~/.config/waybar/weather_cities.sh`, as `CITIES=(["Wi-Fi name"]="City")`. So is the Bluetooth address of the headset the voice assistant connects ("connecte mon casque"): one line in `~/.config/vocal-assistant/casque`, as printed by `bluetoothctl devices`.
 

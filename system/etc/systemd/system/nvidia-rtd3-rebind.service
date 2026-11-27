@@ -1,0 +1,14 @@
+[Unit]
+Description=Probe the NVIDIA GPU again so that it can power off (NVIDIA bug 7039712)
+Documentation=https://github.com/NVIDIA/open-gpu-kernel-modules/issues/1507
+After=systemd-modules-load.service systemd-udev-trigger.service
+Before=ly@tty2.service ollama.service
+ConditionPathExists=/sys/bus/pci/devices/0000:01:00.0
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/nvidia-rtd3-rebind
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target
